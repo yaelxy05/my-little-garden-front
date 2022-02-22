@@ -1,0 +1,8 @@
+@use 'reset';
+@use 'vars';
+@use 'mixins';
+body {
+  width: 100%;
+  min-height: 100%;
+  font-family: sans-serif;
+}

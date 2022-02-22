@@ -1,0 +1,16 @@
+@use "src/styles/utils/vars";
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    .copyright {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        background-color: vars.$secondaryColor;
+        height: 3rem;
+        width: 100%;
+        padding-right: 2rem;
+    }
+}

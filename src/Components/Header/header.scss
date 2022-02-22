@@ -1,0 +1,44 @@
+.header {
+  background-image: url("../../assets/img/background/seedling-gfe77ea329_1280.jpg");
+  height: 45rem;
+  width: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 3rem;
+
+  .header_description {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: solid 2px white;
+    border-radius: 1rem;
+    color: white;
+    font-weight: bold;
+    height: 14rem;
+    padding: 0 5rem;
+
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 1.5rem;
+    }
+  }
+
+  .header_divider--bottom {
+    position: absolute;
+    width: 100%;
+    height: 49px;
+    left: 0px;
+    bottom: 0;
+    background-image: url("../../assets/img/background/wave.svg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    z-index: 5;
+  }
+}
