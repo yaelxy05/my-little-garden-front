@@ -1,0 +1,85 @@
+@use "src/styles/utils/vars";
+@use "src/styles/utils/mixins";
+
+.calendar {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  height: 70vh;
+  margin-top: 10rem;
+  width: 100%;
+
+  h1 {
+    margin: 4rem 0;
+    font-size: 2rem;
+    font-weight: bold;
+  }
+
+  .calendar_legend {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    .calendar_legend--brown {
+      @include mixins.legendBrown;
+    }
+
+    .calendar_legend--red {
+      @include mixins.legendRed;
+    }
+    .calendar_legend--blue {
+      @include mixins.legendBlue;
+    }
+
+    p {
+      margin-right: 2rem;
+    }
+  }
+
+  table {
+    box-shadow: 0 2px 1px -1px rgb(0 0 0 / 20%), 0 1px 1px 0 rgb(0 0 0 / 14%),
+      0 1px 3px 0 rgb(0 0 0 / 12%);
+    border: 1.5px solid #bec7e6;
+    border-radius: 2px;
+    width: 80%;
+
+    &:hover {
+      box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%),
+        0 1px 8px 0 rgb(0 0 0 / 12%);
+      transition: box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    thead {
+      width: 100%;
+      text-align: center;
+      font-weight: bold;
+
+      td {
+        border: 1px solid #dbe3ff;
+        padding: 1rem;
+        color: vars.$color5;
+      }
+    }
+
+    tbody {
+      text-align: center;
+
+      td {
+        border: 1px solid #dbe3ff;
+        padding: 1rem;
+        width: 100%;
+      }
+      .blue {
+        background: vars.$colorBlue;
+      }
+
+      .brown {
+        background-color: vars.$colorBrown;
+  
+      }
+
+      .red {
+        background: vars.$colorRed;
+      }
+    }
+  }
+}
