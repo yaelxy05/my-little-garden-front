@@ -77,6 +77,36 @@ function Calendar() {
             <td></td>
             <td></td>
           </tr>
+          <tr>
+            <td>Haricot</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td className="red"></td>
+            <td className="red"></td>
+            <td className="brown"></td>
+            <td className="brown"></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+                  </tr>
+                  <tr>
+            <td>Melon</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td className="red"></td>
+            <td className="red"></td>
+            <td className="brown"></td>
+            <td className="brown"></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
         </tbody>
       </table>
     </div>
