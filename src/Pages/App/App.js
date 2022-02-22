@@ -1,13 +1,33 @@
+import { Route, Switch } from "react-router-dom";
+// import scss
+import "./App.scss";
+// import Page
+import Navigation from "../../Components/Navigation";
+import Footer from "../../Components/Footer";
+import Calendar from "../Calendar";
+import Home from '../Home';
+import Connexion from '../Connexion';
+import Register from '../Register';
 
-import './App.scss';
-import Navigation from '../../Components/Navigation';
-import Header from '../../Components/Header';
-import Footer from '../../Components/Footer';
 function App() {
   return (
     <div className="App">
       <Navigation />
-      <Header />
+      <Switch>
+        <Route path="/calendrier">
+          <Calendar />
+        </Route>
+        <Route path="/connexion" >
+          <Connexion />
+        </Route>
+        <Route path="/inscription" >
+          <Register />
+        </Route>
+        <Route path="/" exact>
+          <Home />
+        </Route>
+      </Switch>
+    
       <Footer />
     </div>
   );
