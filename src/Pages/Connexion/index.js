@@ -7,19 +7,23 @@ import axios from "axios";
 import { IsConnectedContext, TokenContext } from "../../Utils/Context";
 
 function Connexion() {
+  // Initial state
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
+  
+  // Context 
   const { token, setToken } = useContext(TokenContext);
   const { isConnected, setIsConnected } = useContext(IsConnectedContext);
 
-  const API_URL = "http://127.0.0.1:8000/api/login";
+  const API_URLS = process.env.REACT_APP_API_URL;
+  
   const handleSubmit = (evt) => {
     evt.preventDefault();
     setFormData(formData);
     axios
-      .post(`${API_URL}`, {
+      .post(`${API_URLS}/login`, {
         username: formData.email,
         password: formData.password,
       })
