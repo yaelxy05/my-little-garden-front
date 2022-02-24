@@ -1,0 +1,138 @@
+@use "src/styles/utils/vars";
+@use "src/styles/utils/mixins";
+
+.register {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 14rem 0;
+  background: #f8f9fd;
+  height: 100%;
+
+  h1 {
+    font-weight: bold;
+    margin-bottom: 5rem;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    height: 45rem;
+    width: 25rem;
+    border-radius: 1rem;
+    background: vars.$colorLight;
+    box-shadow: 0px 6px 10px rgb(179, 179, 179);
+    position: relative;
+
+    h1 {
+      width: 100%;
+      height: 3.5rem;
+      text-align: center;
+      margin-top: 2rem;
+      font-weight: bold;
+      font-size: 1.5rem;
+      font-family: vars.$fontTitle;
+      color: vars.$colorBlue;
+    }
+
+    .input_box {
+      width: 15rem;
+      margin: 0 2rem 2rem 2rem;
+      input {
+        width: 100%;
+
+        border: 0;
+        border-bottom: 1.5px solid vars.$secondaryColor;
+        background-color: transparent;
+        padding: 4px 0;
+
+        font-size: 1em;
+        &::placeholder {
+          color: transparent;
+        }
+
+        &:focus {
+          width: 100%;
+          transition: 0.4s;
+          border-bottom: 3px solid vars.$color5;
+        }
+        &:focus ~ #labelField-email,
+        &:not(:placeholder-shown) ~ #labelField-email {
+          transform: translateY(-1em) scale(0.8);
+        }
+
+        &:focus ~ #labelField-password,
+        &:not(:placeholder-shown) ~ #labelField-password {
+          transform: translateY(-1em) scale(0.8);
+        }
+
+        &:focus ~ #labelField-password-confirm,
+        &:not(:placeholder-shown) ~ #labelField-password-confirm {
+          transform: translateY(-1em) scale(0.8);
+        }
+
+        &:focus ~ #labelField-firstname,
+        &:not(:placeholder-shown) ~ #labelField-firstname {
+          transform: translateY(-1em) scale(0.8);
+        }
+
+        &:focus ~ #labelField-lastname ,
+        &:not(:placeholder-shown) ~ #labelField-lastname  {
+          transform: translateY(-1em) scale(0.8);
+        }
+      }
+
+      label {
+        margin: 1rem 0;
+        color: rgb(153, 153, 153);
+        height: 2px;
+        transition: all 0.25s cubic-bezier(0.2, 0, 0.03, 1);
+        pointer-events: none;
+      }
+
+      #labelField-email {
+        position: absolute;
+        top: 156px;
+        left: 79px;
+      }
+
+      #labelField-password {
+        position: absolute;
+        top: 215px;
+        left: 79px;
+      }
+
+      #labelField-password-confirm {
+        position: absolute;
+        top: 275px;
+        left: 79px;
+      }
+
+      #labelField-firstname {
+        position: absolute;
+        top: 335px;
+        left: 79px;
+      }
+
+      #labelField-lastname {
+        position: absolute;
+        top: 395px;
+        left: 79px;
+      }
+    }
+    .register_button {
+      @include mixins.buttonInput;
+      width: 15rem;
+      margin: 2rem 0 8rem 0;
+    }
+    p {
+      padding-bottom: 0.7rem;
+      span {
+        font-weight: bold;
+      }
+    }
+  }
+}

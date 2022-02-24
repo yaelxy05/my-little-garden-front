@@ -9,7 +9,7 @@ import { IsConnectedContext, TokenContext } from "../../Utils/Context";
 
 function NavigationDesktop() {
   const { isConnected, setIsConnected } = useContext(IsConnectedContext);
-  const { token, setToken } = useContext(TokenContext);
+  const { setToken } = useContext(TokenContext);
 
   const logOut = () => {
     window.location = "/connexion";
@@ -17,7 +17,7 @@ function NavigationDesktop() {
     setToken(null);
     setIsConnected(false);
   };
-  
+
   return (
     <>
       <ul className="navigation_desktop">

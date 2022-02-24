@@ -5,6 +5,8 @@ import InputField from "../../Components/Input";
 import axios from "axios";
 // Import Context
 import { IsConnectedContext, TokenContext } from "../../Utils/Context";
+// Import SCSS
+import './connexion.scss';
 
 function Connexion() {
   // Initial state
@@ -14,7 +16,7 @@ function Connexion() {
   });
   
   // Context 
-  const { token, setToken } = useContext(TokenContext);
+  const { setToken } = useContext(TokenContext);
   const { isConnected, setIsConnected } = useContext(IsConnectedContext);
 
   const API_URLS = process.env.REACT_APP_API_URL;
@@ -50,14 +52,15 @@ function Connexion() {
     <div className="login">
       {!isConnected && (
         <>
-          <h1>Connexion</h1>
+          
           <form onSubmit={handleSubmit}>
+          <h1>Connexion</h1>
             <InputField
               name="email"
-              placeholder="email"
-              classname="login_email"
+              placeholder=" "
+              label="Email"
+              classname="login_input login_email"
               value={formData.email}
-              placeholder="email"
               type="email"
               manageChange={(e) =>
                 setFormData({ ...formData, email: e.target.value })
@@ -65,22 +68,23 @@ function Connexion() {
             />
             <InputField
               name="password"
-              placeholder="Mot de passe"
-              classname="login_password"
+              placeholder=" "
+              label="Mot de passe"
+              classname="login_input login_password"
               value={formData.password}
-              placeholder="Mot de passe"
               type="password"
               manageChange={(e) =>
                 setFormData({ ...formData, password: e.target.value })
               }
             />
-            <button>Envoyer</button>
+            <button className="login_button">Envoyer</button>
+            <p>Vous n'avez pas de compte? <span>Inscrivez vous</span> </p>
           </form>
         </>
       )}
       {isConnected && (
         <>
-          <p>Vous êtes connecté !</p>
+          <p className="login_isconnected">Vous êtes connecté !</p>
         </>
       )}
     </div>
