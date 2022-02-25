@@ -1,11 +1,10 @@
 import React from "react";
 
-function Input({ name, type, classname, label, manageChange, value, placeholder }) {
+function Input({ name, type, classname, label, manageChange, value, placeholder, errors }) {
   const inputId = `labelField-${name}`;
-  const classId = `target-${name}`
 
   return (
-    <div className="input_box">
+    <div className={errors ? " input_box--error" : " input_box"}>
         <input
           type={type}
           onChange={manageChange}
@@ -13,9 +12,8 @@ function Input({ name, type, classname, label, manageChange, value, placeholder 
           placeholder={placeholder}
           value={value}
           name={name}
-          id={classId}
         />
-       <label htmlFor={classId} id={ inputId } >{label}</label>
+       <label id={ inputId } >{label}</label>
     </div>
   );
 }

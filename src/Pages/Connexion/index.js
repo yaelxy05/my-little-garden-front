@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 // Import components
-import InputField from "../../Components/Input";
+import InputField from "../../Components/InputLogin";
 // Import package
 import axios from "axios";
 // Import Context
