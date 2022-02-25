@@ -1,4 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
+import { NavLink } from "react-router-dom";
 // Import components
 import InputField from "../../Components/InputLogin";
 // Import package
@@ -78,7 +79,7 @@ function Connexion() {
               }
             />
             <button className="login_button">Envoyer</button>
-            <p>Vous n'avez pas de compte? <span>Inscrivez vous</span> </p>
+            <p>Vous n'avez pas de compte? <span><NavLink exact to="/inscription">Inscrivez vous</NavLink></span> </p>
           </form>
         </>
       )}

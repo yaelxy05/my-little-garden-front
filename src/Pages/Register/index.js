@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { NavLink } from "react-router-dom";
 // Import components
 import InputField from "../../Components/InputRegister";
 // Import package
@@ -193,7 +194,7 @@ function Register() {
         )}
         <button className="register_button">Envoyer</button>
         <p>
-          Vous avez déja un compte? <span>Connectez vous</span>{" "}
+          Vous avez déja un compte? <span><NavLink exact to="/connexion">Connectez vous</NavLink></span>{" "}
         </p>
       </form>
     </div>
