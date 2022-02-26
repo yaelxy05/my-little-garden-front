@@ -24,9 +24,8 @@ function Register() {
     lastname: "",
   };
   const [errors, setErrors] = useState(errorsObj);
-  const [errorApi, setErrorApi] = useState(false);
   const [success, setSuccess] = useState(false);
-
+  const [emailError, setEmailError] = useState(false)
   const API_URLS = process.env.REACT_APP_API_URL;
 
   // function for add new user on the server backend
@@ -46,9 +45,12 @@ function Register() {
         console.log(response);
       })
       .catch((error) => {
-        console.log(error.response);    
+        console.log(error.response.data.error.email); 
+        if (error.response.data.error.email) {
+          setEmailError(true)
+        }
       });
-
+    console.log(emailError);
     let error = false;
 
     const errorObj = { ...errorsObj };
@@ -62,6 +64,10 @@ function Register() {
       errorObj.email = "Le champ email est trop court.";
       error = true;
     }
+    else if (emailError) {
+      errorObj.email = "Il y a déjà un compte avec cette email";
+      error = true;
+      }
     else if (formData.email.length > 4 && /\S+@\S+\.\S+/.test(formData.email) && formData.email !== "" ) {
       setSuccess(true);
     }
@@ -131,7 +137,8 @@ function Register() {
           }
           errors={errors.email}
         />
-        {errors.email && <div className="signup__error">{errors.email}</div>}
+        { errors.email && <div className="signup__error">{errors.email}</div>}
+ 
         <InputField
           name="password"
           placeholder=" "

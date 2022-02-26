@@ -1,6 +1,6 @@
 import React from "react";
 
-function Input({ name, type, success, label, manageChange, value, placeholder, errors }) {
+function Input({ name, type, success, label, manageChange, value, placeholder, errors}) {
   const inputId = `labelField-${name}`;
 
   return (
