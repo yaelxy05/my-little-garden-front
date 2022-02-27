@@ -1,3 +1,5 @@
+
+
 .header {
   background-image: url("../../assets/img/background/seedling-gfe77ea329_1280.jpg");
   height: 45rem;
@@ -10,6 +12,7 @@
   justify-content: center;
   align-items: center;
   margin-bottom: 3rem;
+  z-index: -1;
 
   .header_description {
     display: flex;

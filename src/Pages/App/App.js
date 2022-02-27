@@ -6,10 +6,10 @@ import "./App.scss";
 import Navigation from "../../Components/Navigation";
 import Footer from "../../Components/Footer";
 import Calendar from "../Calendar";
-import Home from "../Home";
 import Connexion from "../Connexion";
 import Register from "../Register";
 import UserSpace from "../SpaceUser";
+import Header from '../../Components/Header'
 // Import Context
 import { IsConnectedContext } from "../../Utils/Context";
 
@@ -36,7 +36,7 @@ function App() {
         )}
 
         <Route path="/" exact>
-          <Home />
+          <Header />
         </Route>
       </Switch>
 

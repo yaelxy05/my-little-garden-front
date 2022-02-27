@@ -1,0 +1,227 @@
+@use "src/styles/utils/vars";
+@use "src/styles/utils/mixins";
+
+.navigation_mobile {
+  position: fixed;
+  display: block;
+  top: 0;
+  background: vars.$colorLight;
+  width: 100%;
+  z-index: 2;
+
+  .navigation_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 7rem;
+    width: 100%;
+    z-index: 10;
+    box-shadow: 0px 4px 10px rgb(179, 179, 179);
+    .navigation_li--picture {
+      position: relative;
+      margin-left: 2.5rem;
+      z-index: 0;
+      img {
+        height: 4rem;
+        width: auto;
+        border-radius: 2rem;
+      }
+    }
+
+    .nav_burger-icon--open {
+      align-self: center;
+      width: 35px;
+      height: 15px;
+      @include mixins.for-tablet-portrait-up {
+        margin-right: 2.5rem;
+      }
+      position: relative;
+      transform: rotate(90deg);
+      transition: 0.5s ease-in-out;
+      cursor: pointer;
+      span {
+        display: block;
+        position: absolute;
+        height: 4px;
+        width: 100%;
+        background: vars.$colorBlue;
+        border-radius: 9px;
+        opacity: 1;
+        transform: rotate(135deg);
+        transition: 0.25s ease-in-out;
+        @include mixins.for-tablet-landscape-up {
+          display: none;
+        }
+      }
+      span:nth-child(1) {
+        top: 18px;
+        transform: rotate(135deg);
+      }
+      span:nth-child(2) {
+        opacity: 0;
+        left: -60px;
+      }
+      span:nth-child(3) {
+        top: 18px;
+        transform: rotate(-135deg);
+      }
+    }
+
+    .nav_burger-icon {
+      align-self: center;
+      width: 35px;
+      height: 12px;
+      position: relative;
+      margin-right: 1rem;
+      @include mixins.for-tablet-portrait-up {
+        margin-right: 3rem;
+      }
+      margin-bottom: 1.4rem;
+      transform: rotate(0deg);
+      transition: 0.5s ease-in-out;
+      cursor: pointer;
+
+      span {
+        display: block;
+        position: absolute;
+        height: 4px;
+        width: 100%;
+        background: vars.$colorBlue;
+        cursor: pointer;
+        border-radius: 9px;
+        opacity: 1;
+        left: 0;
+        transform: rotate(0deg);
+        transition: 0.25s ease-in-out;
+        @include mixins.for-tablet-landscape-up {
+          display: none;
+        }
+      }
+      span:nth-child(1) {
+        top: 0px;
+      }
+
+      span:nth-child(2) {
+        top: 12px;
+      }
+
+      span:nth-child(3) {
+        top: 24px;
+      }
+    }
+  }
+
+  .navigation_mobile--link {
+    z-index: 1000;
+    display: block;
+    position: fixed;
+    padding: 0px 0px 0px 0px;
+    top: 0;
+    left: -241px;
+    height: 100%;
+    border-right: 1px solid vars.$colorBlue;
+    transition: left 1.5s;
+    animation-duration: 2s;
+    transform: translate(0px, 0px);
+    transition-duration: 1s, 1s;
+
+    ul {
+      background-color: vars.$colorGreenTransparent;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
+      padding-top: 5rem;
+      
+
+      li {
+        font-weight: bold;
+        color: vars.$colorLight;
+        margin-left: 2rem;
+        margin-top: 2rem;
+        padding-right: 2rem;
+      }
+    }
+  }
+  .active {
+    z-index: 1000;
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0px;
+    transition: left 1s;
+    animation-duration: 2s;
+    transition-duration: 1.5s, 1.5s;
+    transform: translate(0px, 0px);
+    height: 100%;
+    width: 50%;
+
+    .nav_burger-icon--open {
+      align-self: flex-end;
+      width: 35px;
+      height: 15px;
+      @include mixins.for-tablet-portrait-up {
+        margin-right: 2.5rem;
+      }
+      position: relative;
+      transform: rotate(90deg);
+      transition: 0.5s ease-in-out;
+      cursor: pointer;
+      span {
+        display: block;
+        position: absolute;
+        height: 4px;
+        width: 100%;
+        background: vars.$colorLight;
+        border-radius: 9px;
+        opacity: 1;
+        transform: rotate(135deg);
+        transition: 0.25s ease-in-out;
+        @include mixins.for-tablet-landscape-up {
+          display: none;
+        }
+      }
+      span:nth-child(1) {
+        top: 18px;
+        transform: rotate(135deg);
+      }
+      span:nth-child(2) {
+        opacity: 0;
+        left: -60px;
+      }
+      span:nth-child(3) {
+        top: 18px;
+        transform: rotate(-135deg);
+      }
+    }
+    ul {
+      height: 100%;
+      background-color: vars.$colorGreenTransparent;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
+      padding-left: 2.5rem;
+      padding-top: 5rem;
+
+      li {
+        margin-top: 2rem;
+        font-weight: bold;
+        color: vars.$colorLight;
+        
+        .icon {
+          padding-right: 1rem;
+        }
+
+        .login_icon {
+          padding-right: 0.6rem;
+        }
+
+        .button_logged {
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}
