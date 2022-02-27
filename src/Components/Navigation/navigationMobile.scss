@@ -156,6 +156,9 @@
     transform: translate(0px, 0px);
     height: 100%;
     width: 50%;
+    @include mixins.for-phone-only {
+      width: 70%;
+    }
 
     .nav_burger-icon--open {
       align-self: flex-end;
@@ -168,6 +171,10 @@
       transform: rotate(90deg);
       transition: 0.5s ease-in-out;
       cursor: pointer;
+      @include mixins.for-phone-only {
+        margin-right: 1rem;
+      }
+
       span {
         display: block;
         position: absolute;
@@ -204,6 +211,9 @@
       align-items: flex-start;
       padding-left: 2.5rem;
       padding-top: 5rem;
+      @include mixins.for-phone-only {
+        padding-left: 1.8rem;
+      }
 
       li {
         margin-top: 2rem;
