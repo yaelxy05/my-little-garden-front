@@ -28,7 +28,7 @@ function NavigationMobile() {
     };
     document.addEventListener("click", checkIfClickedOutside);
     return () => { document.removeEventListener("click", checkIfClickedOutside); };
-  }, [isOpen])
+  }, [isOpen]);
 
   const logOut = () => {
     window.location = "/connexion";
