@@ -40,14 +40,14 @@ function Connexion() {
       });
   };
   const refreshLogin = () => {
-    if (localStorage.getItem("token") !== null) {
-      setToken(localStorage.getItem("token"));
+    if (window.localStorage.getItem("token") !== null) {
+      setToken(window.localStorage.getItem("token"));
       setIsConnected(true);
     }
   };
   useEffect(() => {
     refreshLogin();
-  }, []);
+  }, [isConnected]);
 
   return (
     <div className="login">
@@ -79,7 +79,7 @@ function Connexion() {
               }
             />
             <button className="login_button">Envoyer</button>
-            <p>Vous n'avez pas de compte? <span><NavLink exact to="/inscription">Inscrivez vous</NavLink></span> </p>
+            <p>Vous n'avez pas de compte? <span><NavLink to="/inscription">Inscrivez vous</NavLink></span> </p>
           </form>
         </>
       )}

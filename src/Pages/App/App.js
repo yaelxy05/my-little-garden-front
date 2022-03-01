@@ -1,5 +1,5 @@
-import { Route, Switch } from "react-router-dom";
-import React, { useContext } from "react";
+import { Route, Routes } from "react-router-dom";
+import React, { useState, useContext, useEffect } from "react";
 // Import scss
 import "./App.scss";
 // Import Page
@@ -9,36 +9,40 @@ import Calendar from "../Calendar";
 import Connexion from "../Connexion";
 import Register from "../Register";
 import UserSpace from "../SpaceUser";
-import Header from '../../Components/Header'
+import Header from "../../Components/Header";
+import Profil from "../SpaceUser/Profil";
 // Import Context
-import { IsConnectedContext } from "../../Utils/Context";
+import { IsConnectedContext, TokenContext } from "../../Utils/Context";
 
 function App() {
-  const { isConnected } = useContext(IsConnectedContext);
+  // Context 
+  const { isConnected, setIsConnected } = useContext(IsConnectedContext);
+  const { setToken } = useContext(TokenContext);
+
+  const refreshLogin = () => {
+    if (window.localStorage.getItem("token") !== null) {
+      setToken(window.localStorage.getItem("token"));
+      setIsConnected(true);
+    }
+  };
+  useEffect(() => {
+    refreshLogin();
+  }, []);
   
   return (
     <div className="App">
       <Navigation />
-      <Switch>
-        <Route path="/calendrier">
-          <Calendar />
-        </Route>
-        <Route path="/connexion">
-          <Connexion />
-        </Route>
-        <Route path="/inscription">
-          <Register />
-        </Route>
+      <Routes>
+        <Route path="/calendrier" element={<Calendar />} />
+        <Route path="/connexion" element={<Connexion />} />
+        <Route path="/inscription" element={<Register />} />
         {isConnected && (
-          <Route path="/espace-utilisateur">
-            <UserSpace />
+          <Route path="/espace-utilisateur" element={<UserSpace />}>
+            <Route path="/espace-utilisateur/mon-profil" element={<Profil />} />
           </Route>
         )}
-
-        <Route path="/" exact>
-          <Header />
-        </Route>
-      </Switch>
+        <Route path="/" element={<Header />} />
+      </Routes>
 
       <Footer />
     </div>

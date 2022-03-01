@@ -17,42 +17,27 @@ function NavigationDesktop() {
     setToken(null);
     setIsConnected(false);
   };
-
+  
   return (
     <>
       <ul className="navigation_desktop">
         <li>
-          <NavLink exact to="/" activeClassName="current">
+          <NavLink end to="/">
             Accueil
           </NavLink>
         </li>
         <li>
-          <NavLink to="/calendrier" activeClassName="current">
+          <NavLink to="/calendrier" >
             Calendrier des semis
           </NavLink>
         </li>
         <li className="navigation_li--picture">
           <img src={Logo} alt="logo my little farmer" />
         </li>
-        {!isConnected && (
-          <>
-            <li>
-              <NavLink to="/connexion" activeClassName="current">
-                Se connecter
-              </NavLink>
-            </li>
-            <li>
-              <NavLink to="/inscription" activeClassName="current">
-                Inscription
-              </NavLink>
-            </li>
-          </>
-        )}
-
         {isConnected && (
           <>
             <li>
-              <NavLink to="/espace-utilisateur" activeClassName="current">
+              <NavLink to="/espace-utilisateur" >
                 Espace utilisateur
               </NavLink>
             </li>
@@ -61,6 +46,22 @@ function NavigationDesktop() {
             </li>
           </>
         )}
+        {!isConnected && (
+          <>
+            <li>
+              <NavLink to="/connexion" >
+                Se connecter
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/inscription" >
+                Inscription
+              </NavLink>
+            </li>
+          </>
+        )}
+
+        
       </ul>
     </>
   );

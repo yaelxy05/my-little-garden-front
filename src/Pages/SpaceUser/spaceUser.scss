@@ -1,0 +1,55 @@
+@use "src/styles/utils/vars";
+@use "src/styles/utils/mixins";
+
+.userspace {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+
+  .menu_user {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: vars.$colorBrown;
+    width: 25rem;
+    padding-top: 2rem;
+
+    .menu_user-img {
+      margin: 4rem 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+
+      img {
+        height: 130px;
+        width: auto;
+        border-radius: 50%;
+        margin-bottom: 1rem;
+      }
+
+      p {
+        color: vars.$colorLight;
+        font-weight: bold;
+      }
+    }
+
+    ul {
+      padding: 0px 0px 0px 16px;
+      border-left: solid 1px white;
+
+      li:not(:last-child) {
+        margin-bottom: 3rem;
+      }
+
+      li {
+        color: vars.$colorLight;
+        font-weight: bold;
+
+        .active {
+          color: vars.$color5;
+        }
+      }
+    }
+  }
+}

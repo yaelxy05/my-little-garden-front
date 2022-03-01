@@ -7,9 +7,9 @@ function Calendar() {
       <h1>Calendrier des semis</h1>
       <div className="calendar_legend">
         <span className="calendar_legend--brown"></span> <p> En pleine terre</p>
-        <span className="calendar_legend--blue"></span>{" "}
+        <span className="calendar_legend--blue"></span>
         <p> Sous serre froide</p>
-        <span className="calendar_legend--red"></span>{" "}
+        <span className="calendar_legend--red"></span>
         <p> Sous serre chauffée</p>
       </div>
 

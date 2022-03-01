@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState, useRef } from "react";
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 // Import fontawesome
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHouse, faCalendar, faChalkboardUser, faAddressCard, faDoorOpen } from "@fortawesome/free-solid-svg-icons";
@@ -66,27 +66,27 @@ function NavigationMobile() {
           </div>
             <li>
            
-              <NavLink exact to="/" activeClassName="current" onClick={windowCloseMenu}>
+              <Link  to="/"  onClick={windowCloseMenu}>
                 <FontAwesomeIcon icon={faHouse} className="icon" />Accueil
-              </NavLink>
+              </Link>
             </li>
             <li>
-              <NavLink to="/calendrier" activeClassName="current" onClick={windowCloseMenu}>
+              <Link to="/calendrier" onClick={windowCloseMenu}>
               <FontAwesomeIcon icon={faCalendar} className="icon" />Calendrier des semis
-              </NavLink>
+              </Link>
             </li>
 
             {!isConnected && (
               <>
                 <li>
-                  <NavLink to="/connexion" activeClassName="current" onClick={windowCloseMenu}>
+                  <Link to="/connexion" onClick={windowCloseMenu}>
                   <FontAwesomeIcon icon={faChalkboardUser} className="icon login_icon" />Se connecter
-                  </NavLink>
+                  </Link>
                 </li>
                 <li>
-                  <NavLink to="/inscription" activeClassName="current" onClick={windowCloseMenu}>
+                  <Link to="/inscription" onClick={windowCloseMenu}>
                   <FontAwesomeIcon icon={faAddressCard} className="icon register_icon" />Inscription
-                  </NavLink>
+                  </Link>
                 </li>
               </>
             )}
@@ -94,9 +94,9 @@ function NavigationMobile() {
             {isConnected && (
               <>
                 <li>
-                  <NavLink to="/espace-utilisateur" activeClassName="current" onClick={windowCloseMenu}>
+                  <Link to="/espace-utilisateur" onClick={windowCloseMenu}>
                   <FontAwesomeIcon icon={faAddressCard} className="icon register_icon" />Espace utilisateur
-                  </NavLink>
+                  </Link>
                 </li>
                 <li className="button_logged" onClick={logOut}>
                 <FontAwesomeIcon icon={faDoorOpen} className="icon logout_icon" />Déconnexion
