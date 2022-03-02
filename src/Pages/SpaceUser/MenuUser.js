@@ -7,7 +7,7 @@ import Avatar from '../../assets/img/logo/My little Farmer.svg'
 function MenuUser() {
   return (
     <> 
-      <nav className="menu_user">
+      <aside className="menu_user">
           <div className="menu_user-img">
               <img src={Avatar} alt="avatar profil" />
               <p>Name</p>
@@ -23,7 +23,7 @@ function MenuUser() {
         <li>Liste de mes semis</li>
         <li>Mon potager</li>
       </ul>
-    </nav>
+    </aside>
     <Outlet />
     </>
   );

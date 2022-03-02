@@ -13,6 +13,9 @@
     background: vars.$colorBrown;
     width: 25rem;
     padding-top: 2rem;
+    @include mixins.for-desktop-small-medium {
+      width: 20rem;
+    }
 
     .menu_user-img {
       margin: 4rem 0;
@@ -26,6 +29,9 @@
         width: auto;
         border-radius: 50%;
         margin-bottom: 1rem;
+        @include mixins.for-desktop-small-medium {
+          height: 100px;
+        }
       }
 
       p {

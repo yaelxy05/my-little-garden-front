@@ -1,0 +1,191 @@
+@use "src/styles/utils/vars";
+@use "src/styles/utils/mixins";
+
+.profil {
+  width: 100%;
+  padding-left: 5rem;
+  padding-top: 8rem;
+  background: #f8f9fd;
+
+  .profil_title {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 2rem;
+
+    h1 {
+      color: vars.$colorBlue;
+      font-weight: bold;
+      font-size: 1.8rem;
+      font-family: vars.$fontMenu;
+    }
+  }
+
+  .profil_data--box {
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+
+    .profil_data {
+      border-radius: 8px;
+      background-color: rgb(255, 255, 255);
+      box-shadow: 0px 4px 10px rgb(179, 179, 179);
+      color: rgb(23, 20, 45);
+      height: 25rem;
+      width: 50%;
+      padding: 2rem 2rem;
+      margin-right: 2.5rem;
+
+      &:hover {
+        box-shadow: 0px 4px 8px  rgb(83, 87, 87);
+      }
+
+      h2 {
+        font-weight: bold;
+        font-size: 1.5rem;
+        margin-bottom: 2rem;
+      }
+
+      .profil_data--form {
+        padding-top: 2rem;
+
+        .profil_data--input {
+          display: flex;
+          flex-direction: column;
+          position: relative;
+          margin-bottom: 2.5rem;
+
+          input {
+            display: block;
+            padding: 4px 28px 4px 0px;
+            border: none;
+            appearance: none;
+            border-radius: 0px;
+            background-color: transparent;
+            text-overflow: ellipsis;
+
+            &:read-only {
+              cursor: default;
+            }
+          }
+
+          label {
+            position: absolute;
+            top: 0;
+            padding: 4px 0px;
+            pointer-events: none;
+            transition: transform 0.2s ease 0s, font-size 0.2s ease 0s,
+              color 0.2s ease 0s;
+            color: rgba(23, 20, 45, 0.8);
+            transform: translateY(-100%);
+            font-size: 10px;
+            line-height: 1.5;
+          }
+        }
+      }
+    }
+
+    .profil_data--modify {
+      width: 50%;
+      margin-right: 4rem;
+
+      .input_modify {
+        display: flex;
+        flex-direction: column;
+        height: 11rem;
+        width: 100%;
+        margin-bottom: 1.5rem;
+
+        .profil_data--input {
+          display: flex;
+          flex-direction: column;
+          position: relative;
+          margin-bottom: 2.5rem;
+
+          input {
+            display: block;
+            padding: 4px 28px 4px 0px;
+            border: none;
+            appearance: none;
+            border-radius: 0px;
+            background-color: transparent;
+            text-overflow: ellipsis;
+
+            &:read-only {
+              cursor: default;
+            }
+          }
+
+          label {
+            position: absolute;
+            top: 0;
+            padding: 4px 0px;
+            pointer-events: none;
+            transition: transform 0.2s ease 0s, font-size 0.2s ease 0s,
+              color 0.2s ease 0s;
+            color: rgba(23, 20, 45, 0.8);
+            transform: translateY(-100%);
+            font-size: 10px;
+            line-height: 1.5;
+          }
+        }
+
+        button {
+          width: 7rem;
+          border-radius: 2rem;
+          padding: 0.5rem 0;
+          border: none;
+          background: vars.$primaryColor;
+          color: vars.$colorLight;
+          font-weight: bold;
+          margin-bottom: 1rem;
+          font-size: 1rem;
+        }
+
+        .profil_data--email {
+          display: flex;
+          position: relative;
+          margin-top: 0.5rem;
+
+          input {
+            display: block;
+            padding: 4px 28px 4px 0px;
+            border: none;
+            appearance: none;
+            border-radius: 0px;
+            background-color: transparent;
+            text-overflow: ellipsis;
+            font-weight: 500;
+
+            &:read-only {
+              cursor: default;
+            }
+          }
+
+          label {
+            position: absolute;
+            top: 0;
+            padding: 4px 0px;
+            pointer-events: none;
+            transition: transform 0.2s ease 0s, font-size 0.2s ease 0s,
+              color 0.2s ease 0s;
+            color: rgba(23, 20, 45, 0.8);
+            transform: translateY(-100%);
+            font-size: 10px;
+            line-height: 1.5;
+          }
+
+          .button_email {
+            width: 7rem;
+            border-radius: 2rem;
+            padding: 0.5rem 0;
+            border: none;
+            background: vars.$primaryColor;
+            color: vars.$colorLight;
+            font-weight: bold;
+            font-size: 1rem;
+          }
+        }
+      }
+    }
+  }
+}
