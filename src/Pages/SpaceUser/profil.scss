@@ -6,6 +6,10 @@
   padding-left: 5rem;
   padding-top: 8rem;
   background: #f8f9fd;
+  @include mixins.for-screen-small-medium {
+    min-height: 100vh;
+    margin-bottom: 3rem;
+  }
 
   .profil_title {
     display: flex;
@@ -24,7 +28,10 @@
     display: flex;
     justify-content: flex-start;
     width: 100%;
-
+    @include mixins.for-screen-small-medium {
+      flex-direction: column;
+      display: block;
+    }
     .profil_data {
       border-radius: 8px;
       background-color: rgb(255, 255, 255);
@@ -34,6 +41,11 @@
       width: 50%;
       padding: 2rem 2rem;
       margin-right: 2.5rem;
+      @include mixins.for-screen-small-medium {
+        margin-right: 0;
+        margin-bottom: 2rem;
+        width: 90%;
+      }
 
       &:hover {
         box-shadow: 0px 4px 8px  rgb(83, 87, 87);
@@ -47,12 +59,35 @@
 
       .profil_data--form {
         padding-top: 2rem;
+        .button_box {
+          display: flex;
+          flex-direction: row;
+          justify-content: flex-start;
+          button {
+          width: 7rem;
+          border-radius: 2rem;
+          padding: 0.5rem 0;
+          margin-bottom: 1rem;
+          margin-right: 0.5rem;
+          border: none;
+          background: vars.$primaryColor;
+          color: vars.$colorLight;
+          font-weight: bold;
+          font-size: 1rem;
+          align-self: center;
+          }
+        }
+        
 
         .profil_data--input {
           display: flex;
           flex-direction: column;
           position: relative;
           margin-bottom: 2.5rem;
+
+          .focus_input {
+            border-bottom: 1px solid vars.$colorBlue;
+          }
 
           input {
             display: block;
@@ -87,6 +122,64 @@
     .profil_data--modify {
       width: 50%;
       margin-right: 4rem;
+      @include mixins.for-screen-small-medium {
+        margin-right: 0;
+        width: 90%;
+      }
+      .input_modify--active {
+        height: 24rem;
+        width: 100%;
+        margin-bottom: 1.5rem;
+
+        .profil_data--input {
+          display: flex;
+          flex-direction: column;
+          position: relative;
+          margin-bottom: 2.5rem;
+
+          a {
+            font-size: 0.9rem;
+          }
+          #current-password {
+            margin-bottom: 0.5rem;
+          }
+
+          .focus_input {
+            border-bottom: 1px solid vars.$colorBlue;
+          }
+
+          input {
+            display: block;
+            padding: 4px 28px 4px 0px;
+            border: none;
+          }
+
+          label {
+            position: absolute;
+            top: 0;
+            padding: 4px 0px;
+            pointer-events: none;
+            transition: transform 0.2s ease 0s, font-size 0.2s ease 0s,
+              color 0.2s ease 0s;
+            color: rgba(23, 20, 45, 0.8);
+            transform: translateY(-100%);
+            font-size: 10px;
+            line-height: 1.5;
+          }
+        }
+
+        button {
+          width: 7rem;
+          border-radius: 2rem;
+          padding: 0.5rem 0;
+          border: none;
+          background: vars.$primaryColor;
+          color: vars.$colorLight;
+          font-weight: bold;
+          margin-right: 0.5rem;
+          font-size: 1rem;
+        }
+      }
 
       .input_modify {
         display: flex;
@@ -100,6 +193,10 @@
           flex-direction: column;
           position: relative;
           margin-bottom: 2.5rem;
+
+          .focus_input {
+            border-bottom: 1px solid vars.$colorBlue;
+          }
 
           input {
             display: block;

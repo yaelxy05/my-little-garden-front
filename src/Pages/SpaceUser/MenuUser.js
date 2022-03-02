@@ -2,7 +2,7 @@ import React from "react";
 import { Link, Outlet } from "react-router-dom";
 
 // Import picture
-import Avatar from '../../assets/img/logo/My little Farmer.svg'
+import Avatar from '../../assets/img/avatar/portfolio-img.jpg'
 
 function MenuUser() {
   return (
@@ -10,7 +10,7 @@ function MenuUser() {
       <aside className="menu_user">
           <div className="menu_user-img">
               <img src={Avatar} alt="avatar profil" />
-              <p>Name</p>
+              <p>Yael</p>
           </div>
      
       <ul>

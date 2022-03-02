@@ -3,7 +3,7 @@
 
 .userspace {
   display: flex;
-  height: 100vh;
+  min-height: 100vh;
   width: 100%;
 
   .menu_user {
@@ -28,6 +28,7 @@
         height: 130px;
         width: auto;
         border-radius: 50%;
+        border: solid 2px vars.$colorLight;
         margin-bottom: 1rem;
         @include mixins.for-desktop-small-medium {
           height: 100px;
