@@ -14,7 +14,7 @@
     width: 25rem;
     padding-top: 2rem;
     @include mixins.for-desktop-small-medium {
-      width: 20rem;
+      width: 18rem;
     }
 
     .menu_user-img {
@@ -43,7 +43,7 @@
 
     ul {
       padding: 0px 0px 0px 16px;
-      border-left: solid 1px white;
+
 
       li:not(:last-child) {
         margin-bottom: 3rem;
@@ -52,9 +52,15 @@
       li {
         color: vars.$colorLight;
         font-weight: bold;
+        padding: 0.5rem 0;
+
+        svg {
+          margin-right: 0.7rem;
+        }
 
         .active {
           color: vars.$color5;
+          
         }
       }
     }
