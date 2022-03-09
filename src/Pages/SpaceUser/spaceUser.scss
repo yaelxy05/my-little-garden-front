@@ -25,10 +25,10 @@
       flex-direction: column;
 
       img {
-        height: 130px;
+        height: 110px;
         width: auto;
         border-radius: 50%;
-        border: solid 2px vars.$colorLight;
+
         margin-bottom: 1rem;
         @include mixins.for-desktop-small-medium {
           height: 100px;
@@ -56,6 +56,7 @@
 
         svg {
           margin-right: 0.7rem;
+          color: #6FA943;
         }
 
         .active {

@@ -11,8 +11,15 @@ import Register from "../Register";
 import UserSpace from "../SpaceUser";
 import Header from "../../Components/Header";
 import Profil from "../SpaceUser/Profil";
+import ListSemis from "../SpaceUser/ListSemis";
+import AddSemis from "../SpaceUser/AddSemis";
+import MyGarden from "../SpaceUser/MyGarden";
+
 // Import Context
 import { IsConnectedContext, TokenContext } from "../../Utils/Context";
+
+
+
 
 function App() {
   // Context 
@@ -39,6 +46,9 @@ function App() {
         {isConnected && (
           <Route path="/espace-utilisateur" element={<UserSpace />}>
             <Route path="/espace-utilisateur/mon-profil" element={<Profil />} />
+            <Route path="/espace-utilisateur/liste-semis" element={<ListSemis />} />
+            <Route path="/espace-utilisateur/add-semis" element={<AddSemis />} />
+            <Route path="/espace-utilisateur/mon-potager" element={<MyGarden />} />
           </Route>
         )}
         <Route path="/" element={<Header />} />

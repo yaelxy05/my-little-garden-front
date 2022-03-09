@@ -6,7 +6,7 @@ import {
   faUser,
   faSeedling,
   faRectangleList,
-  faCarrot
+  faCarrot,
 } from "@fortawesome/free-solid-svg-icons";
 // Import picture
 import Avatar from "../../assets/img/avatar/portfolio-img.jpg";
@@ -27,15 +27,17 @@ function MenuUser() {
           </li>
           <li>
             <FontAwesomeIcon icon={faSeedling} />
-            Ajouter un semis
+            <Link to="/espace-utilisateur/add-semis">Ajouter un semis</Link>
           </li>
           <li>
             <FontAwesomeIcon icon={faRectangleList} />
-            Liste de mes semis
+            <Link to="/espace-utilisateur/liste-semis">Liste de mes semis</Link>
           </li>
           <li>
-          <FontAwesomeIcon icon={faCarrot} />
-            Mon potager</li>
+            <FontAwesomeIcon icon={faCarrot} />
+            <Link to="/espace-utilisateur/mon-potager">Mon potager</Link>
+            
+          </li>
         </ul>
       </aside>
       <Outlet />

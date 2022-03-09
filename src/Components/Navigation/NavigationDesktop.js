@@ -37,7 +37,7 @@ function NavigationDesktop() {
         {isConnected && (
           <>
             <li>
-              <NavLink to="/espace-utilisateur" >
+              <NavLink to="/espace-utilisateur/mon-profil" >
                 Espace utilisateur
               </NavLink>
             </li>
