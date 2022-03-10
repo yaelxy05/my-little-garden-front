@@ -14,6 +14,7 @@ function ListSemis() {
                           <td>Variété</td>
                           <td>Date de semis</td>
                           <td>Famille</td>
+                          <td>Date dernier arrosage</td>
                       </tr>
                   </thead>
                   <tbody>
