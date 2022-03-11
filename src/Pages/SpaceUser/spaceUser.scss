@@ -25,13 +25,13 @@
       flex-direction: column;
 
       img {
-        height: 110px;
+        height: 90px;
         width: auto;
         border-radius: 50%;
 
         margin-bottom: 1rem;
         @include mixins.for-desktop-small-medium {
-          height: 100px;
+          height: 90px;
         }
       }
 

@@ -9,7 +9,7 @@ import {
   faCarrot,
 } from "@fortawesome/free-solid-svg-icons";
 // Import picture
-import Avatar from "../../assets/img/avatar/portfolio-img.jpg";
+import Avatar from "../../assets/img/avatar/user.png";
 
 function MenuUser() {
   return (

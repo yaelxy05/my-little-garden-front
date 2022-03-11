@@ -1,14 +1,58 @@
-import React from "react";
+import axios from "axios";
+import React, { useState } from "react";
 // Import components
 import InputField from "../../../Components/InputRegister";
 // Import css
 import "./addSemis.scss";
 
 function AddSemis() {
+  const token = localStorage.getItem("token");
+  // variable for define the time zone
+  let date = new Date();
+  const myTimeZone = 1;
+  // Initial state
+  const [formSemis, setFormSemis] = useState({
+    variete: "",
+    famille: "",
+    dateSemis: new Date(
+      date.setTime(date.getTime() + myTimeZone * 60 * 60 * 1000)
+    ),
+    NomSemis: "",
+  });
+  const API_URLS = process.env.REACT_APP_API_URL;
+
+  const handleSubmit = (evt) => {
+    evt.preventDefault();
+    setFormSemis(formSemis);
+
+    axios
+      .post(
+        `${API_URLS}/legume/create`,
+        {
+          date_semis: formSemis.dateSemis,
+          variete: formSemis.variete,
+          family: formSemis.famille,
+          name: formSemis.NomSemis,
+        },
+        {
+          headers: {
+            Authorization: "Bearer " + token,
+            Accept: "application/json, text/plain, */*",
+            "Content-Type": "application/json",
+          },
+        }
+      )
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   return (
     <div className="addSemis">
       <div className="addSemis--box">
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className="addSemis--title">
             <h1>Ajout de semis</h1>
           </div>
@@ -17,18 +61,41 @@ function AddSemis() {
             label="Variété"
             placeholder=" "
             type="text"
+            value={formSemis.variete}
+            manageChange={(e) =>
+              setFormSemis({ ...formSemis, variete: e.target.value })
+            }
           />
           <InputField
             name="famille"
             label="Famille"
             placeholder=" "
             type="text"
+            value={formSemis.famille}
+            manageChange={(e) =>
+              setFormSemis({ ...formSemis, famille: e.target.value })
+            }
           />
           <InputField
             name="date-semis"
             label="Date du semis"
             placeholder=" "
+            type="date"
+            dateFormat="yyyy-MM-dd"
+            value={formSemis.dateSemis}
+            manageChange={(e) =>
+              setFormSemis({ ...formSemis, dateSemis: e.target.value })
+            }
+          />
+          <InputField
+            name="nom-semis"
+            label="Nom du semis"
+            placeholder=" "
             type="text"
+            value={formSemis.NomSemis}
+            manageChange={(e) =>
+              setFormSemis({ ...formSemis, NomSemis: e.target.value })
+            }
           />
           <button className="addSemis_button">Ajouter</button>
         </form>

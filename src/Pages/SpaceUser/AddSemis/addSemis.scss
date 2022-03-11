@@ -25,7 +25,7 @@
       flex-direction: column;
       justify-content: flex-start;
       align-items: center;
-      height: 32rem;
+      height: 40rem;
       width: 25rem;
       border-radius: 1rem;
       background: vars.$colorLight;
@@ -51,6 +51,7 @@
       .input_box {
         width: 15rem;
         margin: 2rem 2rem;
+
         input {
           width: 100%;
 
@@ -70,17 +71,22 @@
             border-bottom: 3px solid vars.$color5;
           }
           &:focus ~ #labelField-variete,
-          &:not(:placeholder-shown) ~ #labelField-email {
+          &:not(:placeholder-shown) ~ #labelField-variete {
             transform: translateY(-1em) scale(0.8);
           }
 
           &:focus ~ #labelField-famille,
-          &:not(:placeholder-shown) ~ #labelField-password {
+          &:not(:placeholder-shown) ~ #labelField-famille {
             transform: translateY(-1em) scale(0.8);
           }
 
           &:focus ~ #labelField-date-semis,
-          &:not(:placeholder-shown) ~ #labelField-password {
+          &:not(:placeholder-shown) ~ #labelField-date-semis {
+            transform: translateY(-1em) scale(0.8);
+          }
+
+          &:focus ~ #labelField-nom-semis,
+          &:not(:placeholder-shown) ~ #labelField-nom-semis {
             transform: translateY(-1em) scale(0.8);
           }
         }
@@ -110,10 +116,16 @@
           top: 307px;
           left: 79px;
         }
+
+        #labelField-nom-semis {
+          position: absolute;
+          top: 399px;
+          left: 79px;
+        }
       }
       .addSemis_button {
         @include mixins.buttonInput;
-        width: 15rem;
+        width: 7rem;
         margin: 1.5rem 0 4rem 0;
       }
     }

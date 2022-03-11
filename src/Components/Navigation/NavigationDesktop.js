@@ -34,7 +34,7 @@ function NavigationDesktop() {
         <li className="navigation_li--picture">
           <img src={Logo} alt="logo my little farmer" />
         </li>
-        {isConnected && (
+        {isConnected ? 
           <>
             <li>
               <NavLink to="/espace-utilisateur/mon-profil" >
@@ -45,8 +45,7 @@ function NavigationDesktop() {
               Déconnexion
             </li>
           </>
-        )}
-        {!isConnected && (
+          :
           <>
             <li>
               <NavLink to="/connexion" >
@@ -59,7 +58,7 @@ function NavigationDesktop() {
               </NavLink>
             </li>
           </>
-        )}
+        }
 
         
       </ul>

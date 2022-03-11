@@ -4,10 +4,11 @@ import { NavLink } from "react-router-dom";
 import InputField from "../../Components/InputLogin";
 // Import package
 import axios from "axios";
+import jwt_decode from "jwt-decode";
 // Import Context
 import { IsConnectedContext, TokenContext } from "../../Utils/Context";
 // Import SCSS
-import './connexion.scss';
+import "./connexion.scss";
 
 function Connexion() {
   // Initial state
@@ -15,13 +16,13 @@ function Connexion() {
     email: "",
     password: "",
   });
-  
-  // Context 
+
+  // Context
   const { setToken } = useContext(TokenContext);
   const { isConnected, setIsConnected } = useContext(IsConnectedContext);
 
   const API_URLS = process.env.REACT_APP_API_URL;
-  
+
   const handleSubmit = (evt) => {
     evt.preventDefault();
     setFormData(formData);
@@ -33,16 +34,31 @@ function Connexion() {
       .then((response) => {
         localStorage.setItem("token", response.data.token);
         setIsConnected(true);
-        console.log(response);
+        console.log(response.data.token);
       })
       .catch((error) => {
         console.log(error);
       });
   };
+
   const refreshLogin = () => {
     if (window.localStorage.getItem("token") !== null) {
-      setToken(window.localStorage.getItem("token"));
-      setIsConnected(true);
+      // get token user for have token expiration delay
+      let token = localStorage.getItem("token");
+      let decodeJwt = jwt_decode(token);
+      console.log(decodeJwt.exp);
+      if (window.localStorage.getItem("token") !== null) {
+        setToken(window.localStorage.getItem("token"));
+        setIsConnected(true);
+      } else if (
+        window.localStorage.getItem("token") !== null &&
+        decodeJwt.exp === 0
+      ) {
+        window.location = "/connexion";
+        localStorage.removeItem("token");
+        setToken(null);
+        setIsConnected(false);
+      }
     }
   };
   useEffect(() => {
@@ -53,9 +69,8 @@ function Connexion() {
     <div className="login">
       {!isConnected && (
         <>
-          
           <form onSubmit={handleSubmit}>
-          <h1>Connexion</h1>
+            <h1>Connexion</h1>
             <InputField
               name="email"
               placeholder=" "
@@ -79,7 +94,12 @@ function Connexion() {
               }
             />
             <button className="login_button">Envoyer</button>
-            <p>Vous n'avez pas de compte? <span><NavLink to="/inscription">Inscrivez vous</NavLink></span> </p>
+            <p>
+              Vous n'avez pas de compte?{" "}
+              <span>
+                <NavLink to="/inscription">Inscrivez vous</NavLink>
+              </span>{" "}
+            </p>
           </form>
         </>
       )}
