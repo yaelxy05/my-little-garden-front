@@ -1,9 +1,12 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+
 import "./listSemis.scss";
+
 
 function ListSemis() {
   const API_URLS = process.env.REACT_APP_API_URL;
+
   useEffect(() => {
     getSemisList();
   }, []);

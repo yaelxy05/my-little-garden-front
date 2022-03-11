@@ -14,15 +14,12 @@ import Profil from "../SpaceUser/Profil";
 import ListSemis from "../SpaceUser/ListSemis";
 import AddSemis from "../SpaceUser/AddSemis";
 import MyGarden from "../SpaceUser/MyGarden";
-
+import ProtectedRoute from "../../Utils/ProtectedRoute";
 // Import Context
 import { IsConnectedContext, TokenContext } from "../../Utils/Context";
 
-
-
-
 function App() {
-  // Context 
+  // Context
   const { isConnected, setIsConnected } = useContext(IsConnectedContext);
   const { setToken } = useContext(TokenContext);
 
@@ -35,7 +32,7 @@ function App() {
   useEffect(() => {
     refreshLogin();
   }, []);
-  
+
   return (
     <div className="App">
       <Navigation />
@@ -43,14 +40,25 @@ function App() {
         <Route path="/calendrier" element={<Calendar />} />
         <Route path="/connexion" element={<Connexion />} />
         <Route path="/inscription" element={<Register />} />
-        {isConnected && (
+
+        <Route element={<ProtectedRoute />}>
           <Route path="/espace-utilisateur" element={<UserSpace />}>
             <Route path="/espace-utilisateur/mon-profil" element={<Profil />} />
-            <Route path="/espace-utilisateur/liste-semis" element={<ListSemis />} />
-            <Route path="/espace-utilisateur/add-semis" element={<AddSemis />} />
-            <Route path="/espace-utilisateur/mon-potager" element={<MyGarden />} />
+            <Route
+              path="/espace-utilisateur/liste-semis"
+              element={<ListSemis />}
+            />
+            <Route
+              path="/espace-utilisateur/add-semis"
+              element={<AddSemis />}
+            />
+            <Route
+              path="/espace-utilisateur/mon-potager"
+              element={<MyGarden />}
+            />
           </Route>
-        )}
+        </Route>
+
         <Route path="/" element={<Header />} />
       </Routes>
 
