@@ -7,8 +7,8 @@ import { IsConnectedContext } from "../Utils/Context";
 const ProtectedRoutes = () => {
   // Context
   const { isConnected } = useContext(IsConnectedContext);
-
-  return isConnected ? <Outlet /> : <Navigate to="/connexion" />;
+  
+  return (isConnected ? <Outlet /> : <Navigate to="/connexion" />);
 };
 
 export default ProtectedRoutes;

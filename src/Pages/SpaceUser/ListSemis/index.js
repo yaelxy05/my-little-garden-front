@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 
 import "./listSemis.scss";
 
-
 function ListSemis() {
   const API_URLS = process.env.REACT_APP_API_URL;
 
@@ -39,7 +38,7 @@ function ListSemis() {
         console.log(error);
       });
   };
-  
+
   return (
     <div className="list-semis">
       <div className="list-semis--title">
@@ -54,22 +53,32 @@ function ListSemis() {
               <td>Nom du semis</td>
               <td>Date de semis</td>
               <td>Date dernier arrosage</td>
+              <td>Commentaires</td>
             </tr>
           </thead>
-          <tbody>{listSemis && listSemis.map((list, index) => {
-            const update = new Date(
-              list.date_semis
-            ).toLocaleDateString("fr-FR", options);
-            return (
-              <tr key={index}>
-                <td>{list.variete}</td>
-                <td>{list.family}</td>
-                <td>{list.name}</td>
-                <td>{update}</td>
-                
-              </tr>
-            )
-          })}</tbody>
+          <tbody>
+            {listSemis &&
+              listSemis.map((list, index) => {
+                const update = new Date(list.date_semis).toLocaleDateString(
+                  "fr-FR",
+                  options
+                );
+              
+
+                return (
+                  <tr key={index}>
+                    <td>{list.variete}</td>
+                    <td>{list.family}</td>
+                    <td>{list.name}</td>
+                    <td>{update}</td>
+                    <td>{list.dateArrosage !== null ? new Date(
+                  list.dateArrosage
+                ).toLocaleDateString("fr-FR", options) : "pas d'arrosage"}</td>
+                    <td>{list.comments !== null ? list.comments : "Aucun commentaire"}</td>
+                  </tr>
+                );
+              })}
+          </tbody>
         </table>
       </div>
     </div>

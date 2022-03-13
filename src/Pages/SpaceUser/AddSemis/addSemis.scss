@@ -25,7 +25,7 @@
       flex-direction: column;
       justify-content: flex-start;
       align-items: center;
-      height: 40rem;
+      height: 50rem;
       width: 25rem;
       border-radius: 1rem;
       background: vars.$colorLight;
@@ -89,6 +89,16 @@
           &:not(:placeholder-shown) ~ #labelField-nom-semis {
             transform: translateY(-1em) scale(0.8);
           }
+
+          &:focus ~ #labelField-mode-semis,
+          &:not(:placeholder-shown) ~ #labelField-mode-semis {
+            transform: translateY(-1em) scale(0.8);
+          }
+
+          &:focus ~ #labelField-date-arrosage,
+          &:not(:placeholder-shown) ~ #labelField-date-arrosage {
+            transform: translateY(-1em) scale(0.8);
+          }
         }
 
         label {
@@ -114,13 +124,25 @@
         #labelField-date-semis {
           position: absolute;
           top: 307px;
-          left: 79px;
+          left: 69px;
         }
 
         #labelField-nom-semis {
           position: absolute;
           top: 399px;
           left: 79px;
+        }
+
+        #labelField-mode-semis {
+          position: absolute;
+          top: 492px;
+          left: 79px;
+        }
+
+        #labelField-date-arrosage {
+          position: absolute;
+          top: 582px;
+          left: 55px;
         }
       }
       .addSemis_button {

@@ -36,8 +36,9 @@
       }
 
       p {
-        color: vars.$colorLight;
+        color: vars.$color4;
         font-weight: bold;
+        font-family: vars.$fontSecondary;
       }
     }
 

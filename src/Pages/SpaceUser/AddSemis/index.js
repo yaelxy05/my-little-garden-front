@@ -14,6 +14,10 @@ function AddSemis() {
   const [formSemis, setFormSemis] = useState({
     variete: "",
     famille: "",
+    modeSemis: "",
+    dateArrosage: new Date(
+      date.setTime(date.getTime() + myTimeZone * 60 * 60 * 1000)
+    ),
     dateSemis: new Date(
       date.setTime(date.getTime() + myTimeZone * 60 * 60 * 1000)
     ),
@@ -33,6 +37,8 @@ function AddSemis() {
           variete: formSemis.variete,
           family: formSemis.famille,
           name: formSemis.NomSemis,
+          modeSemis: formSemis.modeSemis,
+          dateArrosage: formSemis.dateArrosage,
         },
         {
           headers: {
@@ -65,6 +71,7 @@ function AddSemis() {
             manageChange={(e) =>
               setFormSemis({ ...formSemis, variete: e.target.value })
             }
+            required
           />
           <InputField
             name="famille"
@@ -75,6 +82,7 @@ function AddSemis() {
             manageChange={(e) =>
               setFormSemis({ ...formSemis, famille: e.target.value })
             }
+            required
           />
           <InputField
             name="date-semis"
@@ -86,6 +94,7 @@ function AddSemis() {
             manageChange={(e) =>
               setFormSemis({ ...formSemis, dateSemis: e.target.value })
             }
+            required
           />
           <InputField
             name="nom-semis"
@@ -95,6 +104,28 @@ function AddSemis() {
             value={formSemis.NomSemis}
             manageChange={(e) =>
               setFormSemis({ ...formSemis, NomSemis: e.target.value })
+            }
+            required
+          />
+          <InputField
+            name="mode-semis"
+            label="Mode de semis"
+            placeholder=" "
+            type="text"
+            value={formSemis.modeSemis}
+            manageChange={(e) =>
+              setFormSemis({ ...formSemis, modeSemis: e.target.value })
+            }
+            required
+          />
+          <InputField
+            name="date-arrosage"
+            label="Date du dernier arrosage (facultatif)"
+            placeholder=" "
+            type="date"
+            value={formSemis.dateArrosage}
+            manageChange={(e) =>
+              setFormSemis({ ...formSemis, dateArrosage: e.target.value })
             }
           />
           <button className="addSemis_button">Ajouter</button>
