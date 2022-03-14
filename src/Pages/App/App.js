@@ -1,5 +1,8 @@
 import { Route, Routes } from "react-router-dom";
 import React, { useState, useContext, useEffect } from "react";
+
+// Import package
+import axios from "axios";
 // Import scss
 import "./App.scss";
 // Import Page
@@ -21,8 +24,28 @@ import { IsConnectedContext, TokenContext } from "../../Utils/Context";
 
 function App() {
   // Context
-  const { isConnected, setIsConnected } = useContext(IsConnectedContext);
-  const { setToken } = useContext(TokenContext);
+  const { setIsConnected } = useContext(IsConnectedContext);
+  const {  setToken } = useContext(TokenContext);
+
+  axios.interceptors.response.use(
+    function (response) {
+      console.log(response);
+      return response;
+    },
+    function (error) {
+      console.log(error);
+      if (401 === error.response.status) {
+        // handle error: inform user, go to login, etc
+        console.log("erreurdddd");
+        window.location = "/connexion";
+        localStorage.removeItem("token");
+        setToken(null);
+        setIsConnected(false);
+      } else {
+        return Promise.reject(error);
+      }
+    }
+  );
 
   const refreshLogin = () => {
     if (window.localStorage.getItem("token") !== null) {

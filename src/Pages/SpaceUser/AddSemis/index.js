@@ -11,6 +11,7 @@ function AddSemis() {
   let date = new Date();
   const myTimeZone = 1;
   // Initial state
+  const [sucess, setSucess] = useState(false);
   const [formSemis, setFormSemis] = useState({
     variete: "",
     famille: "",
@@ -50,9 +51,11 @@ function AddSemis() {
       )
       .then((response) => {
         console.log(response);
+        setSucess(true);
       })
       .catch((error) => {
         console.log(error);
+        setSucess(false);
       });
   };
   return (
@@ -130,6 +133,10 @@ function AddSemis() {
           />
           <button className="addSemis_button">Ajouter</button>
         </form>
+        {sucess && 
+          <p>Le semis a bien été ajouté</p>
+        }
+        <p></p>
       </div>
     </div>
   );
