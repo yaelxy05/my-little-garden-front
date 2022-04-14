@@ -37,7 +37,6 @@ function Connexion() {
         localStorage.setItem("token", response.data.token);
         
         setIsConnected(true);
-        console.log(response.data.token);
       })
       .catch((error) => {
         console.log(error);
@@ -45,14 +44,15 @@ function Connexion() {
       });
   };
 
-  const refreshLogin = () => {
-    if (window.localStorage.getItem("token") !== null) {
-      setToken(window.localStorage.getItem("token"));
-      setIsConnected(true);
-    }
-    
-  };
+  
   useEffect(() => {
+    const refreshLogin = () => {
+      if (window.localStorage.getItem("token") !== null) {
+        setToken(window.localStorage.getItem("token"));
+        setIsConnected(true);
+      }
+      
+    };
     refreshLogin();
   }, [isConnected]);
 

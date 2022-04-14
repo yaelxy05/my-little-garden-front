@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import React, { useState, useContext, useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 
 // Import package
 import axios from "axios";
@@ -17,7 +17,6 @@ import Profil from "../SpaceUser/Profil";
 import ListSemis from "../SpaceUser/ListSemis";
 import AddSemis from "../SpaceUser/AddSemis";
 import MyGarden from "../SpaceUser/MyGarden";
-import ProtectedRoute from "../../Utils/ProtectedRoute";
 import Page404 from "../404";
 // Import Context
 import { IsConnectedContext, TokenContext } from "../../Utils/Context";
@@ -27,9 +26,9 @@ function App() {
   const { setIsConnected } = useContext(IsConnectedContext);
   const {  setToken } = useContext(TokenContext);
 
+  /*
   axios.interceptors.response.use(
     function (response) {
-      console.log(response);
       return response;
     },
     function (error) {
@@ -46,14 +45,15 @@ function App() {
       }
     }
   );
-
-  const refreshLogin = () => {
-    if (window.localStorage.getItem("token") !== null) {
-      setToken(window.localStorage.getItem("token"));
-      setIsConnected(true);
-    }
-  };
+    
+  */
   useEffect(() => {
+    const refreshLogin = () => {
+      if (window.localStorage.getItem("token") !== null) {
+        setToken(window.localStorage.getItem("token"));
+        setIsConnected(true);
+      }
+    };
     refreshLogin();
   }, []);
 

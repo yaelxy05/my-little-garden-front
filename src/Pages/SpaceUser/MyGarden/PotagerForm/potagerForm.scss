@@ -26,6 +26,7 @@
       height: 3.5rem;
       text-align: center;
       margin-top: 2rem;
+      margin-bottom: 2rem;
       font-weight: bold;
       font-size: 1.5rem;
       font-family: vars.$fontTitle;
@@ -35,9 +36,31 @@
     .input_box {
       width: 15rem;
       margin: 0 2rem 2rem 2rem;
+      
+      select {
+        width: 100%;
+        height: 2rem;
+        margin-top: 1.6rem;
+        border: 0;
+        border-bottom: 1.5px solid vars.$secondaryColor;
+        background-color: transparent;
+        outline: none;
+        cursor: pointer;
+
+        font-size: 1em;
+        &::placeholder {
+          color: transparent;
+        }
+
+        &:focus {
+          width: 100%;
+          transition: 0.4s;
+          border-bottom: 3px solid vars.$color5;
+        }
+      }
+
       input {
         width: 100%;
-
         border: 0;
         border-bottom: 1.5px solid vars.$secondaryColor;
         background-color: transparent;
@@ -57,11 +80,6 @@
         &:not(:placeholder-shown) ~ #labelField-name {
           transform: translateY(-1em) scale(0.8);
         }
-
-        &:focus ~ #labelField-size,
-        &:not(:placeholder-shown) ~ #labelField-size {
-          transform: translateY(-1em) scale(0.8);
-        }
       }
 
       label {
@@ -74,13 +92,13 @@
 
       #labelField-name {
         position: absolute;
-        top: 80px;
+        top: 112px;
         left: 40px;
       }
 
       #labelField-size {
         position: absolute;
-        top: 139px;
+        top: 175px;
         left: 40px;
       }
     }
