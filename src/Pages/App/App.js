@@ -26,16 +26,15 @@ function App() {
   const { setIsConnected } = useContext(IsConnectedContext);
   const {  setToken } = useContext(TokenContext);
 
-  /*
+  
   axios.interceptors.response.use(
     function (response) {
       return response;
     },
     function (error) {
       console.log(error);
-      if (401 === error.response.status) {
+      if ("Expired JWT Token" === error.response.message) {
         // handle error: inform user, go to login, etc
-        console.log("erreurdddd");
         window.location = "/connexion";
         localStorage.removeItem("token");
         setToken(null);
@@ -46,7 +45,7 @@ function App() {
     }
   );
     
-  */
+  
   useEffect(() => {
     const refreshLogin = () => {
       if (window.localStorage.getItem("token") !== null) {
