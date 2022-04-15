@@ -39,8 +39,7 @@
       
       select {
         width: 100%;
-        height: 2rem;
-        margin-top: 1.6rem;
+        height: 1.8rem;
         border: 0;
         border-bottom: 1.5px solid vars.$secondaryColor;
         background-color: transparent;
@@ -96,11 +95,7 @@
         left: 40px;
       }
 
-      #labelField-size {
-        position: absolute;
-        top: 175px;
-        left: 40px;
-      }
+      
     }
 
     .addCarre_box {
@@ -142,6 +137,28 @@
     .input_box {
       width: 15rem;
       margin: 0 2rem 2rem 2rem;
+
+      select {
+        width: 100%;
+        height: 1.8rem;
+        border: 0;
+        border-bottom: 1.5px solid vars.$secondaryColor;
+        background-color: transparent;
+        outline: none;
+        cursor: pointer;
+
+        font-size: 1em;
+        &::placeholder {
+          color: transparent;
+        }
+
+        &:focus {
+          width: 100%;
+          transition: 0.4s;
+          border-bottom: 3px solid vars.$color5;
+        }
+      }
+
       input {
         width: 100%;
 

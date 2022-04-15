@@ -5,6 +5,8 @@ import InputField from "../../../../Components/InputMyGarden";
 import "./potagerForm.scss";
 // Import package
 import axios from "axios";
+// Import PotagerPlant
+import PotagerPlant from "./PotagerPlant";
 
 function PotagerForm() {
   // Initial state
@@ -12,30 +14,30 @@ function PotagerForm() {
     name: "",
     size: 33,
   });
-  console.log(formDataPotager.size);
-  console.log(formDataPotager.name);
 
   const token = localStorage.getItem("token");
   const API_URLS = process.env.REACT_APP_API_URL;
 
-  const handleSubmit = (evt) => {
+  const handleSubmit = async (evt) => {
     evt.preventDefault();
 
     setFormDataPotager(formDataPotager);
 
     axios
-      .post(`${API_URLS}/potager/create`, {
-        name: formDataPotager.name,
-        size: formDataPotager.size,
-      },
-      {
-        headers: {
-          Authorization: "Bearer " + token,
-          Accept: "application/json, text/plain, */*",
-          "Content-Type": "application/json",
+      .post(
+        `${API_URLS}/potager/create`,
+        {
+          name: formDataPotager.name,
+          size: formDataPotager.size,
         },
-      }
-    )
+        {
+          headers: {
+            Authorization: "Bearer " + token,
+            Accept: "application/json, text/plain, */*",
+            "Content-Type": "application/json",
+          },
+        }
+      )
       .then((response) => {
         console.log(response);
       })
@@ -60,11 +62,15 @@ function PotagerForm() {
             }
           />
           <div className={"input_box"}>
+            <label>Taille du carré</label>
             <select
               value={formDataPotager.size}
               name="size"
               onChange={(e) =>
-                setFormDataPotager({ ...formDataPotager, size: parseInt(e.target.value,10) })
+                setFormDataPotager({
+                  ...formDataPotager,
+                  size: parseInt(e.target.value, 10),
+                })
               }
               className="addCarre_input"
               placeholder=" "
@@ -75,53 +81,13 @@ function PotagerForm() {
               <option value={25}>2 X 5</option>
               <option value={35}>3 X 5</option>
             </select>
-            <label>Taille du carré</label>
           </div>
           <div className="addCarre_box">
             <button className="addCarre_button">Ajouter</button>
           </div>
         </form>
       </div>
-      <div className="potager_addPlant">
-        <form>
-          <h1>Ajout d'un plant</h1>
-          <InputField
-            name="name"
-            placeholder=" "
-            label="Nom du plant"
-            classname="addPlant_input"
-            type="text"
-          />
-          <InputField
-            name="family"
-            placeholder=" "
-            label="Famille"
-            classname="addPlant_input"
-            type="text"
-          />
-          <InputField
-            name="variete"
-            placeholder=" "
-            label="Variété"
-            classname="addPlant_input"
-            type="text"
-          />
-          <InputField
-            name="potager"
-            placeholder=" "
-            label="Nom du carré"
-            classname="addPlant_input"
-            value={formDataPotager.potager}
-            type="text"
-            manageChange={(e) =>
-              setFormDataPotager({ ...formDataPotager, potager: e.target.value })
-            }
-          />
-          <div className="addCarre_box">
-            <button className="addCarre_button">Ajouter</button>
-          </div>
-        </form>
-      </div>
+      <PotagerPlant />
     </div>
   );
 }
