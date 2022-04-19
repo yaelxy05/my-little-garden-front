@@ -85,17 +85,31 @@ function PotagerPlant() {
             setFormDataPlant({ ...formDataPlant, name: e.target.value })
           }
         />
-        <InputField
-          name="family"
-          placeholder=" "
-          label="Famille"
-          classname="addPlant_input"
-          type="text"
-          value={formDataPlant.family}
-          manageChange={(e) =>
-            setFormDataPlant({ ...formDataPlant, family: e.target.value })
-          }
-        />
+        <div className={"input_box"}>
+          <label>Famille</label>
+          <select
+            value={formDataPlant.family}
+            name="family"
+            onChange={(e) =>
+              setFormDataPlant({
+                ...formDataPlant,
+                family: e.target.value,
+              })
+            }
+            className="addPlant_input"
+            placeholder=" "
+            type="select"
+          >
+            <option value="tomate">Tomate</option>
+            <option value="salade">Salade</option>
+            <option value="haricot">Haricot</option>
+            <option value="basilic">Basilic</option>
+            <option value="piment">Piment</option>
+            <option value="betterave">Betterave</option>
+            <option value="melon">Melon</option>
+            <option value="cornichon">Cornichon</option>
+          </select>
+        </div>
         <InputField
           name="variete"
           placeholder=" "
