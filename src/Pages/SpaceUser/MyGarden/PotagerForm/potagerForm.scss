@@ -182,11 +182,6 @@
           transform: translateY(-1em) scale(0.8);
         }
 
-        &:focus ~ #labelField-family,
-        &:not(:placeholder-shown) ~ #labelField-family {
-          transform: translateY(-1em) scale(0.8);
-        }
-
         &:focus ~ #labelField-variete,
         &:not(:placeholder-shown) ~ #labelField-variete {
           transform: translateY(-1em) scale(0.8);
@@ -207,15 +202,9 @@
         left: 40px;
       }
 
-      #labelField-family {
-        position: absolute;
-        top: 139px;
-        left: 40px;
-      }
-
       #labelField-variete {
         position: absolute;
-        top: 198px;
+        top: 217px;
         left: 40px;
       }
 
@@ -229,11 +218,11 @@
     .addCarre_box {
         display: flex;
         justify-content: center;
-        margin-top: 1.8rem;
+        margin-bottom: 1.4rem;
       .addCarre_button {
         @include mixins.buttonInput;
         width: 8rem;
-        margin: 1.5rem 0 4rem 0;
+        margin: 0.2rem 0 2rem 0;
       }
     }
   }

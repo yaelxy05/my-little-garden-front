@@ -3,7 +3,7 @@
 
 .potager {
   background-color: #008037;
-  height: 90vh;
+  min-height: 100vh;
 
   h2 {
     width: 100%;
@@ -21,6 +21,7 @@
     justify-content: space-around;
     align-items: flex-start;
     flex-wrap: wrap;
+    padding-bottom: 3rem;
 
     .potager_carre--box {
         margin-bottom: 2rem;
