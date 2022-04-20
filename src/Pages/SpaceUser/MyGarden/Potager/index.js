@@ -40,12 +40,12 @@ function Potager() {
                 <div key={index} className="potager_carre--box">
                   <h3>{list.name}</h3>
                   <div className="potager_carre carre33">
-                    {list.plants.map((items, i) => {
+                    {list.plants.map((items, id) => {
                       const family = items.family;
 
                       return (
                         <img
-                          key={i}
+                          key={id}
                           src={require(`../../../../assets/img/legume/${family}.jpg`)}
                           alt={items.family}
                         />
