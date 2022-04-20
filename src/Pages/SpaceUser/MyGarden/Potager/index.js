@@ -39,39 +39,66 @@ function Potager() {
               return (
                 <div key={index} className="potager_carre--box">
                   <h3>{list.name}</h3>
-                  <div className="potager_carre carre33"></div>
+                  <div className="potager_carre carre33">
+                    {list.plants.map((items, i) => {
+                      const family = items.family;
+
+                      return (
+                        <img
+                          key={i}
+                          src={require(`../../../../assets/img/legume/${family}.jpg`)}
+                          alt={items.family}
+                        />
+                      );
+                    })}
+                  </div>
                 </div>
               );
             } else if (list.size === 25) {
               return (
                 <div key={index} className="potager_carre--box">
                   <h3>{list.name}</h3>
-                  <div className="potager_carre carre25"></div>
+                  <div className="potager_carre carre25">
+                    {list.plants.map((items, id) => {
+                      return <p key={id}>{items.family}</p>;
+                    })}
+                  </div>
                 </div>
               );
             } else if (list.size === 24) {
               return (
                 <div key={index} className="potager_carre--box">
                   <h3>{list.name}</h3>
-                  <div className="potager_carre carre25"></div>
+                  <div className="potager_carre carre25">
+                    {list.plants.map((items,id) => {
+                      return <p key={id}>{items.family}</p>;
+                    })}
+                  </div>
                 </div>
               );
             } else if (list.size === 35) {
               return (
                 <div key={index} className="potager_carre--box">
                   <h3>{list.name}</h3>
-                  <div className="potager_carre carre25"></div>
+                  <div className="potager_carre carre25">
+                    {list.plants.map((items, id) => {
+                      return <p key={id}>{items.family}</p>;
+                    })}
+                  </div>
+                </div>
+              );
+            } else {
+              return (
+                <div key={index} className="potager_carre--box">
+                  <h3>{list.name}</h3>
+                  <div className="potager_carre">
+                    {list.plants.map((items, id) => {
+                      return <p key={id}>{items.family}</p>;
+                    })}
+                  </div>
                 </div>
               );
             }
-            else {
-                return (
-                  <div key={index} className="potager_carre--box">
-                    <h3>{list.name}</h3>
-                    <div className="potager_carre"></div>
-                  </div>
-                );
-              }
           })}
       </div>
     </section>
