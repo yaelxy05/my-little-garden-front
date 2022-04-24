@@ -13,7 +13,7 @@ function PotagerPlant() {
     name: "",
     family: "",
     variete: "",
-    potager: "",
+    potager: 1,
   });
   const [listPlant, setListPlant] = useState([]);
 

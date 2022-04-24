@@ -40,17 +40,19 @@ function Potager() {
                 <div key={index} className="potager_carre--box">
                   <h3>{list.name}</h3>
                   <div className="potager_carre carre33">
-                    {list.plants.map((items, id) => {
-                      const family = items.family;
-
-                      return (
-                        <img
-                          key={id}
-                          src={require(`../../../../assets/img/legume/${family}.jpg`)}
-                          alt={items.family}
-                        />
-                      );
-                    })}
+                    {list.plants.length !== 0 &&
+                      list.plants.map((items, id) => {
+                        const family = items.family;
+                        if (items.family !== "") {
+                          return (
+                            <img
+                              key={id}
+                              src={require(`../../../../assets/img/legume/${family}.jpg`)}
+                              alt={items.family}
+                            />
+                          );
+                        }
+                      })}
                   </div>
                 </div>
               );
@@ -60,7 +62,16 @@ function Potager() {
                   <h3>{list.name}</h3>
                   <div className="potager_carre carre25">
                     {list.plants.map((items, id) => {
-                      return <p key={id}>{items.family}</p>;
+                      const family = items.family;
+                      if (items.family !== "") {
+                        return (
+                          <img
+                            key={id}
+                            src={require(`../../../../assets/img/legume/${family}.jpg`)}
+                            alt={items.family}
+                          />
+                        );
+                      }
                     })}
                   </div>
                 </div>
@@ -70,8 +81,17 @@ function Potager() {
                 <div key={index} className="potager_carre--box">
                   <h3>{list.name}</h3>
                   <div className="potager_carre carre25">
-                    {list.plants.map((items,id) => {
-                      return <p key={id}>{items.family}</p>;
+                    {list.plants.map((items, id) => {
+                      const family = items.family;
+                      if (items.family !== "") {
+                        return (
+                          <img
+                            key={id}
+                            src={require(`../../../../assets/img/legume/${family}.jpg`)}
+                            alt={items.family}
+                          />
+                        );
+                      }
                     })}
                   </div>
                 </div>
@@ -82,7 +102,16 @@ function Potager() {
                   <h3>{list.name}</h3>
                   <div className="potager_carre carre25">
                     {list.plants.map((items, id) => {
-                      return <p key={id}>{items.family}</p>;
+                      const family = items.family;
+                      if (items.family !== "") {
+                        return (
+                          <img
+                            key={id}
+                            src={require(`../../../../assets/img/legume/${family}.jpg`)}
+                            alt={items.family}
+                          />
+                        );
+                      }
                     })}
                   </div>
                 </div>
@@ -93,7 +122,16 @@ function Potager() {
                   <h3>{list.name}</h3>
                   <div className="potager_carre">
                     {list.plants.map((items, id) => {
-                      return <p key={id}>{items.family}</p>;
+                      const family = items.family;
+                      if (items.family !== "") {
+                        return (
+                          <img
+                            key={id}
+                            src={require(`../../../../assets/img/legume/${family}.jpg`)}
+                            alt={items.family}
+                          />
+                        );
+                      }
                     })}
                   </div>
                 </div>
