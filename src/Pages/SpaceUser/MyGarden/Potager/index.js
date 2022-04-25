@@ -53,7 +53,7 @@ function Potager() {
                             />
                           );
                         }
-                        return <p>le carré est vide</p>;
+                        return <p key={id}>le carré est vide</p>;
                       })}
                   </div>
                 </div>
@@ -74,7 +74,7 @@ function Potager() {
                           />
                         );
                       }
-                      return <p>le carré est vide</p>;
+                      return <p key={id}>le carré est vide</p>;
                     })}
                   </div>
                 </div>
@@ -95,7 +95,7 @@ function Potager() {
                           />
                         );
                       }
-                      return <p>le carré est vide</p>;
+                      return <p key={id}>le carré est vide</p>;
                     })}
                   </div>
                 </div>
@@ -116,7 +116,7 @@ function Potager() {
                           />
                         );
                       }
-                      return <p>le carré est vide</p>;
+                      return <p key={id}>le carré est vide</p>;
                     })}
                   </div>
                 </div>
@@ -137,7 +137,7 @@ function Potager() {
                           />
                         );
                       }
-                      return <p>le carré est vide</p>;
+                      return <p key={id}>le carré est vide</p>;
                     })}
                   </div>
                 </div>

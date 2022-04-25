@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+
 // Import components
 import InputField from "../../../../../Components/InputMyGarden";
 
@@ -16,11 +17,12 @@ function PotagerPlant() {
     potager: 1,
   });
   const [listPlant, setListPlant] = useState([]);
-
   const token = localStorage.getItem("token");
   const API_URLS = process.env.REACT_APP_API_URL;
 
   useEffect(() => {
+    const token = localStorage.getItem("token");
+    const API_URLS = process.env.REACT_APP_API_URL;
     const getPotagerNumber = () => {
       axios
         .get(`${API_URLS}/potager`, {
@@ -154,5 +156,7 @@ function PotagerPlant() {
     </div>
   );
 }
+
+
 
 export default PotagerPlant;

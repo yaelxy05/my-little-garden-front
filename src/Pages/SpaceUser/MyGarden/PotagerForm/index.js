@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 // Import components
 import InputField from "../../../../Components/InputMyGarden";
 // import SCSS
@@ -90,6 +91,12 @@ function PotagerForm() {
       <PotagerPlant />
     </div>
   );
+}
+
+PotagerForm.prototypes = {
+  name: PropTypes.string.isRequired,
+  size: PropTypes.number.isRequired,
+  handleSubmit: PropTypes.func.isRequired
 }
 
 export default PotagerForm;
