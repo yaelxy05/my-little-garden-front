@@ -33,7 +33,7 @@
             color: vars.$color4;
         }
       .potager_carre {
-        border: solid 5px #efc40d;
+        border: solid 6px #efc40d;
         width: 25rem;
         height: 9rem;
         margin-top: 1rem;
@@ -55,13 +55,18 @@
       }
 
       .carre25 {
-        width: 35rem;
-        height: 9rem;
+        width: 42rem;
+        height: 14rem;
       }
 
       .carre24 {
-        width: 30rem;
-        height: 9rem;
+        width: 35rem;
+        height: 13rem;
+      }
+
+      .carre35 {
+        width: 45rem;
+        height: 25rem;
       }
     }
   }

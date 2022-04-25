@@ -7,9 +7,9 @@ import axios from "axios";
 function Potager() {
   const [listPotager, setListPotager] = useState([]);
 
-  const token = localStorage.getItem("token");
-  const API_URLS = process.env.REACT_APP_API_URL;
   useEffect(() => {
+    const token = localStorage.getItem("token");
+    const API_URLS = process.env.REACT_APP_API_URL;
     const getPotagerList = () => {
       axios
         .get(`${API_URLS}/potager`, {
@@ -29,6 +29,7 @@ function Potager() {
     };
     getPotagerList();
   }, []);
+    
   return (
     <section className="potager">
       <h2>Plan du potager</h2>
@@ -52,6 +53,7 @@ function Potager() {
                             />
                           );
                         }
+                        return <p>le carré est vide</p>;
                       })}
                   </div>
                 </div>
@@ -72,6 +74,7 @@ function Potager() {
                           />
                         );
                       }
+                      return <p>le carré est vide</p>;
                     })}
                   </div>
                 </div>
@@ -80,7 +83,7 @@ function Potager() {
               return (
                 <div key={index} className="potager_carre--box">
                   <h3>{list.name}</h3>
-                  <div className="potager_carre carre25">
+                  <div className="potager_carre carre24">
                     {list.plants.map((items, id) => {
                       const family = items.family;
                       if (items.family !== "") {
@@ -92,6 +95,7 @@ function Potager() {
                           />
                         );
                       }
+                      return <p>le carré est vide</p>;
                     })}
                   </div>
                 </div>
@@ -100,7 +104,7 @@ function Potager() {
               return (
                 <div key={index} className="potager_carre--box">
                   <h3>{list.name}</h3>
-                  <div className="potager_carre carre25">
+                  <div className="potager_carre carre35">
                     {list.plants.map((items, id) => {
                       const family = items.family;
                       if (items.family !== "") {
@@ -112,6 +116,7 @@ function Potager() {
                           />
                         );
                       }
+                      return <p>le carré est vide</p>;
                     })}
                   </div>
                 </div>
@@ -132,6 +137,7 @@ function Potager() {
                           />
                         );
                       }
+                      return <p>le carré est vide</p>;
                     })}
                   </div>
                 </div>
