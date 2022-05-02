@@ -1,6 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+// Import package
+import axios from "axios";
+
 import "./profil.scss";
 function Profil() {
+  // Initial state
+  const [formDataUser, setFormDataUser] = useState({
+    firstname: "",
+    lastname: "",
+    email: "",
+  });
+  
   // for activate or deactivate input
   const [modifyInputInformation, setModifyInputInformation] = useState(false);
 
@@ -11,6 +21,32 @@ function Profil() {
 
   const activateButtonPassword = () => setModifyInputPassword(true);
   const desactivateButtonPassword = () => setModifyInputPassword(false);
+
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    const API_URLS = process.env.REACT_APP_API_URL;
+
+    const getInfoUser = async () => {
+      axios
+        .get(`${API_URLS}/users`, {
+          headers: {
+            Authorization: "Bearer " + token,
+            Accept: "application/json, text/plain, */*",
+            "Content-Type": "application/json",
+          },
+        })
+        .then((response) => {
+          console.log(response);
+          setFormDataUser(response.data[0]);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    };
+    getInfoUser();
+  }, []);
+
   return (
     <div className="profil">
       <div className="profil_title">
@@ -25,11 +61,17 @@ function Profil() {
             <div className="profil_data--input">
               <input
                 type="text"
-                name="name"
+                name="lastname"
                 readOnly={!modifyInputInformation}
-                value="Fontraille"
+                value={formDataUser.lastname}
                 id="name"
                 className={modifyInputInformation ? "focus_input" : ""}
+                onChange={(e) =>
+                  setFormDataUser({
+                    ...formDataUser,
+                    lastname: e.target.value
+                  })
+                }
               />
               <label htmlFor="name">Nom</label>
             </div>
@@ -38,9 +80,15 @@ function Profil() {
                 type="text"
                 name="firstname"
                 readOnly={!modifyInputInformation}
-                value="alexia"
+                value={formDataUser.firstname}
                 id="firstname"
                 className={modifyInputInformation ? "focus_input" : ""}
+                onChange={(e) =>
+                  setFormDataUser({
+                    ...formDataUser,
+                    firstname: e.target.value
+                  })
+                }
               />
               <label htmlFor="firstname">Prénom</label>
             </div>
@@ -49,9 +97,15 @@ function Profil() {
                 type="email"
                 name="email"
                 readOnly={!modifyInputInformation}
-                value="afontraille@gmail.com"
+                value={formDataUser.email}
                 id="email"
                 className={modifyInputInformation ? "focus_input" : ""}
+                onChange={(e) =>
+                  setFormDataUser({
+                    ...formDataUser,
+                    email: e.target.value
+                  })
+                }
               />
               <label htmlFor="email">Email</label>
             </div>
@@ -137,7 +191,7 @@ function Profil() {
                   type="email"
                   name="email"
                   readOnly
-                  value="afontraille@gmail.com"
+                  value={formDataUser.email}
                   id="email-data"
                 />
                 <label htmlFor="email-data">Nom</label>
