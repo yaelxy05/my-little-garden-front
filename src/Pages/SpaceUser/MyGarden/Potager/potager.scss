@@ -22,10 +22,20 @@
     align-items: flex-start;
     flex-wrap: wrap;
     padding-bottom: 3rem;
+    @include mixins.for-phone-and-tablet-only {
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
 
     .potager_carre--box {
-        margin-bottom: 2rem;
         margin: 2rem 3rem;
+        @include mixins.for-phone-and-tablet-only {
+          margin: 2rem 1.5rem;
+        }
+        @include mixins.for-phone-only {
+          margin: 2rem 1.5rem;
+        }
         h3 {
             text-align: center;
             font-weight: bold;
@@ -46,27 +56,60 @@
           height: 3.5rem;
           border-radius: 50%;
           margin: 1.3rem;
+          @include mixins.for-phone-and-tablet-only {
+            height: 2rem;
+          }
+          @include mixins.for-phone-only {
+            height: 1.3rem;
+          }
         }
       }
 
       .carre33 {
         width: 25rem;
         height: 25rem;
+        @include mixins.for-phone-and-tablet-only {
+          width: 20rem;
+          height: 20rem;
+        }
+        @include mixins.for-phone-only {
+          width: 15rem;
+          height: 15rem;
+        }
       }
 
       .carre25 {
         width: 42rem;
         height: 14rem;
+        @include mixins.for-phone-and-tablet-only {
+          width: 30rem;
+        }
+        @include mixins.for-phone-only {
+          width: 20rem;
+        }
       }
 
       .carre24 {
         width: 35rem;
         height: 13rem;
+        @include mixins.for-phone-and-tablet-only {
+          width: 28rem;
+        }
+        @include mixins.for-phone-only {
+          width: 20rem;
+        }
       }
 
       .carre35 {
         width: 45rem;
         height: 25rem;
+        @include mixins.for-phone-and-tablet-only {
+          width: 25rem;
+          height: 15rem;
+        }
+        @include mixins.for-phone-only {
+          width: 25rem;
+        }
       }
     }
   }

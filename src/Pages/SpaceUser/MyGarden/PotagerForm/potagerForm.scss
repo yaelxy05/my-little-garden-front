@@ -8,6 +8,14 @@
   height: 15rem;
   margin-top: 10rem;
   margin-bottom: 18rem;
+  @include mixins.for-phone-and-tablet-only {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 25rem;
+    margin-top: 34rem;
+  }
+
   .potager_addCarre {
     display: flex;
     flex-direction: column;
@@ -20,6 +28,9 @@
     box-shadow: 0px 6px 10px rgb(179, 179, 179);
     position: relative;
     z-index: 0;
+    @include mixins.for-phone-and-tablet-only {
+      margin-bottom: 3rem;
+    }
 
     h1 {
       width: 100%;

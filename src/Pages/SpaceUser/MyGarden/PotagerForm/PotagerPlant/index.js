@@ -17,6 +17,7 @@ function PotagerPlant() {
     potager: 1,
   });
   const [listPlant, setListPlant] = useState([]);
+
   const token = localStorage.getItem("token");
   const API_URLS = process.env.REACT_APP_API_URL;
 
@@ -156,7 +157,5 @@ function PotagerPlant() {
     </div>
   );
 }
-
-
 
 export default PotagerPlant;

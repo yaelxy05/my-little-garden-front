@@ -97,6 +97,7 @@ function Connexion() {
       {isConnected && (
         <>
           <p className="login_isconnected">Vous êtes connecté !</p>
+          <NavLink className="link_isConnected" to="/espace-utilisateur/mon-profil">Accédez à votre espace utilisateur</NavLink>
         </>
       )}
     </div>

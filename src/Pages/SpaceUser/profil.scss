@@ -10,17 +10,30 @@
     min-height: 100vh;
     margin-bottom: 3rem;
   }
+  @include mixins.for-phone-and-tablet-only {
+    margin-top: 5rem;
+    padding-left: 0;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+  }
 
   .profil_title {
     display: flex;
     align-items: flex-start;
     margin-bottom: 2rem;
+    @include mixins.for-phone-and-tablet-only {
+      align-items: center;
+      justify-content: center;
+    }
 
     h1 {
       color: vars.$colorBlue;
       font-weight: bold;
       font-size: 1.8rem;
       font-family: vars.$fontMenu;
+
+      
     }
   }
 
@@ -32,6 +45,10 @@
       flex-direction: column;
       display: block;
     }
+    @include mixins.for-phone-and-tablet-only {
+      margin-left: 1.35rem;
+    }
+
     .profil_data {
       border-radius: 8px;
       background-color: rgb(255, 255, 255);
@@ -48,7 +65,7 @@
       }
 
       &:hover {
-        box-shadow: 0px 4px 8px  rgb(83, 87, 87);
+        box-shadow: 0px 4px 8px rgb(83, 87, 87);
       }
 
       h2 {
@@ -64,20 +81,19 @@
           flex-direction: row;
           justify-content: flex-start;
           button {
-          width: 7rem;
-          border-radius: 2rem;
-          padding: 0.5rem 0;
-          margin-bottom: 1rem;
-          margin-right: 0.5rem;
-          border: none;
-          background: vars.$primaryColor;
-          color: vars.$colorLight;
-          font-weight: bold;
-          font-size: 1rem;
-          align-self: center;
+            width: 7rem;
+            border-radius: 2rem;
+            padding: 0.5rem 0;
+            margin-bottom: 1rem;
+            margin-right: 0.5rem;
+            border: none;
+            background: vars.$primaryColor;
+            color: vars.$colorLight;
+            font-weight: bold;
+            font-size: 1rem;
+            align-self: center;
           }
         }
-        
 
         .profil_data--input {
           display: flex;

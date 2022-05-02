@@ -12,8 +12,14 @@
 
 
   .login_isconnected {
-    padding-bottom: 25rem;
+    padding-bottom: 6rem;
     padding-top: 2rem;
+  }
+
+  .link_isConnected {
+    font-weight: bold;
+    cursor: pointer;
+    color: vars.$colorBlue;
   }
 
   h1 {

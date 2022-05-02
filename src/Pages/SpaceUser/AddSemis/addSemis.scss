@@ -11,6 +11,11 @@
   @include mixins.for-screen-small-medium {
     min-height: 100vh;
     margin-bottom: 3rem;
+    
+  }
+  @include mixins.for-phone-and-tablet-only {
+    margin-top: 5rem;
+    padding-left: 0;
   }
 
   .addSemis--box {

@@ -22,21 +22,28 @@ function MenuUser() {
 
         <ul>
           <li>
-            <FontAwesomeIcon icon={faUser} />
-            <Link to="/espace-utilisateur/mon-profil">Mon profil</Link>
+            <Link to="/espace-utilisateur/mon-profil">
+              <FontAwesomeIcon icon={faUser} />
+              <p>Mon profil</p>
+            </Link>
           </li>
           <li>
-            <FontAwesomeIcon icon={faSeedling} />
-            <Link to="/espace-utilisateur/add-semis">Ajouter un semis</Link>
+            <Link to="/espace-utilisateur/add-semis">
+              <FontAwesomeIcon icon={faSeedling} />
+              <p>Ajouter un semis</p>
+            </Link>
           </li>
           <li>
-            <FontAwesomeIcon icon={faRectangleList} />
-            <Link to="/espace-utilisateur/liste-semis">Liste de mes semis</Link>
+            <Link to="/espace-utilisateur/liste-semis">
+              <FontAwesomeIcon icon={faRectangleList} />
+              <p>Liste de mes semis</p>
+            </Link>
           </li>
           <li>
-            <FontAwesomeIcon icon={faCarrot} />
-            <Link to="/espace-utilisateur/mon-potager">Mon potager</Link>
-            
+            <Link to="/espace-utilisateur/mon-potager">
+              <FontAwesomeIcon icon={faCarrot} />
+              <p>Mon potager</p>
+            </Link>
           </li>
         </ul>
       </aside>
