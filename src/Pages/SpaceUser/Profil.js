@@ -9,8 +9,14 @@ function Profil() {
     firstname: "",
     lastname: "",
     email: "",
+    id: "",
   });
-  
+
+  const [messageSuccess, setMessageSuccess] = useState("");
+
+  const token = localStorage.getItem("token");
+  const API_URLS = process.env.REACT_APP_API_URL;
+
   // for activate or deactivate input
   const [modifyInputInformation, setModifyInputInformation] = useState(false);
 
@@ -21,7 +27,6 @@ function Profil() {
 
   const activateButtonPassword = () => setModifyInputPassword(true);
   const desactivateButtonPassword = () => setModifyInputPassword(false);
-
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -47,6 +52,40 @@ function Profil() {
     getInfoUser();
   }, []);
 
+  // Function for update user info
+  const handleUpdateProfile = async (evt) => {
+    evt.preventDefault();
+    setFormDataUser(formDataUser);
+
+    axios
+      .patch(
+        `${API_URLS}/user/update/${formDataUser.id}`,
+        {
+          email: formDataUser.email,
+          lastname: formDataUser.lastname,
+          firstname: formDataUser.firstname,
+        },
+        {
+          headers: {
+            Authorization: "Bearer " + token,
+            Accept: "application/json, text/plain, */*",
+            "Content-Type": "application/json",
+          },
+        }
+      )
+      .then((response) => {
+        console.log(response);
+        setMessageSuccess(response.data.message);
+        setTimeout(() => {
+          setMessageSuccess("");
+        }, 2500);
+      
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   return (
     <div className="profil">
       <div className="profil_title">
@@ -58,71 +97,79 @@ function Profil() {
             <h2>Mes informations personnelles</h2>
           </header>
           <div className="profil_data--form">
-            <div className="profil_data--input">
-              <input
-                type="text"
-                name="lastname"
-                readOnly={!modifyInputInformation}
-                value={formDataUser.lastname}
-                id="name"
-                className={modifyInputInformation ? "focus_input" : ""}
-                onChange={(e) =>
-                  setFormDataUser({
-                    ...formDataUser,
-                    lastname: e.target.value
-                  })
-                }
-              />
-              <label htmlFor="name">Nom</label>
-            </div>
-            <div className="profil_data--input">
-              <input
-                type="text"
-                name="firstname"
-                readOnly={!modifyInputInformation}
-                value={formDataUser.firstname}
-                id="firstname"
-                className={modifyInputInformation ? "focus_input" : ""}
-                onChange={(e) =>
-                  setFormDataUser({
-                    ...formDataUser,
-                    firstname: e.target.value
-                  })
-                }
-              />
-              <label htmlFor="firstname">Prénom</label>
-            </div>
-            <div className="profil_data--input">
-              <input
-                type="email"
-                name="email"
-                readOnly={!modifyInputInformation}
-                value={formDataUser.email}
-                id="email"
-                className={modifyInputInformation ? "focus_input" : ""}
-                onChange={(e) =>
-                  setFormDataUser({
-                    ...formDataUser,
-                    email: e.target.value
-                  })
-                }
-              />
-              <label htmlFor="email">Email</label>
-            </div>
-            {modifyInputInformation && (
-              <>
-                <div className="button_box">
-                  <button>Valider</button>
-                  <button onClick={desactivateButton}>Annuler</button>
-                </div>
-              </>
-            )}
-            {!modifyInputInformation && (
-              <div className="button_box">
-                <button onClick={activateButton}>Modifier</button>
+            <form onSubmit={handleUpdateProfile}>
+              <div className="profil_data--input">
+                <input
+                  type="text"
+                  name="lastname"
+                  readOnly={!modifyInputInformation}
+                  value={formDataUser.lastname}
+                  id="name"
+                  className={modifyInputInformation ? "focus_input" : ""}
+                  onChange={(e) =>
+                    setFormDataUser({
+                      ...formDataUser,
+                      lastname: e.target.value,
+                    })
+                  }
+                />
+                <label htmlFor="name">Nom</label>
               </div>
-            )}
+              <div className="profil_data--input">
+                <input
+                  type="text"
+                  name="firstname"
+                  readOnly={!modifyInputInformation}
+                  value={formDataUser.firstname}
+                  id="firstname"
+                  className={modifyInputInformation ? "focus_input" : ""}
+                  onChange={(e) =>
+                    setFormDataUser({
+                      ...formDataUser,
+                      firstname: e.target.value,
+                    })
+                  }
+                />
+                <label htmlFor="firstname">Prénom</label>
+              </div>
+              <div className="profil_data--input">
+                <input
+                  type="email"
+                  name="email"
+                  readOnly={!modifyInputInformation}
+                  value={formDataUser.email}
+                  id="email"
+                  className={modifyInputInformation ? "focus_input" : ""}
+                  onChange={(e) =>
+                    setFormDataUser({
+                      ...formDataUser,
+                      email: e.target.value,
+                    })
+                  }
+                />
+                <label htmlFor="email">Email</label>
+              </div>
+              {modifyInputInformation && (
+                <>
+                  <div className="button_box">
+                    <button>Valider</button>
+                    <button onClick={desactivateButton}>Annuler</button>
+                  </div>
+                </>
+              )}
+              {!modifyInputInformation && (
+                <div className="button_box">
+                  <button onClick={activateButton}>Modifier</button>
+                </div>
+              )}
+            </form>
           </div>
+          {messageSuccess ===
+            "Les informations utilisateur ont bien été modifié." && (
+            <div className="message_success">
+              <p>{messageSuccess}</p>
+            </div>
+          )}
         </article>
         <div className="profil_data--modify">
           <article

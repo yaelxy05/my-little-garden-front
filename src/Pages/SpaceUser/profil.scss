@@ -74,6 +74,17 @@
         margin-bottom: 2rem;
       }
 
+      .message_success {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 2rem;
+        background: vars.$colorGreenTransparent;
+        color: vars.$colorLight;
+        border-radius: 2rem;
+        font-weight: bold;
+      }
+
       .profil_data--form {
         padding-top: 2rem;
         .button_box {
