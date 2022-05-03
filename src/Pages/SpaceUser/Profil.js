@@ -28,6 +28,11 @@ function Profil() {
   const activateButtonPassword = () => setModifyInputPassword(true);
   const desactivateButtonPassword = () => setModifyInputPassword(false);
 
+  const [modifyInputEmail, setModifyInputEmail] = useState(false);
+
+  const activateButtonEmail = () => setModifyInputEmail(true);
+  const desactivateButtonEmail = () => setModifyInputEmail(false);
+
   useEffect(() => {
     const token = localStorage.getItem("token");
     const API_URLS = process.env.REACT_APP_API_URL;
@@ -79,7 +84,37 @@ function Profil() {
         setTimeout(() => {
           setMessageSuccess("");
         }, 2500);
-      
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  // Function for update email
+  const handleUpdateEmail = async (evt) => {
+    evt.preventDefault();
+    setFormDataUser(formDataUser);
+
+    axios
+      .patch(
+        `${API_URLS}/user/update/${formDataUser.id}`,
+        {
+          email: formDataUser.email,
+        },
+        {
+          headers: {
+            Authorization: "Bearer " + token,
+            Accept: "application/json, text/plain, */*",
+            "Content-Type": "application/json",
+          },
+        }
+      )
+      .then((response) => {
+        console.log(response);
+        setMessageSuccess(response.data.message);
+        setTimeout(() => {
+          setMessageSuccess("");
+        }, 2500);
       })
       .catch((error) => {
         console.log(error);
@@ -228,24 +263,7 @@ function Profil() {
               </>
             )}
           </article>
-          <article className="profil_data input_modify">
-            <header>
-              <h2>Mon Email</h2>
-            </header>
-            <div className="profil_data--email">
-              <div className="profil_data--email">
-                <input
-                  type="email"
-                  name="email"
-                  readOnly
-                  value={formDataUser.email}
-                  id="email-data"
-                />
-                <label htmlFor="email-data">Nom</label>
-              </div>
-              <button className="button_email">Modifier</button>
-            </div>
-          </article>
+          
         </div>
       </div>
     </div>
