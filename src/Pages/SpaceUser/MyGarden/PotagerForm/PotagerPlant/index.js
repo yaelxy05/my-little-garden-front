@@ -15,6 +15,7 @@ function PotagerPlant() {
     family: "",
     variete: "",
     potager: 1,
+    id: "",
   });
   const [listPlant, setListPlant] = useState([]);
 
@@ -72,6 +73,8 @@ function PotagerPlant() {
         console.log(error);
       });
   };
+
+  
 
   return (
     <div className="potager_addPlant">

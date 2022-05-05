@@ -10,12 +10,10 @@ function Profil() {
     lastname: "",
     email: "",
     id: "",
+    avatar: null,
   });
 
   const [messageSuccess, setMessageSuccess] = useState("");
-
-  const token = localStorage.getItem("token");
-  const API_URLS = process.env.REACT_APP_API_URL;
 
   // for activate or deactivate input
   const [modifyInputInformation, setModifyInputInformation] = useState(false);
@@ -27,11 +25,6 @@ function Profil() {
 
   const activateButtonPassword = () => setModifyInputPassword(true);
   const desactivateButtonPassword = () => setModifyInputPassword(false);
-
-  const [modifyInputEmail, setModifyInputEmail] = useState(false);
-
-  const activateButtonEmail = () => setModifyInputEmail(true);
-  const desactivateButtonEmail = () => setModifyInputEmail(false);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -59,6 +52,8 @@ function Profil() {
 
   // Function for update user info
   const handleUpdateProfile = async (evt) => {
+    const token = localStorage.getItem("token");
+  const API_URLS = process.env.REACT_APP_API_URL;
     evt.preventDefault();
     setFormDataUser(formDataUser);
 
@@ -69,37 +64,6 @@ function Profil() {
           email: formDataUser.email,
           lastname: formDataUser.lastname,
           firstname: formDataUser.firstname,
-        },
-        {
-          headers: {
-            Authorization: "Bearer " + token,
-            Accept: "application/json, text/plain, */*",
-            "Content-Type": "application/json",
-          },
-        }
-      )
-      .then((response) => {
-        console.log(response);
-        setMessageSuccess(response.data.message);
-        setTimeout(() => {
-          setMessageSuccess("");
-        }, 2500);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-
-  // Function for update email
-  const handleUpdateEmail = async (evt) => {
-    evt.preventDefault();
-    setFormDataUser(formDataUser);
-
-    axios
-      .patch(
-        `${API_URLS}/user/update/${formDataUser.id}`,
-        {
-          email: formDataUser.email,
         },
         {
           headers: {
@@ -183,6 +147,25 @@ function Profil() {
                   }
                 />
                 <label htmlFor="email">Email</label>
+              </div>
+              <div className="profil_data--input">
+                <input
+                  type="file"
+                  name="avatar"
+                  accept=".jpg,.png,.svg"
+                  readOnly={!modifyInputInformation}
+                  value={formDataUser.avatar}
+                  id="avatar"
+                  size="2000"
+                  className={modifyInputInformation ? "focus_input" : ""}
+                  onChange={(e) =>
+                    setFormDataUser({
+                      ...formDataUser,
+                      avatar: e.target.files[0],
+                    })
+                  }
+                />
+                <label htmlFor="avatar">Avatar</label>
               </div>
               {modifyInputInformation && (
                 <>

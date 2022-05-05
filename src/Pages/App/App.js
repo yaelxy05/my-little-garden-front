@@ -32,7 +32,6 @@ function App() {
       return response;
     },
     function (error) {
-      console.log(error.response.data.message);
       if ("Expired JWT Token" === error.response.data.message) {
         // handle error: inform user, go to login, etc
         window.location = "/connexion";

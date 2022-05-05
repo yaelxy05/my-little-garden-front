@@ -3,6 +3,9 @@ import React, { useState, useEffect } from "react";
 import "./potager.scss";
 // Import package
 import axios from "axios";
+// Import fontawesome
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCircle, faXmark } from "@fortawesome/free-solid-svg-icons";
 
 function Potager() {
   const [listPotager, setListPotager] = useState([]);
@@ -29,7 +32,27 @@ function Potager() {
     };
     getPotagerList();
   }, []);
-    
+
+  const token = localStorage.getItem("token");
+  const API_URLS = process.env.REACT_APP_API_URL;
+
+  const deletePlant = async (id) => {
+    axios
+      .delete(`${API_URLS}/plant/${id}`, {
+        headers: {
+          Authorization: "Bearer " + token,
+          Accept: "application/json, text/plain, */*",
+          "Content-Type": "application/json",
+        },
+      })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   return (
     <section className="potager">
       <h2>Plan du potager</h2>
@@ -46,14 +69,22 @@ function Potager() {
                         const family = items.family;
                         if (items.family !== "") {
                           return (
-                            <img
-                              key={id}
-                              src={require(`../../../../assets/img/legume/${family}.jpg`)}
-                              alt={items.family}
-                            />
+                            <div key={id} className="plant_box">
+                              <img
+                                src={require(`../../../../assets/img/legume/${family}.jpg`)}
+                                alt={items.family}
+                              />
+                              <FontAwesomeIcon
+                                icon={faXmark}
+                                onClick={() => {
+                                  deletePlant(items.id);
+                                }}
+                              />
+                            </div>
                           );
+                        } else {
+                          return <p key={id}></p>;
                         }
-                        return <p key={id}></p>;
                       })}
                   </div>
                 </div>
@@ -67,14 +98,22 @@ function Potager() {
                       const family = items.family;
                       if (items.family !== "") {
                         return (
-                          <img
-                            key={id}
-                            src={require(`../../../../assets/img/legume/${family}.jpg`)}
-                            alt={items.family}
-                          />
+                          <div key={id} className="plant_box">
+                            <img
+                              src={require(`../../../../assets/img/legume/${family}.jpg`)}
+                              alt={items.family}
+                            />
+                            <FontAwesomeIcon
+                              icon={faXmark}
+                              onClick={() => {
+                                deletePlant(items.id);
+                              }}
+                            />
+                          </div>
                         );
+                      } else {
+                        return <p key={id}></p>;
                       }
-                      return <p key={id}></p>;
                     })}
                   </div>
                 </div>
@@ -88,14 +127,22 @@ function Potager() {
                       const family = items.family;
                       if (items.family !== "") {
                         return (
-                          <img
-                            key={id}
-                            src={require(`../../../../assets/img/legume/${family}.jpg`)}
-                            alt={items.family}
-                          />
+                          <div key={id} className="plant_box">
+                            <img
+                              src={require(`../../../../assets/img/legume/${family}.jpg`)}
+                              alt={items.family}
+                            />
+                            <FontAwesomeIcon
+                              icon={faXmark}
+                              onClick={() => {
+                                deletePlant(items.id);
+                              }}
+                            />
+                          </div>
                         );
+                      } else {
+                        return <p key={id}></p>;
                       }
-                      return <p key={id}></p>;
                     })}
                   </div>
                 </div>
@@ -109,14 +156,22 @@ function Potager() {
                       const family = items.family;
                       if (items.family !== "") {
                         return (
-                          <img
-                            key={id}
-                            src={require(`../../../../assets/img/legume/${family}.jpg`)}
-                            alt={items.family}
-                          />
+                          <div key={id} className="plant_box">
+                            <img
+                              src={require(`../../../../assets/img/legume/${family}.jpg`)}
+                              alt={items.family}
+                            />
+                            <FontAwesomeIcon
+                              icon={faXmark}
+                              onClick={() => {
+                                deletePlant(items.id);
+                              }}
+                            />
+                          </div>
                         );
+                      } else {
+                        return <p key={id}></p>;
                       }
-                      return <p key={id}></p>;
                     })}
                   </div>
                 </div>
@@ -130,14 +185,22 @@ function Potager() {
                       const family = items.family;
                       if (items.family !== "") {
                         return (
-                          <img
-                            key={id}
-                            src={require(`../../../../assets/img/legume/${family}.jpg`)}
-                            alt={items.family}
-                          />
+                          <div key={id} className="plant_box">
+                            <img
+                              src={require(`../../../../assets/img/legume/${family}.jpg`)}
+                              alt={items.family}
+                            />
+                            <FontAwesomeIcon
+                              icon={faXmark}
+                              onClick={() => {
+                                deletePlant(items.id);
+                              }}
+                            />
+                          </div>
                         );
+                      } else {
+                        return <p key={id}></p>;
                       }
-                      return <p key={id}></p>;
                     })}
                   </div>
                 </div>

@@ -29,19 +29,19 @@
     }
 
     .potager_carre--box {
-        margin: 2rem 3rem;
-        @include mixins.for-phone-and-tablet-only {
-          margin: 2rem 1.5rem;
-        }
-        @include mixins.for-phone-only {
-          margin: 2rem 1.5rem;
-        }
-        h3 {
-            text-align: center;
-            font-weight: bold;
-            font-family: vars.$fontSecondary;
-            color: vars.$color4;
-        }
+      margin: 2rem 3rem;
+      @include mixins.for-phone-and-tablet-only {
+        margin: 2rem 1.5rem;
+      }
+      @include mixins.for-phone-only {
+        margin: 2rem 1.5rem;
+      }
+      h3 {
+        text-align: center;
+        font-weight: bold;
+        font-family: vars.$fontSecondary;
+        color: vars.$color4;
+      }
       .potager_carre {
         border: solid 6px #efc40d;
         width: 25rem;
@@ -52,16 +52,42 @@
         justify-content: space-around;
         flex-wrap: wrap;
 
-        img {
-          height: 3.5rem;
-          border-radius: 50%;
-          margin: 1.3rem;
-          @include mixins.for-phone-and-tablet-only {
-            height: 2rem;
+        .plant_box {
+          position: relative;
+
+          img {
+            height: 3.5rem;
+            border-radius: 50%;
+            margin: 1.3rem;
+            background: vars.$colorLight;
+            @include mixins.for-phone-and-tablet-only {
+              height: 2rem;
+            }
+            @include mixins.for-phone-only {
+              height: 1.3rem;
+            }
           }
-          @include mixins.for-phone-only {
-            height: 1.3rem;
+
+          svg {
+            position: absolute;
+            right: 20px;
+            top: 16px;
+            cursor: pointer;
+            line-height: 1.2em;
+            width: 1.2em;
+            height: 1.2em;
+            text-align: center;
+            display: inline-block;
+            background: vars.$colorError;
+            border-radius: 50%;
+            transition:0.5s;
+
+            &:hover {
+              background: black;
+              color: vars.$colorError;
+            }
           }
+
         }
       }
 

@@ -23,7 +23,7 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    height: 45rem;
+    height: 50rem;
     width: 25rem;
     border-radius: 1rem;
     background: vars.$colorLight;
@@ -163,6 +163,19 @@
         @include mixins.for-phone-only {
           left: 63px;
         }
+      }
+
+      #labelField-avatar {
+        position: absolute;
+        top: 450px;
+        left: 79px;
+        @include mixins.for-phone-only {
+          left: 63px;
+        }
+      }
+
+      #input_avatar {
+        margin-top: 1rem;
       }
 
       i {

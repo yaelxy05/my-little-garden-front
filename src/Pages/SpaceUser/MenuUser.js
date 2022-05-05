@@ -36,7 +36,6 @@ function MenuUser() {
           },
         })
         .then((response) => {
-          console.log(response);
           setFormDataUser(response.data[0]);
         })
         .catch((error) => {
