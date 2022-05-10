@@ -1,29 +1,63 @@
 import React, { useRef } from "react";
 import { Link } from "react-router-dom";
-// Import components
-import InputField from "../../Components/InputRegister";
+
 // Import package
 import axios from "axios";
 import { useForm } from "react-hook-form";
-
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as Yup from "yup";
 // Import SCSS
 import "./register.scss";
 
 function Register() {
+  const validationSchema = Yup.object().shape({
+    email: Yup.string()
+      .required("L'email est requis")
+      .email("L'email est invalide"),
+    password: Yup.string()
+      .required("Le mot de passe est requis")
+      .min(8, "Le mot de passe doit avoir au minimum 8 caractères")
+      .test(
+        "isValidPass",
+        "Le mot de passe doit contenir au moins un chiffre,une majuscules, une minuscules et un caractère spéciaux",
+        (value, context) => {
+          const hasUpperCase = /[A-Z]/.test(value);
+          const hasLowerCase = /[a-z]/.test(value);
+          const hasNumber = /[0-9]/.test(value);
+          const hasSymbole = /[!@#%&]/.test(value);
+          let validConditions = 0;
+          const numberOfMustBeValidConditions = 3;
+          const conditions = [
+            hasLowerCase,
+            hasUpperCase,
+            hasNumber,
+            hasSymbole,
+          ];
+          conditions.forEach((condition) =>
+            condition ? validConditions++ : null
+          );
+          if (validConditions >= numberOfMustBeValidConditions) {
+            return true;
+          }
+          return false;
+        }
+      ),
+    passwordConfirm: Yup.string()
+      .required("La confirmation de mot de passe est requis")
+      .oneOf([Yup.ref("password")], "Les mots de passe ne correspondent pas"),
+    firstname: Yup.string().required("Le prénom est requis"),
+    lastname: Yup.string().required("Le nom est requis"),
+  });
+
   // Function React Hook form
   const {
     register,
     handleSubmit,
-    formState: { errors, isValid, isDirty },
-    watch,
+    formState: { errors, isValid },
   } = useForm({
     mode: "onTouched",
+    resolver: yupResolver(validationSchema),
   });
-  console.log(errors);
-  console.log(isValid);
-  console.log(isDirty);
-  const password = useRef({});
-  password.current = watch("password", "");
 
   const API_URLS = process.env.REACT_APP_API_URL;
 
@@ -54,141 +88,100 @@ function Register() {
     <div className="register">
       <form onSubmit={handleSubmit(onSubmit)}>
         <h1>Inscription</h1>
-        <div className="input_box">
-          {isValid && <i className="fas fa-check"></i>}
+        <div className={errors.email ? "input_box--error" : "input_box"}>
           {errors.email && <i className="fas fa-exclamation-circle"></i>}
           <input
             type="email"
-            className={errors.email ? "input_error" : "" || isValid ? "register_input--success" : ""}
             placeholder=" "
-            {...register("email", {
-              required: "L'email est requis",
-              pattern: {
-                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                message: "L'adresse email est invalide",
-              },
-              maxLength: {
-                value: 49,
-                message: "Le mot de passe doit avoir au maximum 49 caractères",
-              },
-            })}
+            {...register("email")}
             name="email"
             id="email"
           />
           <label id="labelField-email" htmlFor="email">
             Email
           </label>
-          {errors.email && (
-            <span className="signup__error">{errors.email.message}</span>
-          )}
         </div>
-
-        <div className="input_box">
-          {isValid && <i className="fas fa-check"></i>}
+        {errors.email && (
+          <span className="signup__error">{errors.email.message}</span>
+        )}
+        <div className={errors.password ? "input_box--error" : "input_box"}>
           {errors.password && <i className="fas fa-exclamation-circle"></i>}
           <input
             type="password"
-            className={errors.password ? "input_error" : "" || isValid ? "register_input--success" : ""}
             placeholder=" "
-            {...register("password", {
-              required: "Le mot de passe est requis",
-              minLength: {
-                value: 8,
-                message: "Le mot de passe doit avoir au minimum 8 caractères",
-              },
-            })}
+            {...register("password")}
             name="password"
             id="password"
           />
           <label id="labelField-password" htmlFor="password">
             Mot de passe
           </label>
-          {errors.password && (
-            <span className="signup__error">{errors.password.message}</span>
-          )}
         </div>
-        <div className="input_box">
+        {errors.password && (
+          <span className="signup__error">{errors.password.message}</span>
+        )}
+        <div
+          className={errors.passwordConfirm ? "input_box--error" : "input_box"}
+        >
           {isValid && <i className="fas fa-check"></i>}
           {errors.passwordConfirm && (
             <i className="fas fa-exclamation-circle"></i>
           )}
           <input
             type="password"
-            className={errors.passwordConfirm ? "input_error" : "" || isValid ? "register_input--success" : ""}
+            className={errors.passwordConfirm ? "input_error" : ""}
             placeholder=" "
-            {...register("passwordConfirm", {
-              required: "La confirmation de mot de passe est requis",
-              minLength: {
-                value: 8,
-                message: "Le mot de passe doit avoir au minimum 8 caractères",
-              },
-              validate: (value) =>
-                value === password.current || "The passwords do not match",
-            })}
+            {...register("passwordConfirm")}
             name="passwordConfirm"
             id="password-confirm"
           />
           <label id="labelField-password-confirm" htmlFor="password-confirm">
             Confirmez le mot de passe
           </label>
-          {errors.passwordConfirm && (
-            <span className="signup__error">
-              {errors.passwordConfirm.message}
-            </span>
-          )}
         </div>
-        <div className="input_box">
+        {errors.passwordConfirm && (
+          <span className="signup__error">
+            {errors.passwordConfirm.message}
+          </span>
+        )}
+        <div className={errors.firstname ? "input_box--error" : "input_box"}>
           {isValid && <i className="fas fa-check"></i>}
           {errors.firstname && <i className="fas fa-exclamation-circle"></i>}
           <input
             type="text"
-            className={errors.firstname ? "input_error" : "" || isValid ? "register_input--success" : ""}
+            className={errors.firstname ? "input_error" : ""}
             placeholder=" "
-            {...register("firstname", {
-              required: "Le prénom est requis",
-              validate: (value) => {
-                return (
-                  [/[a-z]/, /[A-Z]/, /[^a-zA-Z]/].every((pattern) =>
-                    pattern.test(value)
-                  ) ||
-                  "Le prénom ne peut avoir que des minuscules et des majuscules"
-                );
-              },
-            })}
+            {...register("firstname")}
             name="firstname"
             id="firstname"
           />
           <label id="labelField-firstname" htmlFor="firstname">
             Prénom
           </label>
-          {errors.firstname && (
-            <span className="signup__error">{errors.firstname.message}</span>
-          )}
         </div>
-        <div className="input_box">
+        {errors.firstname && (
+          <span className="signup__error">{errors.firstname.message}</span>
+        )}
+        <div className={errors.lastname ? "input_box--error" : "input_box"}>
           {isValid && <i className="fas fa-check"></i>}
           {errors.lastname && <i className="fas fa-exclamation-circle"></i>}
           <input
             type="text"
-            className={errors.lastname ? "input_error" : "" || isValid ? "register_input--success" : ""}
             placeholder=" "
-            {...register("lastname", {
-              required: "Le nom est requis",
-            })}
+            {...register("lastname")}
             name="lastname"
             id="lastname"
           />
           <label id="labelField-lastname" htmlFor="lastname">
             Nom
           </label>
-          {errors.lastname && (
-            <span className="signup__error">{errors.lastname.message}</span>
-          )}
         </div>
+        {errors.lastname && (
+          <span className="signup__error">{errors.lastname.message}</span>
+        )}
         <div className="input_box">
           <input
             type="file"
-            //className={success ? "register_input--success" : ""}
             placeholder=" "
             {...register("avatar", {
               required: true,
