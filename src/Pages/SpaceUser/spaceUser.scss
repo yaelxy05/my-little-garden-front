@@ -41,11 +41,12 @@
 
       img {
         height: 90px;
-        width: auto;
+        width: 90px;
         border-radius: 50%;
         margin-bottom: 1rem;
         @include mixins.for-phone-and-tablet-only {
           height: 40px;
+          width: 40px;
         }
         @include mixins.for-desktop-small-medium {
           height: 90px;

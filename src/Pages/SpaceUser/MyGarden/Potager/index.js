@@ -5,7 +5,7 @@ import "./potager.scss";
 import axios from "axios";
 // Import fontawesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircle, faXmark } from "@fortawesome/free-solid-svg-icons";
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
 
 function Potager() {
   const [listPotager, setListPotager] = useState([]);

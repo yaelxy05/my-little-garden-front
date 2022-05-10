@@ -39,11 +39,7 @@
       font-size: 0.6rem;
       margin-bottom: 1rem;
       align-self: flex-start;
-      margin-left: 5rem;
       padding-top: 5px;
-      @include mixins.for-phone-only {
-        margin-left: 3rem;
-      }
     }
 
     h1 {
@@ -125,7 +121,7 @@
         top: 156px;
         left: 79px;
         @include mixins.for-phone-only {
-          left: 63px;
+          left: 47px;
         }
       }
 
@@ -134,7 +130,7 @@
         top: 215px;
         left: 79px;
         @include mixins.for-phone-only {
-          left: 63px;
+          left: 47px;
         }
       }
 
@@ -143,7 +139,7 @@
         top: 275px;
         left: 79px;
         @include mixins.for-phone-only {
-          left: 63px;
+          left: 47px;
         }
       }
 
@@ -152,7 +148,7 @@
         top: 335px;
         left: 79px;
         @include mixins.for-phone-only {
-          left: 63px;
+          left: 47px;
         }
       }
 
@@ -161,7 +157,7 @@
         top: 395px;
         left: 79px;
         @include mixins.for-phone-only {
-          left: 63px;
+          left: 47px;
         }
       }
 
@@ -170,7 +166,7 @@
         top: 450px;
         left: 79px;
         @include mixins.for-phone-only {
-          left: 63px;
+          left: 47px;
         }
       }
 
@@ -201,6 +197,70 @@
       }
     }
 
+    .fa-check {
+      display: none;
+      
+    }
+    
+    .fa-exclamation-circle {
+      padding-right: 16px;
+      margin-top: 6px;
+      color: red;
+      min-width: 31px;
+      min-height: 32px;
+      align-self: flex-end;
+    }
+
+    .input_error {
+      width: 100%;
+
+      border: 0;
+      border-bottom: 1.5px solid vars.$colorError;
+      background-color: rgba(253, 0, 0, 0.09);
+      padding: 4px 0;
+
+      font-size: 1em;
+      &::placeholder {
+        color: transparent;
+      }
+
+      &:focus {
+        width: 100%;
+        transition: 0.4s;
+        border-bottom: 3px solid rgba(253, 0, 0, 0.624);
+      }
+      &:focus ~ #labelField-email,
+      &:not(:placeholder-shown) ~ #labelField-email {
+        transform: translateY(-1em) scale(0.8);
+        left:75px;
+        
+      }
+
+      &:focus ~ #labelField-password,
+      &:not(:placeholder-shown) ~ #labelField-password {
+        transform: translateY(-1em) scale(0.8);
+        left:70px;
+      }
+
+      &:focus ~ #labelField-password-confirm,
+      &:not(:placeholder-shown) ~ #labelField-password-confirm {
+        transform: translateY(-1em) scale(0.8);
+        left:60px;
+      }
+
+      &:focus ~ #labelField-firstname,
+      &:not(:placeholder-shown) ~ #labelField-firstname {
+        transform: translateY(-1em) scale(0.8);
+        left:75px;
+      }
+
+      &:focus ~ #labelField-lastname,
+      &:not(:placeholder-shown) ~ #labelField-lastname {
+        transform: translateY(-1em) scale(0.8);
+        left:77px;
+      }
+    }
+
     .input_box--error {
       width: 15rem;
       margin: 0 2rem;
@@ -216,69 +276,7 @@
         }
       }
 
-      .fa-check {
-        display: none;
-        
-      }
       
-      .fa-exclamation-circle {
-        padding-right: 16px;
-        margin-top: 6px;
-        color: red;
-        min-width: 31px;
-        min-height: 32px;
-        align-self: flex-end;
-      }
-
-      input {
-        width: 100%;
-
-        border: 0;
-        border-bottom: 1.5px solid vars.$colorError;
-        background-color: rgba(253, 0, 0, 0.09);
-        padding: 4px 0;
-
-        font-size: 1em;
-        &::placeholder {
-          color: transparent;
-        }
-
-        &:focus {
-          width: 100%;
-          transition: 0.4s;
-          border-bottom: 3px solid rgba(253, 0, 0, 0.624);
-        }
-        &:focus ~ #labelField-email,
-        &:not(:placeholder-shown) ~ #labelField-email {
-          transform: translateY(-1em) scale(0.8);
-          left:75px;
-          
-        }
-
-        &:focus ~ #labelField-password,
-        &:not(:placeholder-shown) ~ #labelField-password {
-          transform: translateY(-1em) scale(0.8);
-          left:70px;
-        }
-
-        &:focus ~ #labelField-password-confirm,
-        &:not(:placeholder-shown) ~ #labelField-password-confirm {
-          transform: translateY(-1em) scale(0.8);
-          left:60px;
-        }
-
-        &:focus ~ #labelField-firstname,
-        &:not(:placeholder-shown) ~ #labelField-firstname {
-          transform: translateY(-1em) scale(0.8);
-          left:75px;
-        }
-
-        &:focus ~ #labelField-lastname,
-        &:not(:placeholder-shown) ~ #labelField-lastname {
-          transform: translateY(-1em) scale(0.8);
-          left:77px;
-        }
-      }
 
       label {
         margin: 1rem 0;

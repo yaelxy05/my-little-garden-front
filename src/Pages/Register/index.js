@@ -1,229 +1,207 @@
-import React, { useState } from "react";
+import React, { useRef } from "react";
 import { Link } from "react-router-dom";
 // Import components
 import InputField from "../../Components/InputRegister";
 // Import package
 import axios from "axios";
+import { useForm } from "react-hook-form";
+
 // Import SCSS
 import "./register.scss";
 
 function Register() {
-  // Initial state
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-    passwordConfirm: "",
-    firstname: "",
-    lastname: "",
+  // Function React Hook form
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isValid, isDirty },
+    watch,
+  } = useForm({
+    mode: "onTouched",
   });
-  const [image, setImage] = useState(undefined);
-  console.log(image);
-  let errorsObj = {
-    email: "",
-    password: "",
-    passwordConfirm: "",
-    firstname: "",
-    lastname: "",
-  };
-  const [errors, setErrors] = useState(errorsObj);
-  const [success, setSuccess] = useState(false);
-  const [emailError, setEmailError] = useState(false);
+  console.log(errors);
+  console.log(isValid);
+  console.log(isDirty);
+  const password = useRef({});
+  password.current = watch("password", "");
+
   const API_URLS = process.env.REACT_APP_API_URL;
 
   // function for add new user on the server backend
-  const handleSubmit = (evt) => {
-    evt.preventDefault();
-
+  const onSubmit = async (data) => {
     const formDataUpload = new FormData();
-    formDataUpload.append("image", image);
-
-    setFormData(formData);
+    formDataUpload.append("avatar", data.avatar[0]);
+    formDataUpload.append("email", data.email);
+    formDataUpload.append("password", data.password);
+    formDataUpload.append("firstname", data.firstname);
+    formDataUpload.append("lastname", data.lastname);
 
     axios
-      .post(
-        `${API_URLS}/register`,
-        {
-          email: formData.email,
-          password: formData.password,
-          firstname: formData.firstname,
-          lastname: formData.lastname,
-          avatar: formDataUpload,
-        },
-        {
-          headers: { "Content-Type": "multipart/form-data" },
-        }
-      )
+      .post(`${API_URLS}/register`, formDataUpload, {
+        headers: { "Content-Type": "multipart/form-data" },
+      })
       .then((response) => {
         console.log(response);
       })
       .catch((error) => {
         if (error.response.data.error.email) {
-          setEmailError(true);
+          console.log(error.response.data.error.email);
         }
       });
-    console.log(emailError);
-    let error = false;
-
-    const errorObj = { ...errorsObj };
-
-    if (formData.email === "") {
-      errorObj.email = "L'email est requis.";
-      error = true;
-    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      errorObj.email = "l'email n'est pas valide.";
-    } else if (formData.email.length < 4) {
-      errorObj.email = "Le champ email est trop court.";
-      error = true;
-    } else if (emailError) {
-      errorObj.email = "Il y a déjà un compte avec cette email";
-      error = true;
-    } else if (
-      formData.email.length > 4 &&
-      /\S+@\S+\.\S+/.test(formData.email) &&
-      formData.email !== ""
-    ) {
-      setSuccess(true);
-    }
-    if (formData.password === "") {
-      errorObj.password = "Le mot de passe est requis.";
-      error = true;
-    } else if (formData.password.length < 6) {
-      errorObj.password = "Le mot de passe doit contenir minimum 6 caractères.";
-      error = true;
-    } else if (formData.password !== formData.passwordConfirm) {
-      errorObj.password = "Les champs mot de passe doivent être identique.";
-      error = true;
-    } else if (
-      formData.password === formData.passwordConfirm &&
-      formData.password !== "" &&
-      formData.password.length > 6
-    ) {
-      setSuccess(true);
-    }
-    if (formData.lastname === "") {
-      errorObj.lastname = "Le nom est requis.";
-      error = true;
-    } else if (formData.lastname.length < 2) {
-      errorObj.lastname = "Le nom doit contenir minimum 6 caractères.";
-      error = true;
-    } else if (
-      !/^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u.test(
-        formData.lastname
-      )
-    ) {
-      errorObj.lastname = "Le nom ne doit pas contenir de chiffres.";
-      error = true;
-    } else {
-      setSuccess(true);
-    }
-    if (formData.firstname === "") {
-      errorObj.firstname = "Le nom est requis.";
-      error = true;
-    } else if (formData.firstname.length < 2) {
-      errorObj.firstname = "Le nom doit contenir minimum 6 caractères.";
-      error = true;
-    } else if (
-      !/^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u.test(
-        formData.firstname
-      )
-    ) {
-      errorObj.firstname = "Le nom ne doit pas contenir de chiffres.";
-      error = true;
-    } else {
-      setSuccess(true);
-    }
-    setErrors(errorObj);
   };
 
   return (
     <div className="register">
-      <form enctype="multipart/form-data" onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <h1>Inscription</h1>
+        <div className="input_box">
+          {isValid && <i className="fas fa-check"></i>}
+          {errors.email && <i className="fas fa-exclamation-circle"></i>}
+          <input
+            type="email"
+            className={errors.email ? "input_error" : "" || isValid ? "register_input--success" : ""}
+            placeholder=" "
+            {...register("email", {
+              required: "L'email est requis",
+              pattern: {
+                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                message: "L'adresse email est invalide",
+              },
+              maxLength: {
+                value: 49,
+                message: "Le mot de passe doit avoir au maximum 49 caractères",
+              },
+            })}
+            name="email"
+            id="email"
+          />
+          <label id="labelField-email" htmlFor="email">
+            Email
+          </label>
+          {errors.email && (
+            <span className="signup__error">{errors.email.message}</span>
+          )}
+        </div>
 
-        <InputField
-          name="email"
-          placeholder=" "
-          label="Email"
-          success={success}
-          value={formData.email}
-          type="email"
-          manageChange={(e) =>
-            setFormData({ ...formData, email: e.target.value })
-          }
-          errors={errors.email}
-        />
-        {errors.email && <div className="signup__error">{errors.email}</div>}
-
-        <InputField
-          name="password"
-          placeholder=" "
-          label="Mot de passe"
-          success={success}
-          value={formData.password}
-          type="password"
-          manageChange={(e) =>
-            setFormData({ ...formData, password: e.target.value })
-          }
-          errors={errors.password}
-        />
-        {errors.password && (
-          <div className="signup__error">{errors.password}</div>
-        )}
-        <InputField
-          name="password-confirm"
-          placeholder=" "
-          label="Confirmez le mot de passe"
-          success={success}
-          value={formData.passwordConfirm}
-          type="password"
-          manageChange={(e) =>
-            setFormData({ ...formData, passwordConfirm: e.target.value })
-          }
-          errors={errors.password}
-        />
-        {errors.password && (
-          <div className="signup__error">{errors.password}</div>
-        )}
-        <InputField
-          name="firstname"
-          placeholder=" "
-          label="Prénom"
-          success={success}
-          value={formData.firstname}
-          type="text"
-          manageChange={(e) =>
-            setFormData({ ...formData, firstname: e.target.value })
-          }
-          errors={errors.firstname}
-        />
-        {errors.firstname && (
-          <div className="signup__error">{errors.firstname}</div>
-        )}
-        <InputField
-          name="lastname"
-          placeholder=" "
-          label="Nom"
-          success={success}
-          value={formData.lastname}
-          type="text"
-          manageChange={(e) =>
-            setFormData({ ...formData, lastname: e.target.value })
-          }
-          errors={errors.lastname}
-        />
-        {errors.lastname && (
-          <div className="signup__error">{errors.lastname}</div>
-        )}
-        <InputField
-          name="avatar"
-          placeholder=" "
-          label="Avatar"
-          type="file"
-          size="20000"
-          id="input_avatar"
-          accept=".jpg,.png,.svg"
-          manageChange={(e) => setImage({ ...image, image: e.target.files[0] })}
-        />
+        <div className="input_box">
+          {isValid && <i className="fas fa-check"></i>}
+          {errors.password && <i className="fas fa-exclamation-circle"></i>}
+          <input
+            type="password"
+            className={errors.password ? "input_error" : "" || isValid ? "register_input--success" : ""}
+            placeholder=" "
+            {...register("password", {
+              required: "Le mot de passe est requis",
+              minLength: {
+                value: 8,
+                message: "Le mot de passe doit avoir au minimum 8 caractères",
+              },
+            })}
+            name="password"
+            id="password"
+          />
+          <label id="labelField-password" htmlFor="password">
+            Mot de passe
+          </label>
+          {errors.password && (
+            <span className="signup__error">{errors.password.message}</span>
+          )}
+        </div>
+        <div className="input_box">
+          {isValid && <i className="fas fa-check"></i>}
+          {errors.passwordConfirm && (
+            <i className="fas fa-exclamation-circle"></i>
+          )}
+          <input
+            type="password"
+            className={errors.passwordConfirm ? "input_error" : "" || isValid ? "register_input--success" : ""}
+            placeholder=" "
+            {...register("passwordConfirm", {
+              required: "La confirmation de mot de passe est requis",
+              minLength: {
+                value: 8,
+                message: "Le mot de passe doit avoir au minimum 8 caractères",
+              },
+              validate: (value) =>
+                value === password.current || "The passwords do not match",
+            })}
+            name="passwordConfirm"
+            id="password-confirm"
+          />
+          <label id="labelField-password-confirm" htmlFor="password-confirm">
+            Confirmez le mot de passe
+          </label>
+          {errors.passwordConfirm && (
+            <span className="signup__error">
+              {errors.passwordConfirm.message}
+            </span>
+          )}
+        </div>
+        <div className="input_box">
+          {isValid && <i className="fas fa-check"></i>}
+          {errors.firstname && <i className="fas fa-exclamation-circle"></i>}
+          <input
+            type="text"
+            className={errors.firstname ? "input_error" : "" || isValid ? "register_input--success" : ""}
+            placeholder=" "
+            {...register("firstname", {
+              required: "Le prénom est requis",
+              validate: (value) => {
+                return (
+                  [/[a-z]/, /[A-Z]/, /[^a-zA-Z]/].every((pattern) =>
+                    pattern.test(value)
+                  ) ||
+                  "Le prénom ne peut avoir que des minuscules et des majuscules"
+                );
+              },
+            })}
+            name="firstname"
+            id="firstname"
+          />
+          <label id="labelField-firstname" htmlFor="firstname">
+            Prénom
+          </label>
+          {errors.firstname && (
+            <span className="signup__error">{errors.firstname.message}</span>
+          )}
+        </div>
+        <div className="input_box">
+          {isValid && <i className="fas fa-check"></i>}
+          {errors.lastname && <i className="fas fa-exclamation-circle"></i>}
+          <input
+            type="text"
+            className={errors.lastname ? "input_error" : "" || isValid ? "register_input--success" : ""}
+            placeholder=" "
+            {...register("lastname", {
+              required: "Le nom est requis",
+            })}
+            name="lastname"
+            id="lastname"
+          />
+          <label id="labelField-lastname" htmlFor="lastname">
+            Nom
+          </label>
+          {errors.lastname && (
+            <span className="signup__error">{errors.lastname.message}</span>
+          )}
+        </div>
+        <div className="input_box">
+          <input
+            type="file"
+            //className={success ? "register_input--success" : ""}
+            placeholder=" "
+            {...register("avatar", {
+              required: true,
+            })}
+            name="avatar"
+            id="input_avatar"
+            accept=".jpg,.png,.svg"
+            size="20000"
+          />
+          <label id="labelField-avatar" htmlFor="input_avatar">
+            Avatar
+          </label>
+        </div>
 
         <button className="register_button">Envoyer</button>
         <p>

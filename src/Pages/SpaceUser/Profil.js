@@ -148,7 +148,7 @@ function Profil() {
                 />
                 <label htmlFor="email">Email</label>
               </div>
-              <div className="profil_data--input">
+              {/*<div className="profil_data--input">
                 <input
                   type="file"
                   name="avatar"
@@ -166,7 +166,8 @@ function Profil() {
                   }
                 />
                 <label htmlFor="avatar">Avatar</label>
-              </div>
+              </div> */}
+              
               {modifyInputInformation && (
                 <>
                   <div className="button_box">

@@ -19,7 +19,8 @@ function MenuUser() {
   // Initial state
   const [formDataUser, setFormDataUser] = useState({
     firstname: "",
-    lastname: ""
+    lastname: "",
+    avatar: ""
   });
 
   useEffect(() => {
@@ -49,7 +50,7 @@ function MenuUser() {
     <>
       <aside className="menu_user">
         <div className="menu_user-img">
-          <img src={Avatar} alt="avatar profil" />
+          <img src={"http://127.0.0.1:8000/images/" + formDataUser.avatar} alt="avatar profil" />
           <p>{ formDataUser.lastname + " " + formDataUser.firstname}</p>
         </div>
 

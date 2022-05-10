@@ -1,6 +1,6 @@
 import React from "react";
 
-function Input({ size, id, name, type, success, label, manageChange, value, placeholder, errors, accept}) {
+function Input({ ref, size, id, name, type, success, label, manageChange, value, placeholder, errors, accept}) {
   const inputId = `labelField-${name}`;
 
   return (
@@ -11,7 +11,8 @@ function Input({ size, id, name, type, success, label, manageChange, value, plac
           type={type}
           onChange={manageChange}
           className={success ? "register_input--success" : ""}
-          placeholder={placeholder}
+        placeholder={placeholder}
+        ref={ref}
         value={value}
         id={id}
         name={name}
