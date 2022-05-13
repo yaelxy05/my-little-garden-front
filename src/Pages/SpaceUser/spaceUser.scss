@@ -48,6 +48,10 @@
           height: 40px;
           width: 40px;
         }
+        @include mixins.for-tablet-portrait-up {
+          height: 60px;
+          width: 60px;
+        }
         @include mixins.for-desktop-small-medium {
           height: 90px;
         }
