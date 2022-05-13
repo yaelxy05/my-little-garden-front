@@ -36,9 +36,28 @@ function Potager() {
   const token = localStorage.getItem("token");
   const API_URLS = process.env.REACT_APP_API_URL;
 
+  // function for delete plant
   const deletePlant = async (id) => {
     axios
-      .delete(`${API_URLS}/plant/${id}`, {
+      .delete(`${API_URLS}/plant/delete/${id}`, {
+        headers: {
+          Authorization: "Bearer " + token,
+          Accept: "application/json, text/plain, */*",
+          "Content-Type": "application/json",
+        },
+      })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  // function for delete potager
+  const deletePotager = async (id) => {
+    axios
+      .delete(`${API_URLS}/potager/delete/${id}`, {
         headers: {
           Authorization: "Bearer " + token,
           Accept: "application/json, text/plain, */*",
@@ -64,6 +83,13 @@ function Potager() {
                 <div key={index} className="potager_carre--box">
                   <h3>{list.name}</h3>
                   <div className="potager_carre carre33">
+                    <FontAwesomeIcon
+                      id="trashIcon"
+                      icon={faXmark}
+                      onClick={() => {
+                        deletePotager(list.id);
+                      }}
+                    />
                     {list.plants.length !== 0 &&
                       list.plants.map((items, id) => {
                         const family = items.family;
@@ -94,6 +120,13 @@ function Potager() {
                 <div key={index} className="potager_carre--box">
                   <h3>{list.name}</h3>
                   <div className="potager_carre carre25">
+                    <FontAwesomeIcon
+                      id="trashIcon"
+                      icon={faXmark}
+                      onClick={() => {
+                        deletePotager(list.id);
+                      }}
+                    />
                     {list.plants.map((items, id) => {
                       const family = items.family;
                       if (items.family !== "") {
@@ -123,6 +156,13 @@ function Potager() {
                 <div key={index} className="potager_carre--box">
                   <h3>{list.name}</h3>
                   <div className="potager_carre carre24">
+                    <FontAwesomeIcon
+                      id="trashIcon"
+                      icon={faXmark}
+                      onClick={() => {
+                        deletePotager(list.id);
+                      }}
+                    />
                     {list.plants.map((items, id) => {
                       const family = items.family;
                       if (items.family !== "") {
@@ -152,6 +192,13 @@ function Potager() {
                 <div key={index} className="potager_carre--box">
                   <h3>{list.name}</h3>
                   <div className="potager_carre carre35">
+                    <FontAwesomeIcon
+                      id="trashIcon"
+                      icon={faXmark}
+                      onClick={() => {
+                        deletePotager(list.id);
+                      }}
+                    />
                     {list.plants.map((items, id) => {
                       const family = items.family;
                       if (items.family !== "") {
@@ -181,6 +228,13 @@ function Potager() {
                 <div key={index} className="potager_carre--box">
                   <h3>{list.name}</h3>
                   <div className="potager_carre">
+                    <FontAwesomeIcon
+                      id="trashIcon"
+                      icon={faXmark}
+                      onClick={() => {
+                        deletePotager(list.id);
+                      }}
+                    />
                     {list.plants.map((items, id) => {
                       const family = items.family;
                       if (items.family !== "") {
