@@ -14,21 +14,21 @@ import Avatar from "../../assets/img/avatar/user.png";
 // Import package
 import axios from "axios";
 
-
 function MenuUser() {
   // Initial state
+  const [loading, setLoading] = useState(true);
   const [formDataUser, setFormDataUser] = useState({
     firstname: "",
     lastname: "",
-    avatar: ""
+    avatar: "",
   });
-  console.log(formDataUser.avatar);
+
   useEffect(() => {
     const token = localStorage.getItem("token");
     const API_URLS = process.env.REACT_APP_API_URL;
-  
+
     const getInfoUser = async () => {
-      axios
+      await axios
         .get(`${API_URLS}/users`, {
           headers: {
             Authorization: "Bearer " + token,
@@ -38,6 +38,7 @@ function MenuUser() {
         })
         .then((response) => {
           setFormDataUser(response.data[0]);
+          setLoading(false);
         })
         .catch((error) => {
           console.log(error);
@@ -50,13 +51,16 @@ function MenuUser() {
     <>
       <aside className="menu_user">
         <div className="menu_user-img">
-          {formDataUser.avatar !== null && (
-            <img src={"http://127.0.0.1:8000/images/" + formDataUser.avatar} alt="avatar profil" />
+          {!loading && formDataUser.avatar !== null && (
+            <img
+              src={"http://127.0.0.1:8000/images/" + formDataUser.avatar}
+              alt="avatar profil"
+            />
           )}
           {formDataUser.avatar === null && (
             <img src={Avatar} alt="avatar profil default" />
-          ) }
-          <p>{ formDataUser.lastname + " " + formDataUser.firstname}</p>
+          )}
+          <p>{formDataUser.lastname + " " + formDataUser.firstname}</p>
         </div>
 
         <ul>
