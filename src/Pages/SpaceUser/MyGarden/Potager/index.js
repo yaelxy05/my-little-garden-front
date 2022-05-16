@@ -10,27 +10,29 @@ import { faXmark } from "@fortawesome/free-solid-svg-icons";
 function Potager() {
   const [listPotager, setListPotager] = useState([]);
 
-  useEffect(() => {
+  const fetchDataPotager = () => {
     const token = localStorage.getItem("token");
     const API_URLS = process.env.REACT_APP_API_URL;
-    const getPotagerList = () => {
-      axios
-        .get(`${API_URLS}/potager`, {
-          headers: {
-            Authorization: "Bearer " + token,
-            Accept: "application/json, text/plain, */*",
-            "Content-Type": "application/json",
-          },
-        })
-        .then((response) => {
-          console.log(response);
-          setListPotager(response.data);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    };
-    getPotagerList();
+
+    axios
+      .get(`${API_URLS}/potager`, {
+        headers: {
+          Authorization: "Bearer " + token,
+          Accept: "application/json, text/plain, */*",
+          "Content-Type": "application/json",
+        },
+      })
+      .then((response) => {
+        console.log(response);
+        setListPotager(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  useEffect(() => {
+    fetchDataPotager();
   }, []);
 
   const token = localStorage.getItem("token");
@@ -48,6 +50,7 @@ function Potager() {
       })
       .then((response) => {
         console.log(response);
+        fetchDataPotager();
       })
       .catch((error) => {
         console.log(error);
@@ -66,6 +69,7 @@ function Potager() {
       })
       .then((response) => {
         console.log(response);
+        fetchDataPotager();
       })
       .catch((error) => {
         console.log(error);

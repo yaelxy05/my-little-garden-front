@@ -85,7 +85,7 @@
               height: 2rem;
             }
             @include mixins.for-phone-only {
-              height: 1.3rem;
+              height: 1rem;
             }
           }
 
@@ -102,6 +102,10 @@
             background: vars.$colorError;
             border-radius: 50%;
             transition: 0.5s;
+            @include mixins.for-phone-only {
+              width: 1rem;
+              height: 1rem;
+            }
 
             &:hover {
               background: black;

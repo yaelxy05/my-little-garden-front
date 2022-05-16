@@ -22,7 +22,7 @@ function MenuUser() {
     lastname: "",
     avatar: ""
   });
-
+  console.log(formDataUser.avatar);
   useEffect(() => {
     const token = localStorage.getItem("token");
     const API_URLS = process.env.REACT_APP_API_URL;
@@ -50,7 +50,12 @@ function MenuUser() {
     <>
       <aside className="menu_user">
         <div className="menu_user-img">
-          <img src={"http://127.0.0.1:8000/images/" + formDataUser.avatar} alt="avatar profil" />
+          {formDataUser.avatar !== null && (
+            <img src={"http://127.0.0.1:8000/images/" + formDataUser.avatar} alt="avatar profil" />
+          )}
+          {formDataUser.avatar === null && (
+            <img src={Avatar} alt="avatar profil default" />
+          ) }
           <p>{ formDataUser.lastname + " " + formDataUser.firstname}</p>
         </div>
 
