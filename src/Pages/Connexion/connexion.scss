@@ -24,7 +24,7 @@
 
   h1 {
     font-weight: bold;
-    margin-bottom: 5rem;
+    margin-bottom: 3rem;
   }
 
   .login_isconnected {
@@ -48,7 +48,6 @@
 
     h1 {
       width: 100%;
-      height: 3.5rem;
       text-align: center;
       margin-top: 2rem;
       font-weight: bold;
@@ -99,26 +98,35 @@
 
       #labelField-email {
         position: absolute;
-        top: 156px;
+        top: 96px;
         left: 79px;
       }
 
       #labelField-password {
         position: absolute;
-        top: 205px;
+        top: 156px;
         left: 79px;
       }
     }
     .login_button {
       @include mixins.buttonInput;
       width: 15rem;
-      margin: 1.5rem 0 4rem 0;
+      margin: 1.5rem 0 3rem 0;
     }
     p {
       padding-bottom: 0.7rem;
       span {
         font-weight: bold;
       }
+    }
+
+    .error_login {
+      color: vars.$colorError;
+      border: vars.$colorError 1.5px solid;
+      border-radius: 2rem;
+      padding: 0.5rem;
+      margin-bottom: 1.5rem;
+      font-weight: bold;
     }
   }
 }
