@@ -10,9 +10,10 @@ import axios from "axios";
 
 function PotagerPlant() {
   // Initial state
+  const [sucess, setSucess] = useState(false);
   const [formDataPlant, setFormDataPlant] = useState({
     name: "",
-    family: "",
+    family: "tomate",
     variete: "",
     potager: 1,
     id: "",
@@ -22,26 +23,31 @@ function PotagerPlant() {
   const token = localStorage.getItem("token");
   const API_URLS = process.env.REACT_APP_API_URL;
 
+  const getPotagerNumber = () => {
+    axios
+      .get(`${API_URLS}/potager`, {
+        headers: {
+          Authorization: "Bearer " + token,
+          Accept: "application/json, text/plain, */*",
+          "Content-Type": "application/json",
+        },
+      })
+      .then((response) => {
+        console.log(response);
+        setListPlant(response.data);
+        if (response.statusText === "OK") {
+          setSucess(true);
+          setTimeout(() => {
+            setSucess(false);
+          }, 2500);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    const API_URLS = process.env.REACT_APP_API_URL;
-    const getPotagerNumber = () => {
-      axios
-        .get(`${API_URLS}/potager`, {
-          headers: {
-            Authorization: "Bearer " + token,
-            Accept: "application/json, text/plain, */*",
-            "Content-Type": "application/json",
-          },
-        })
-        .then((response) => {
-          console.log(response);
-          setListPlant(response.data);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    };
     getPotagerNumber();
   }, []);
 
@@ -68,13 +74,18 @@ function PotagerPlant() {
       )
       .then((response) => {
         console.log(response);
+        getPotagerNumber();
+        if (response.statusText === "OK") {
+          setSucess(true);
+          setTimeout(() => {
+            setSucess(false);
+          }, 2500);
+        }
       })
       .catch((error) => {
         console.log(error);
       });
   };
-
-  
 
   return (
     <div className="potager_addPlant">
@@ -156,6 +167,11 @@ function PotagerPlant() {
         <div className="addCarre_box">
           <button className="addCarre_button">Ajouter</button>
         </div>
+        {sucess && (
+          <div className="message_sucess--box">
+            <p className="message_sucess">Le plant a bien été ajouté</p>
+          </div>
+        )}
       </form>
     </div>
   );

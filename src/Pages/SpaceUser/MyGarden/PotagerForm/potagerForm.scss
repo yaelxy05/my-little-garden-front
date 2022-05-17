@@ -21,7 +21,7 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    height: 27rem;
+    height: 30.5rem;
     width: 20rem;
     border-radius: 1rem;
     background: vars.$colorLight;
@@ -47,7 +47,7 @@
     .input_box {
       width: 15rem;
       margin: 0 2rem 2rem 2rem;
-      
+
       select {
         width: 100%;
         height: 1.8rem;
@@ -105,18 +105,32 @@
         top: 112px;
         left: 40px;
       }
-
-      
     }
 
     .addCarre_box {
-        display: flex;
-        justify-content: center;
-        margin-top: 2.5rem;
+      display: flex;
+      justify-content: center;
+      margin-top: 2.5rem;
       .addCarre_button {
         @include mixins.buttonInput;
         width: 8rem;
-        margin: 1.5rem 0 4rem 0;
+        margin: 1.5rem 0 6rem 0;
+      }
+    }
+    .message_sucess--box {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 2rem;
+
+      .message_sucess {
+        align-self: center;
+        text-align: center;
+        height: 2.3rem;
+        width: 90%;
+        border: 1px solid vars.$primaryColor;
+        color: vars.$primaryColor;
+        border-radius: 2rem;
+        padding-top: 0.6rem;
       }
     }
   }
@@ -126,7 +140,7 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    height: 27rem;
+    height: 30.5rem;
     width: 20rem;
     border-radius: 1rem;
     background: vars.$colorLight;
@@ -227,13 +241,30 @@
     }
 
     .addCarre_box {
-        display: flex;
-        justify-content: center;
-        margin-bottom: 1.4rem;
+      display: flex;
+      justify-content: center;
+      margin-bottom: 1.4rem;
       .addCarre_button {
         @include mixins.buttonInput;
         width: 8rem;
-        margin: 0.2rem 0 2rem 0;
+        margin: 0.2rem 0 0.1rem 0;
+      }
+    }
+
+    .message_sucess--box {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 2rem;
+
+      .message_sucess {
+        align-self: center;
+        text-align: center;
+        height: 2.3rem;
+        width: 90%;
+        border: 1px solid vars.$primaryColor;
+        color: vars.$primaryColor;
+        border-radius: 2rem;
+        padding-top: 0.6rem;
       }
     }
   }

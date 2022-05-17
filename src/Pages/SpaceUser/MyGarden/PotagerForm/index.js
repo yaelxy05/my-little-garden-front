@@ -11,6 +11,8 @@ import PotagerPlant from "./PotagerPlant";
 
 function PotagerForm() {
   // Initial state
+  const [sucess, setSucess] = useState(false);
+
   const [formDataPotager, setFormDataPotager] = useState({
     name: "",
     size: 33,
@@ -41,6 +43,12 @@ function PotagerForm() {
       )
       .then((response) => {
         console.log(response);
+        if (response.statusText === "OK") {
+          setSucess(true);
+          setTimeout(() => {
+            setSucess(false);
+          }, 2500);
+        }
       })
       .catch((error) => {
         console.log(error);
@@ -86,6 +94,11 @@ function PotagerForm() {
           <div className="addCarre_box">
             <button className="addCarre_button">Ajouter</button>
           </div>
+          {sucess && (
+            <div className="message_sucess--box">
+              <p className="message_sucess">Le carré a bien été ajouté</p>
+            </div>
+          )}
         </form>
       </div>
       <PotagerPlant />
@@ -96,7 +109,7 @@ function PotagerForm() {
 PotagerForm.prototypes = {
   name: PropTypes.string.isRequired,
   size: PropTypes.number.isRequired,
-  handleSubmit: PropTypes.func.isRequired
-}
+  handleSubmit: PropTypes.func.isRequired,
+};
 
 export default PotagerForm;
