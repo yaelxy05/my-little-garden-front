@@ -12,7 +12,7 @@ import Calendar from "../Calendar";
 import Connexion from "../Connexion";
 import Register from "../Register";
 import UserSpace from "../SpaceUser";
-import Header from "../../Components/Header";
+import Home from "../Home";
 import Profil from "../SpaceUser/Profil";
 import ListSemis from "../SpaceUser/ListSemis";
 import AddSemis from "../SpaceUser/AddSemis";
@@ -20,6 +20,7 @@ import MyGarden from "../SpaceUser/MyGarden";
 import Page404 from "../404";
 // Import Context
 import { IsConnectedContext, TokenContext } from "../../Utils/Context";
+
 
 function App() {
   // Context
@@ -76,7 +77,7 @@ function App() {
           />
         </Route>
 
-        <Route path="/" element={<Header />} />
+        <Route path="/" element={<Home />} />
         <Route path="*" element={<Page404 />} />
       </Routes>
 

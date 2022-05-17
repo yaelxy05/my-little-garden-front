@@ -1,5 +1,7 @@
 import React from "react";
 import "./header.scss";
+
+
 function Header() {
   return (
     <section className="header">
@@ -9,6 +11,7 @@ function Header() {
       </div>
 
       <div className="header_divider--bottom"></div>
+
     </section>
   );
 }
