@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 
 // Import package
@@ -10,6 +10,7 @@ import * as Yup from "yup";
 import "./register.scss";
 
 function Register() {
+  const [successRegister, setSuccessRegister] = useState(false);
   const validationSchema = Yup.object().shape({
     email: Yup.string()
       .required("L'email est requis")
@@ -20,7 +21,7 @@ function Register() {
       .test(
         "isValidPass",
         "Le mot de passe doit contenir au moins un chiffre,une majuscules, une minuscules et un caractère spéciaux",
-        (value, context) => {
+        (value) => {
           const hasUpperCase = /[A-Z]/.test(value);
           const hasLowerCase = /[a-z]/.test(value);
           const hasNumber = /[0-9]/.test(value);
@@ -76,6 +77,10 @@ function Register() {
       })
       .then((response) => {
         console.log(response);
+        setSuccessRegister(true);
+        setTimeout(() => {
+          setSuccessRegister(false);
+        }, 2500);
       })
       .catch((error) => {
         if (error.response.data.error.email) {
@@ -197,6 +202,9 @@ function Register() {
         </div>
 
         <button className="register_button">Envoyer</button>
+        {successRegister && 
+          <p className="register_success">Le compte a été créer avec succés!</p>
+        }
         <p>
           Vous avez déja un compte?{" "}
           <span>

@@ -12,6 +12,9 @@
         font-weight: bold;
         font-size: 2rem;
         margin-bottom: 2rem;
+        @include mixins.for-phone-and-tablet-only {
+            font-size: 1rem;
+        }
     }
 
   .main_slide {
@@ -22,6 +25,13 @@
         border: solid 2px vars.$colorBlue;
         height: 700px;
         width: 600px;
+        
+
+        @include mixins.for-phone-and-tablet-only {
+            height: 400px;
+            width: 300px;
+            object-fit: cover;
+        }
       }
     }
 

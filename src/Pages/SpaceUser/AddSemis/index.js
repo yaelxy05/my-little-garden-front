@@ -136,7 +136,7 @@ function AddSemis() {
         {sucess && 
           <p>Le semis a bien été ajouté</p>
         }
-        <p></p>
+        
       </div>
     </div>
   );
