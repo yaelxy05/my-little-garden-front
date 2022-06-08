@@ -85,7 +85,12 @@ function Potager() {
             if (list.size === 33) {
               return (
                 <div key={index} className="potager_carre--box">
-                  <h3>{list.name}</h3>
+                  <h3>
+                    {list.name}
+                    <span className="potager_size">
+                      {" taille du carré : " + list.size}
+                    </span>
+                  </h3>
                   <div className="potager_carre carre33">
                     <FontAwesomeIcon
                       id="trashIcon"
@@ -122,7 +127,12 @@ function Potager() {
             } else if (list.size === 25) {
               return (
                 <div key={index} className="potager_carre--box">
-                  <h3>{list.name}</h3>
+                  <h3>
+                    {list.name}
+                    <span className="potager_size">
+                      {" taille du carré : " + list.size}
+                    </span>
+                  </h3>
                   <div className="potager_carre carre25">
                     <FontAwesomeIcon
                       id="trashIcon"
@@ -158,7 +168,12 @@ function Potager() {
             } else if (list.size === 24) {
               return (
                 <div key={index} className="potager_carre--box">
-                  <h3>{list.name}</h3>
+                  <h3>
+                    {list.name}
+                    <span className="potager_size">
+                      {" taille du carré : " + list.size}
+                    </span>
+                  </h3>
                   <div className="potager_carre carre24">
                     <FontAwesomeIcon
                       id="trashIcon"
@@ -194,7 +209,12 @@ function Potager() {
             } else if (list.size === 35) {
               return (
                 <div key={index} className="potager_carre--box">
-                  <h3>{list.name}</h3>
+                  <h3>
+                    {list.name}
+                    <span className="potager_size">
+                      {" taille du carré : " + list.size}
+                    </span>
+                  </h3>
                   <div className="potager_carre carre35">
                     <FontAwesomeIcon
                       id="trashIcon"
@@ -230,7 +250,12 @@ function Potager() {
             } else {
               return (
                 <div key={index} className="potager_carre--box">
-                  <h3>{list.name}</h3>
+                  <h3>
+                    {list.name}
+                    <span className="potager_size">
+                      {" taille du carré : " + list.size}
+                    </span>
+                  </h3>
                   <div className="potager_carre">
                     <FontAwesomeIcon
                       id="trashIcon"
