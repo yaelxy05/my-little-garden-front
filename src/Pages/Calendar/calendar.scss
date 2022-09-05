@@ -14,12 +14,17 @@
     margin: 4rem 0;
     font-size: 2rem;
     font-weight: bold;
+    text-align: center;
   }
 
   .calendar_legend {
     display: flex;
     align-items: center;
     margin-bottom: 1.5rem;
+    @include mixins.for-phone-and-tablet-only {
+      flex-direction: column;
+    }
+
     .calendar_legend--brown {
       @include mixins.legendBrown;
     }
@@ -33,53 +38,78 @@
 
     p {
       margin-right: 2rem;
+      @include mixins.for-phone-and-tablet-only {
+        margin: 2rem 0;
+        font-size: 0.7rem;
+      }
     }
   }
 
-  table {
-    box-shadow: 0 2px 1px -1px rgb(0 0 0 / 20%), 0 1px 1px 0 rgb(0 0 0 / 14%),
-      0 1px 3px 0 rgb(0 0 0 / 12%);
-    border: 1.5px solid #bec7e6;
-    border-radius: 2px;
-    width: 80%;
+  .calendar_box--table {
 
-    &:hover {
-      box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%),
-        0 1px 8px 0 rgb(0 0 0 / 12%);
-      transition: box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    thead {
-      width: 100%;
-      text-align: center;
-      font-weight: bold;
+    table {
+      box-shadow: 0 2px 1px -1px rgb(0 0 0 / 20%), 0 1px 1px 0 rgb(0 0 0 / 14%),
+        0 1px 3px 0 rgb(0 0 0 / 12%);
+      border: 1.5px solid #bec7e6;
+      border-radius: 2px;
+      width: 80%;
 
-      td {
-        border: 1px solid #dbe3ff;
-        padding: 1rem;
-        color: vars.$color5;
+      &:hover {
+        box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%),
+          0 3px 4px 0 rgb(0 0 0 / 14%), 0 1px 8px 0 rgb(0 0 0 / 12%);
+        transition: box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1);
       }
-    }
-
-    tbody {
-      text-align: center;
-
-      td {
-        border: 1px solid #dbe3ff;
-        padding: 1rem;
+      thead {
         width: 100%;
+        text-align: center;
         font-weight: bold;
-      }
-      .blue {
-        background: vars.$colorBlue;
+        tr {
+          width: 100%;
+
+          td {
+            border: 1px solid #dbe3ff;
+            padding: 1rem;
+            color: vars.$color5;
+            @include mixins.for-phone-only {
+              padding: 0.1rem;
+              font-size: 0.35rem;
+            }
+            @include mixins.for-tablet-portrait-up {
+              padding: 0.3rem;
+              font-size: 0.5rem;
+            }
+          }
+        }
       }
 
-      .brown {
-        background-color: vars.$colorBrown;
-  
-      }
+      tbody {
+        text-align: center;
 
-      .red {
-        background: vars.$colorRed;
+        td {
+          border: 1px solid #dbe3ff;
+          padding: 1rem;
+          width: 100%;
+          font-weight: bold;
+          @include mixins.for-phone-only {
+            padding: 0.2rem;
+            font-size: 0.5rem;
+          }
+          @include mixins.for-tablet-portrait-up {
+            padding: 0.3rem;
+            font-size: 0.9rem;
+          }
+        }
+        .blue {
+          background: vars.$colorBlue;
+        }
+
+        .brown {
+          background-color: vars.$colorBrown;
+        }
+
+        .red {
+          background: vars.$colorRed;
+        }
       }
     }
   }

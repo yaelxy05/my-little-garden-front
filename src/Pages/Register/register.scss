@@ -26,7 +26,9 @@
     background: vars.$colorLight;
     box-shadow: 0px 6px 10px rgb(179, 179, 179);
     position: relative;
-
+    @include mixins.for-phone-only {
+      width: 20rem;
+    }
     .register_success {
       align-self: center;
       text-align: center;
@@ -123,42 +125,40 @@
         height: 2px;
         transition: all 0.25s cubic-bezier(0.2, 0, 0.03, 1);
         pointer-events: none;
+        left: 79px;
+        @include mixins.for-phone-only {
+          left: 40px;
+        }
       }
 
       #labelField-email {
         position: absolute;
         top: 156px;
-        left: 79px;
       }
 
       #labelField-password {
         position: absolute;
         top: 215px;
-        left: 79px;
       }
 
       #labelField-password-confirm {
         position: absolute;
         top: 275px;
-        left: 79px;
       }
 
       #labelField-firstname {
         position: absolute;
         top: 335px;
-        left: 79px;
       }
 
       #labelField-lastname {
         position: absolute;
         top: 395px;
-        left: 79px;
       }
 
       #labelField-avatar {
         position: absolute;
         top: 445px;
-        left: 79px;
       }
 
       i {

@@ -10,19 +10,12 @@ import axios from "axios";
 
 function PotagerPlant() {
   // Initial state
-  const [sucess, setSucess] = useState(false);
-  const [formDataPlant, setFormDataPlant] = useState({
-    name: "",
-    family: "tomate",
-    variete: "",
-    potager: 1,
-    id: "",
-  });
+
   const [listPlant, setListPlant] = useState([]);
 
   const token = localStorage.getItem("token");
   const API_URLS = process.env.REACT_APP_API_URL;
-
+  // function for get potager number data in the BDD
   const getPotagerNumber = () => {
     axios
       .get(`${API_URLS}/potager`, {
@@ -35,12 +28,6 @@ function PotagerPlant() {
       .then((response) => {
         console.log(response);
         setListPlant(response.data);
-        if (response.statusText === "OK") {
-          setSucess(true);
-          setTimeout(() => {
-            setSucess(false);
-          }, 2500);
-        }
       })
       .catch((error) => {
         console.log(error);
@@ -51,7 +38,16 @@ function PotagerPlant() {
     getPotagerNumber();
   }, []);
 
-  const handleSubmit = async (evt) => {
+  const [sucess, setSucess] = useState(false);
+  const [formDataPlant, setFormDataPlant] = useState({
+    name: "",
+    family: "tomate",
+    variete: "",
+    potager: "",
+    id: "",
+  });
+
+  const handleSubmit = (evt) => {
     evt.preventDefault();
     setFormDataPlant(formDataPlant);
 
@@ -154,14 +150,16 @@ function PotagerPlant() {
             placeholder=" "
             type="select"
           >
+            <option value='' hidden="hidden">Veuillez sélectionnez un carré</option>
             {listPlant &&
               listPlant.map((list, index) => {
                 return (
-                  <option key={index} value={list.id}>
+                  <option key={index} value={list.id} >
                     {list.name}
                   </option>
                 );
               })}
+
           </select>
         </div>
         <div className="addCarre_box">

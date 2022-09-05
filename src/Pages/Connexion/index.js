@@ -91,10 +91,10 @@ function Connexion() {
               <p className="error_login">Les identifiants sont incorrect</p>
             )}
             <p>
-              Vous n'avez pas de compte?{" "}
+              Vous n'avez pas de compte?
               <span>
                 <NavLink to="/inscription">Inscrivez vous</NavLink>
-              </span>{" "}
+              </span>
             </p>
           </form>
         </>

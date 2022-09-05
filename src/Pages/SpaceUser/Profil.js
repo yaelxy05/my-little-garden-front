@@ -52,7 +52,7 @@ function Profil() {
 
   // Function for update user info
   const handleUpdateProfile = async (evt) => {
-    const token = localStorage.getItem("token");
+  const token = localStorage.getItem("token");
   const API_URLS = process.env.REACT_APP_API_URL;
     evt.preventDefault();
     setFormDataUser(formDataUser);
