@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import PropTypes from "prop-types";
 // Import components
 import InputField from "../../../../Components/InputMyGarden";
@@ -8,19 +8,22 @@ import "./potagerForm.scss";
 import axios from "axios";
 // Import PotagerPlant
 import PotagerPlant from "./PotagerPlant";
+// Import Context
+import { GetDataPotagerContext } from "../../../../Utils/Context";
 
 function PotagerForm() {
   // Initial state
   const [sucess, setSucess] = useState(false);
-
   const [formDataPotager, setFormDataPotager] = useState({
     name: "",
     size: 33,
   });
-
+  // Context
+  const { fetchDataPotager } = useContext(GetDataPotagerContext);
+  // API Information
   const token = localStorage.getItem("token");
   const API_URLS = process.env.REACT_APP_API_URL;
-
+  // function for create a new potager
   const handleSubmit = async (evt) => {
     evt.preventDefault();
 
@@ -44,6 +47,7 @@ function PotagerForm() {
       .then((response) => {
         console.log(response);
         if (response.statusText === "OK") {
+          fetchDataPotager();
           setSucess(true);
           setTimeout(() => {
             setSucess(false);

@@ -1,43 +1,22 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useContext } from "react";
 
 // Import components
 import InputField from "../../../../../Components/InputMyGarden";
-
 // import SCSS
 import "../potagerForm.scss";
 // Import package
 import axios from "axios";
+// Import Context
+import { GetDataPotagerContext } from "../../../../../Utils/Context";
 
 function PotagerPlant() {
   // Initial state
-
-  const [listPlant, setListPlant] = useState([]);
+  // Context
+  const { listPotager, fetchDataPotager } = useContext(GetDataPotagerContext);
 
   const token = localStorage.getItem("token");
   const API_URLS = process.env.REACT_APP_API_URL;
-  // function for get potager number data in the BDD
-  const getPotagerNumber = () => {
-    axios
-      .get(`${API_URLS}/potager`, {
-        headers: {
-          Authorization: "Bearer " + token,
-          Accept: "application/json, text/plain, */*",
-          "Content-Type": "application/json",
-        },
-      })
-      .then((response) => {
-        console.log(response);
-        setListPlant(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-
-  useEffect(() => {
-    getPotagerNumber();
-  }, []);
-
+ 
   const [sucess, setSucess] = useState(false);
   const [formDataPlant, setFormDataPlant] = useState({
     name: "",
@@ -70,7 +49,7 @@ function PotagerPlant() {
       )
       .then((response) => {
         console.log(response);
-        getPotagerNumber();
+        fetchDataPotager();
         if (response.statusText === "OK") {
           setSucess(true);
           setTimeout(() => {
@@ -151,8 +130,8 @@ function PotagerPlant() {
             type="select"
           >
             <option value='' hidden="hidden">Veuillez sélectionnez un carré</option>
-            {listPlant &&
-              listPlant.map((list, index) => {
+            {listPotager &&
+              listPotager.map((list, index) => {
                 return (
                   <option key={index} value={list.id} >
                     {list.name}

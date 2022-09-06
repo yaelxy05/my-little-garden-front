@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 // import SCSS
 import "./potager.scss";
 // Import package
@@ -6,34 +6,11 @@ import axios from "axios";
 // Import fontawesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
-
+// Import Context
+import { GetDataPotagerContext } from "../../../../Utils/Context";
 function Potager() {
-  const [listPotager, setListPotager] = useState([]);
-
-  const fetchDataPotager = () => {
-    const token = localStorage.getItem("token");
-    const API_URLS = process.env.REACT_APP_API_URL;
-
-    axios
-      .get(`${API_URLS}/potager`, {
-        headers: {
-          Authorization: "Bearer " + token,
-          Accept: "application/json, text/plain, */*",
-          "Content-Type": "application/json",
-        },
-      })
-      .then((response) => {
-        console.log(response);
-        setListPotager(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-
-  useEffect(() => {
-    fetchDataPotager();
-  }, []);
+  // Context
+  const { listPotager, fetchDataPotager } = useContext(GetDataPotagerContext);
 
   const token = localStorage.getItem("token");
   const API_URLS = process.env.REACT_APP_API_URL;
