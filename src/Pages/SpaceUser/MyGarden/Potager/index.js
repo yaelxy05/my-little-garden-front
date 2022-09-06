@@ -7,52 +7,13 @@ import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 // Import Context
-import { GetDataPotagerContext } from "../../../../Utils/Context/potager";
+import { GetDataPotagerContext, DeletePotagerContext, DeletePlantContext } from "../../../../Utils/Context/potager";
 
 function Potager() {
   // Context
-  const { listPotager, fetchDataPotager } = useContext(GetDataPotagerContext);
-
-  const token = localStorage.getItem("token");
-  const API_URLS = process.env.REACT_APP_API_URL;
-
-  // function for delete plant
-  const deletePlant = async (id) => {
-    axios
-      .delete(`${API_URLS}/plant/delete/${id}`, {
-        headers: {
-          Authorization: "Bearer " + token,
-          Accept: "application/json, text/plain, */*",
-          "Content-Type": "application/json",
-        },
-      })
-      .then((response) => {
-        console.log(response);
-        fetchDataPotager();
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-
-  // function for delete potager
-  const deletePotager = async (id) => {
-    axios
-      .delete(`${API_URLS}/potager/delete/${id}`, {
-        headers: {
-          Authorization: "Bearer " + token,
-          Accept: "application/json, text/plain, */*",
-          "Content-Type": "application/json",
-        },
-      })
-      .then((response) => {
-        console.log(response);
-        fetchDataPotager();
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
+  const { listPotager } = useContext(GetDataPotagerContext);
+  const { deletePotager } = useContext(DeletePotagerContext);
+  const { deletePlant } = useContext(DeletePlantContext);
 
   return (
     <section className="potager">

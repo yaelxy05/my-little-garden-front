@@ -8,6 +8,8 @@ const API_URLS = process.env.REACT_APP_API_URL;
 export const GetDataPotagerContext = createContext();
 export const HandleSubmitCreatePlantContext = createContext();
 export const HandleSubmitCreatePotagerContext = createContext();
+export const DeletePotagerContext = createContext();
+export const DeletePlantContext = createContext();
 
 export const GetDataPotagerProvider = ({ children }) => {
   const [listPotager, setListPotager] = useState([]);
@@ -158,5 +160,69 @@ export const HandleSubmitCreatePotagerProvider = ({ children }) => {
     >
       {children}
     </HandleSubmitCreatePotagerContext.Provider>
+  );
+};
+
+export const DeletePotagerProvider = ({ children }) => {
+  const { fetchDataPotager } = useContext(GetDataPotagerContext);
+  // function for delete potager
+  const deletePotager = async (id) => {
+    axios
+      .delete(`${API_URLS}/potager/delete/${id}`, {
+        headers: {
+          Authorization: "Bearer " + token,
+          Accept: "application/json, text/plain, */*",
+          "Content-Type": "application/json",
+        },
+      })
+      .then((response) => {
+        console.log(response);
+        fetchDataPotager();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  return (
+    <DeletePotagerContext.Provider
+      value={{
+        deletePotager,
+      }}
+    >
+      {children}
+    </DeletePotagerContext.Provider>
+  );
+};
+
+export const DeletePlantProvider = ({ children }) => {
+  const { fetchDataPotager } = useContext(GetDataPotagerContext);
+  // function for delete plant
+  const deletePlant = async (id) => {
+    axios
+      .delete(`${API_URLS}/plant/delete/${id}`, {
+        headers: {
+          Authorization: "Bearer " + token,
+          Accept: "application/json, text/plain, */*",
+          "Content-Type": "application/json",
+        },
+      })
+      .then((response) => {
+        console.log(response);
+        fetchDataPotager();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  return (
+    <DeletePlantContext.Provider
+      value={{
+        deletePlant,
+      }}
+    >
+      {children}
+    </DeletePlantContext.Provider>
   );
 };
