@@ -1,8 +1,6 @@
 import React, { useContext } from "react";
 // import SCSS
 import "./potager.scss";
-// Import package
-import axios from "axios";
 // Import fontawesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";

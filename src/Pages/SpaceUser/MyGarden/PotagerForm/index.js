@@ -1,11 +1,9 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import PropTypes from "prop-types";
 // Import components
 import InputField from "../../../../Components/InputMyGarden";
 // import SCSS
 import "./potagerForm.scss";
-// Import package
-import axios from "axios";
 // Import PotagerPlant
 import PotagerPlant from "./PotagerPlant";
 // Import Context
@@ -19,7 +17,7 @@ function PotagerForm() {
     setFormDataPotager,
     sucess,
   } = useContext(HandleSubmitCreatePotagerContext);
-  
+
   return (
     <div className="potager_form">
       <div className="potager_addCarre">

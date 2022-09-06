@@ -2,65 +2,22 @@ import React, { useState, useContext, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 // Import components
 import InputField from "../../Components/InputLogin";
-// Import package
-import axios from "axios";
-
 // Import Context
-import { IsConnectedContext, TokenContext } from "../../Utils/Context";
+import { IsConnectedContext } from "../../Utils/Context";
+import { LoginAuthContext } from "../../Utils/Context/auth";
 // Import SCSS
 import "./connexion.scss";
 
 function Connexion() {
-  // Initial state
-  const [error, setError] = useState(false);
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-  });
-
-  // Context
-  const { setToken } = useContext(TokenContext);
-  const { isConnected, setIsConnected } = useContext(IsConnectedContext);
-
-  const API_URLS = process.env.REACT_APP_API_URL;
-
-  const handleSubmit = async (evt) => {
-    evt.preventDefault();
-    setFormData(formData);
-    axios
-      .post(`${API_URLS}/login`, {
-        username: formData.email,
-        password: formData.password,
-      })
-      .then((response) => {
-        localStorage.setItem("token", response.data.token);
-
-        setIsConnected(true);
-      })
-      .catch((error) => {
-        console.log(error.code);
-        setError(true);
-        setTimeout(() => {
-          setError(false);
-        }, 2500);
-      });
-  };
-
-  useEffect(() => {
-    const refreshLogin = () => {
-      if (window.localStorage.getItem("token") !== null) {
-        setToken(window.localStorage.getItem("token"));
-        setIsConnected(true);
-      }
-    };
-    refreshLogin();
-  }, [isConnected]);
-
+  const { formData, setFormData, error, handleLogin } =
+    useContext(LoginAuthContext);
+  const { isConnected } = useContext(IsConnectedContext);
+  
   return (
     <div className="login">
       {!isConnected && (
         <>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleLogin}>
             <h1>Connexion</h1>
 
             <InputField

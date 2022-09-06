@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-
 // Import components
 import InputField from "../../../../../Components/InputMyGarden";
 // import SCSS

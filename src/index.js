@@ -10,8 +10,9 @@ import {
   HandleSubmitCreatePlantProvider,
   HandleSubmitCreatePotagerProvider,
   DeletePotagerProvider,
-  DeletePlantProvider
+  DeletePlantProvider,
 } from "./Utils/Context/potager";
+import { LoginAuthProvider } from "./Utils/Context/auth";
 ReactDOM.render(
   <React.StrictMode>
     <Router>
@@ -22,7 +23,9 @@ ReactDOM.render(
               <HandleSubmitCreatePlantProvider>
                 <TokenProvider>
                   <IsConnectedProvider>
-                    <App />
+                    <LoginAuthProvider>
+                      <App />
+                    </LoginAuthProvider>
                   </IsConnectedProvider>
                 </TokenProvider>
               </HandleSubmitCreatePlantProvider>
