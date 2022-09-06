@@ -9,59 +9,21 @@ import axios from "axios";
 // Import PotagerPlant
 import PotagerPlant from "./PotagerPlant";
 // Import Context
-import { GetDataPotagerContext } from "../../../../Utils/Context/potager";
+import { HandleSubmitCreatePotagerContext } from "../../../../Utils/Context/potager";
 
 function PotagerForm() {
-  // Initial state
-  const [sucess, setSucess] = useState(false);
-  const [formDataPotager, setFormDataPotager] = useState({
-    name: "",
-    size: 33,
-  });
   // Context
-  const { fetchDataPotager } = useContext(GetDataPotagerContext);
-  // API Information
-  const token = localStorage.getItem("token");
-  const API_URLS = process.env.REACT_APP_API_URL;
-  // function for create a new potager
-  const handleSubmit = async (evt) => {
-    evt.preventDefault();
-
-    setFormDataPotager(formDataPotager);
-
-    axios
-      .post(
-        `${API_URLS}/potager/create`,
-        {
-          name: formDataPotager.name,
-          size: formDataPotager.size,
-        },
-        {
-          headers: {
-            Authorization: "Bearer " + token,
-            Accept: "application/json, text/plain, */*",
-            "Content-Type": "application/json",
-          },
-        }
-      )
-      .then((response) => {
-        console.log(response);
-        if (response.statusText === "OK") {
-          fetchDataPotager();
-          setSucess(true);
-          setTimeout(() => {
-            setSucess(false);
-          }, 2500);
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
+  const {
+    HandleSubmitCreatePotager,
+    formDataPotager,
+    setFormDataPotager,
+    sucess,
+  } = useContext(HandleSubmitCreatePotagerContext);
+  
   return (
     <div className="potager_form">
       <div className="potager_addCarre">
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={HandleSubmitCreatePotager}>
           <h1>Ajout d'un carré de potager</h1>
           <InputField
             name="name"
@@ -113,7 +75,7 @@ function PotagerForm() {
 PotagerForm.prototypes = {
   name: PropTypes.string.isRequired,
   size: PropTypes.number.isRequired,
-  handleSubmit: PropTypes.func.isRequired,
+  HandleSubmitCreatePotager: PropTypes.func.isRequired,
 };
 
 export default PotagerForm;

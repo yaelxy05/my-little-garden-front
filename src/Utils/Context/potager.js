@@ -7,6 +7,7 @@ const API_URLS = process.env.REACT_APP_API_URL;
 
 export const GetDataPotagerContext = createContext();
 export const HandleSubmitCreatePlantContext = createContext();
+export const HandleSubmitCreatePotagerContext = createContext();
 
 export const GetDataPotagerProvider = ({ children }) => {
   const [listPotager, setListPotager] = useState([]);
@@ -99,5 +100,63 @@ export const HandleSubmitCreatePlantProvider = ({ children }) => {
     >
       {children}
     </HandleSubmitCreatePlantContext.Provider>
+  );
+};
+
+export const HandleSubmitCreatePotagerProvider = ({ children }) => {
+  const { fetchDataPotager } = useContext(GetDataPotagerContext);
+  // Initial state
+  const [sucess, setSucess] = useState(false);
+  const [formDataPotager, setFormDataPotager] = useState({
+    name: "",
+    size: 33,
+  });
+
+  const HandleSubmitCreatePotager = async (evt) => {
+    evt.preventDefault();
+
+    setFormDataPotager(formDataPotager);
+
+    axios
+      .post(
+        `${API_URLS}/potager/create`,
+        {
+          name: formDataPotager.name,
+          size: formDataPotager.size,
+        },
+        {
+          headers: {
+            Authorization: "Bearer " + token,
+            Accept: "application/json, text/plain, */*",
+            "Content-Type": "application/json",
+          },
+        }
+      )
+      .then((response) => {
+        console.log(response);
+        if (response.statusText === "OK") {
+          fetchDataPotager();
+          setSucess(true);
+          setTimeout(() => {
+            setSucess(false);
+          }, 2500);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  return (
+    <HandleSubmitCreatePotagerContext.Provider
+      value={{
+        HandleSubmitCreatePotager,
+        formDataPotager,
+        setFormDataPotager,
+        sucess,
+      }}
+    >
+      {children}
+    </HandleSubmitCreatePotagerContext.Provider>
   );
 };

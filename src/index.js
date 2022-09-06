@@ -8,18 +8,21 @@ import { IsConnectedProvider, TokenProvider } from "./Utils/Context";
 import {
   GetDataPotagerProvider,
   HandleSubmitCreatePlantProvider,
+  HandleSubmitCreatePotagerProvider
 } from "./Utils/Context/potager";
 ReactDOM.render(
   <React.StrictMode>
     <Router>
       <GetDataPotagerProvider>
-        <HandleSubmitCreatePlantProvider>
-          <TokenProvider>
-            <IsConnectedProvider>
-              <App />
-            </IsConnectedProvider>
-          </TokenProvider>
-        </HandleSubmitCreatePlantProvider>
+        <HandleSubmitCreatePotagerProvider>
+          <HandleSubmitCreatePlantProvider>
+            <TokenProvider>
+              <IsConnectedProvider>
+                <App />
+              </IsConnectedProvider>
+            </TokenProvider>
+          </HandleSubmitCreatePlantProvider>
+        </HandleSubmitCreatePotagerProvider>
       </GetDataPotagerProvider>
     </Router>
   </React.StrictMode>,
