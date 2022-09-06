@@ -1,70 +1,24 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 
 // Import components
 import InputField from "../../../../../Components/InputMyGarden";
 // import SCSS
 import "../potagerForm.scss";
-// Import package
-import axios from "axios";
 // Import Context
-import { GetDataPotagerContext } from "../../../../../Utils/Context";
+import {
+  GetDataPotagerContext,
+  HandleSubmitCreatePlantContext,
+} from "../../../../../Utils/Context/potager";
 
 function PotagerPlant() {
-  // Initial state
   // Context
-  const { listPotager, fetchDataPotager } = useContext(GetDataPotagerContext);
-
-  const token = localStorage.getItem("token");
-  const API_URLS = process.env.REACT_APP_API_URL;
- 
-  const [sucess, setSucess] = useState(false);
-  const [formDataPlant, setFormDataPlant] = useState({
-    name: "",
-    family: "tomate",
-    variete: "",
-    potager: "",
-    id: "",
-  });
-
-  const handleSubmit = (evt) => {
-    evt.preventDefault();
-    setFormDataPlant(formDataPlant);
-
-    axios
-      .post(
-        `${API_URLS}/plant/create`,
-        {
-          name: formDataPlant.name,
-          family: formDataPlant.family,
-          variete: formDataPlant.variete,
-          potager: formDataPlant.potager,
-        },
-        {
-          headers: {
-            Authorization: "Bearer " + token,
-            Accept: "application/json, text/plain, */*",
-            "Content-Type": "application/json",
-          },
-        }
-      )
-      .then((response) => {
-        console.log(response);
-        fetchDataPotager();
-        if (response.statusText === "OK") {
-          setSucess(true);
-          setTimeout(() => {
-            setSucess(false);
-          }, 2500);
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
+  const { listPotager } = useContext(GetDataPotagerContext);
+  const { HandleSubmitCreatePlant, setFormDataPlant, formDataPlant, sucess } =
+    useContext(HandleSubmitCreatePlantContext);
 
   return (
     <div className="potager_addPlant">
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={HandleSubmitCreatePlant}>
         <h1>Ajout d'un plant</h1>
         <InputField
           name="name"
@@ -92,6 +46,9 @@ function PotagerPlant() {
             placeholder=" "
             type="select"
           >
+            <option value="" hidden="hidden">
+              Veuillez sélectionnez une famille
+            </option>
             <option value="tomate">Tomate</option>
             <option value="salade">Salade</option>
             <option value="haricot">Haricot</option>
@@ -129,16 +86,17 @@ function PotagerPlant() {
             placeholder=" "
             type="select"
           >
-            <option value='' hidden="hidden">Veuillez sélectionnez un carré</option>
+            <option value="" hidden="hidden">
+              Veuillez sélectionnez un carré
+            </option>
             {listPotager &&
               listPotager.map((list, index) => {
                 return (
-                  <option key={index} value={list.id} >
+                  <option key={index} value={list.id}>
                     {list.name}
                   </option>
                 );
               })}
-
           </select>
         </div>
         <div className="addCarre_box">

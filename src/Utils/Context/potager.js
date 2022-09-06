@@ -1,0 +1,103 @@
+import React, { useState, createContext, useEffect, useContext } from "react";
+import axios from "axios";
+
+// info API
+const token = localStorage.getItem("token");
+const API_URLS = process.env.REACT_APP_API_URL;
+
+export const GetDataPotagerContext = createContext();
+export const HandleSubmitCreatePlantContext = createContext();
+
+export const GetDataPotagerProvider = ({ children }) => {
+  const [listPotager, setListPotager] = useState([]);
+
+  const fetchDataPotager = () => {
+    axios
+      .get(`${API_URLS}/potager`, {
+        headers: {
+          Authorization: "Bearer " + token,
+          Accept: "application/json, text/plain, */*",
+          "Content-Type": "application/json",
+        },
+      })
+      .then((response) => {
+        console.log(response);
+        setListPotager(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  useEffect(() => {
+    fetchDataPotager();
+  }, []);
+
+  return (
+    <GetDataPotagerContext.Provider
+      value={{ listPotager, setListPotager, fetchDataPotager }}
+    >
+      {children}
+    </GetDataPotagerContext.Provider>
+  );
+};
+
+export const HandleSubmitCreatePlantProvider = ({ children }) => {
+  const { fetchDataPotager } = useContext(GetDataPotagerContext);
+  const [sucess, setSucess] = useState(false);
+  const [formDataPlant, setFormDataPlant] = useState({
+    name: "",
+    family: "",
+    variete: "",
+    potager: "",
+    id: "",
+  });
+
+  const HandleSubmitCreatePlant = (evt) => {
+    evt.preventDefault();
+    setFormDataPlant(formDataPlant);
+
+    axios
+      .post(
+        `${API_URLS}/plant/create`,
+        {
+          name: formDataPlant.name,
+          family: formDataPlant.family,
+          variete: formDataPlant.variete,
+          potager: formDataPlant.potager,
+        },
+        {
+          headers: {
+            Authorization: "Bearer " + token,
+            Accept: "application/json, text/plain, */*",
+            "Content-Type": "application/json",
+          },
+        }
+      )
+      .then((response) => {
+        console.log(response);
+        fetchDataPotager();
+        if (response.statusText === "OK") {
+          setSucess(true);
+          setTimeout(() => {
+            setSucess(false);
+          }, 2500);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  return (
+    <HandleSubmitCreatePlantContext.Provider
+      value={{
+        HandleSubmitCreatePlant,
+        setFormDataPlant,
+        formDataPlant,
+        sucess,
+      }}
+    >
+      {children}
+    </HandleSubmitCreatePlantContext.Provider>
+  );
+};

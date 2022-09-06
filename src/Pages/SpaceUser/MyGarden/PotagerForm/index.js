@@ -9,7 +9,7 @@ import axios from "axios";
 // Import PotagerPlant
 import PotagerPlant from "./PotagerPlant";
 // Import Context
-import { GetDataPotagerContext } from "../../../../Utils/Context";
+import { GetDataPotagerContext } from "../../../../Utils/Context/potager";
 
 function PotagerForm() {
   // Initial state

@@ -7,7 +7,8 @@ import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 // Import Context
-import { GetDataPotagerContext } from "../../../../Utils/Context";
+import { GetDataPotagerContext } from "../../../../Utils/Context/potager";
+
 function Potager() {
   // Context
   const { listPotager, fetchDataPotager } = useContext(GetDataPotagerContext);

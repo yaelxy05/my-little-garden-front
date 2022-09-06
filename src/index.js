@@ -4,17 +4,22 @@ import "./styles/utils/index.scss";
 import App from "./Pages/App/App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter as Router } from "react-router-dom";
-import { IsConnectedProvider, TokenProvider, GetDataPotagerProvider } from "./Utils/Context";
-
+import { IsConnectedProvider, TokenProvider } from "./Utils/Context";
+import {
+  GetDataPotagerProvider,
+  HandleSubmitCreatePlantProvider,
+} from "./Utils/Context/potager";
 ReactDOM.render(
   <React.StrictMode>
     <Router>
       <GetDataPotagerProvider>
-        <TokenProvider>
-          <IsConnectedProvider>
-            <App />
-          </IsConnectedProvider>
-        </TokenProvider>
+        <HandleSubmitCreatePlantProvider>
+          <TokenProvider>
+            <IsConnectedProvider>
+              <App />
+            </IsConnectedProvider>
+          </TokenProvider>
+        </HandleSubmitCreatePlantProvider>
       </GetDataPotagerProvider>
     </Router>
   </React.StrictMode>,
