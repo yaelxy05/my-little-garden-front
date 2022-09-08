@@ -84,36 +84,52 @@ function Profil() {
       });
   };
 
+  // function for update avatar of user
   const [uploadFile, setUploadFile] = useState({
     avatar: null,
+    preview: null,
   });
-  console.log(uploadFile);
+  const [error, setError] = useState(false);
+  const [sucess, setSucess] = useState(false);
+  console.log(uploadFile.avatar);
   const handleUpdateAvatar = async (evt) => {
     const token = localStorage.getItem("token");
     const API_URLS = process.env.REACT_APP_API_URL;
     evt.preventDefault();
     const formDataAvatar = new FormData();
     formDataAvatar.append("avatar", uploadFile.avatar);
-    console.log(formDataAvatar);
-    axios
-      .post(
-        `${API_URLS}/user/${formDataUser.id}/update/avatar`,
-        formDataAvatar,
-        {
-          headers: {
-            Authorization: "Bearer " + token,
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      )
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+
+    if (uploadFile.avatar !== null && uploadFile.avatar.size > 2e6) {
+      setError(true);
+      setTimeout(() => {
+        setError(false);
+      }, 2500);
+    } else {
+      setError(false);
+      axios
+        .post(
+          `${API_URLS}/user/${formDataUser.id}/update/avatar`,
+          formDataAvatar,
+          {
+            headers: {
+              Authorization: "Bearer " + token,
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        )
+        .then((response) => {
+          console.log(response);
+          setSucess(true);
+          setTimeout(() => {
+            setSucess(false);
+          }, 2500);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
   };
- 
+
   return (
     <div className="profil">
       <div className="profil_title">
@@ -262,27 +278,56 @@ function Profil() {
             </article>
           </div>
           <div className="profil_data--avatar">
-            <form onSubmit={handleUpdateAvatar}>
-              <input
-                type="file"
-                name="avatar"
-                accept=".jpg,.png,.svg"
-                readOnly={!modifyInputInformation}
-                id="avatar"
-                size="2000"
-                className={modifyInputInformation ? "focus_input" : ""}
-                onChange={(e) =>
-                  setUploadFile({
-                    ...uploadFile,
-                    avatar: e.target.files[0],
-                  })
-                }
-              />
-              <label htmlFor="avatar">Avatar</label>
-              <div className="button_box">
-                <button>Valider</button>
-              </div>
-            </form>
+            <header>
+              <h2>Modifier mon avatar</h2>
+            </header>
+            <div className="profil_data--avatar--box">
+              <form
+                className="profil_data--avatar--middle"
+                onSubmit={handleUpdateAvatar}
+              >
+                <div className="profil_data--avatar--input">
+                  <input
+                    type="file"
+                    name="avatar"
+                    accept=".jpg,.png,.svg"
+                    id="avatar"
+                    className="input_avatar"
+                    size="2000"
+                    onChange={(e) =>
+                      setUploadFile({
+                        ...uploadFile,
+                        preview: URL.createObjectURL(e.target.files[0]),
+                        avatar: e.target.files[0],
+                      })
+                    }
+                    aria-label="Sélectionner un avatar"
+                  />
+
+                  <div className="button_box">
+                    <button>Valider</button>
+                  </div>
+                </div>
+
+                {uploadFile.preview !== null && uploadFile && (
+                  <img className="avatar_preview" src={uploadFile.preview} />
+                )}
+              </form>
+              {error && (
+                <>
+                  <p className="avatar_error">
+                    La taille de l'avatar ne doit pas dépasser 2MO
+                  </p>
+                </>
+              )}
+              {sucess && (
+                <>
+                  <p className="avatar_sucess">
+                    L'avatar a bien etait modifié!
+                  </p>
+                </>
+              )}
+            </div>
           </div>
         </div>
       </div>
