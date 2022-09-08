@@ -13,11 +13,13 @@ import {
   DeletePlantProvider,
 } from "./Utils/Context/potager";
 import { LoginAuthProvider } from "./Utils/Context/auth";
+import { InfoUserProvider } from "./Utils/Context/index";
 ReactDOM.render(
   <React.StrictMode>
     <Router>
       <TokenProvider>
         <IsConnectedProvider>
+          <InfoUserProvider>
           <GetDataPotagerProvider>
             <DeletePlantProvider>
               <DeletePotagerProvider>
@@ -30,7 +32,8 @@ ReactDOM.render(
                 </HandleSubmitCreatePotagerProvider>
               </DeletePotagerProvider>
             </DeletePlantProvider>
-          </GetDataPotagerProvider>
+            </GetDataPotagerProvider>
+            </InfoUserProvider>
         </IsConnectedProvider>
       </TokenProvider>
     </Router>

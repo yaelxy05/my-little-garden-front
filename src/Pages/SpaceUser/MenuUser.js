@@ -1,5 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import { Link, Outlet } from "react-router-dom";
+// Import Context
+import { InfoUserContext } from "../../Utils/Context/index";
+import { IsConnectedContext } from "../../Utils/Context/index";
 // Import fontawesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -11,40 +14,19 @@ import {
 // Import picture
 import Avatar from "../../assets/img/avatar/user.png";
 
-// Import package
-import axios from "axios";
-
 function MenuUser() {
-  // Initial state
-  const [loading, setLoading] = useState(true);
-  const [formDataUser, setFormDataUser] = useState({
-    firstname: "",
-    lastname: "",
-    avatar: "",
-  });
+  // Context
+  const { loading, getInfoUser, formDataUser, setFormDataUser, setLoading } =
+    useContext(InfoUserContext);
+  const { isConnected } = useContext(IsConnectedContext);
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    const API_URLS = process.env.REACT_APP_API_URL;
-
-    const getInfoUser = async () => {
-      await axios
-        .get(`${API_URLS}/users`, {
-          headers: {
-            Authorization: "Bearer " + token,
-            Accept: "application/json, text/plain, */*",
-            "Content-Type": "application/json",
-          },
-        })
-        .then((response) => {
-          setFormDataUser(response.data[0]);
-          setLoading(false);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    };
-    getInfoUser();
+    if (isConnected) {
+      console.log("modifié");
+      getInfoUser();
+    } else {
+      return null;
+    }
   }, []);
 
   return (

@@ -1,9 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 // Import package
 import axios from "axios";
-
+// Import Context
+import {
+  InfoUserContext
+} from "../../Utils/Context/index";
+// import scss
 import "./profil.scss";
 function Profil() {
+  // Context
+  const { getInfoUser } = useContext(InfoUserContext);
   // Initial state
   const [formDataUser, setFormDataUser] = useState({
     firstname: "",
@@ -91,7 +97,7 @@ function Profil() {
   });
   const [error, setError] = useState(false);
   const [sucess, setSucess] = useState(false);
-  console.log(uploadFile.avatar);
+
   const handleUpdateAvatar = async (evt) => {
     const token = localStorage.getItem("token");
     const API_URLS = process.env.REACT_APP_API_URL;
@@ -120,6 +126,7 @@ function Profil() {
         .then((response) => {
           console.log(response);
           setSucess(true);
+          getInfoUser();
           setTimeout(() => {
             setSucess(false);
           }, 2500);
