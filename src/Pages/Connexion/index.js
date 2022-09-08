@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
 // Import components
 import InputField from "../../Components/InputLogin";
@@ -12,7 +12,7 @@ function Connexion() {
   const { formData, setFormData, error, handleLogin } =
     useContext(LoginAuthContext);
   const { isConnected } = useContext(IsConnectedContext);
-  
+
   return (
     <div className="login">
       {!isConnected && (

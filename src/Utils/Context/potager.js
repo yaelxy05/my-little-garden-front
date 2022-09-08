@@ -1,8 +1,9 @@
 import React, { useState, createContext, useEffect, useContext } from "react";
+// Import Context
+import { IsConnectedContext } from "./index";
 import axios from "axios";
 
 // info API
-const token = localStorage.getItem("token");
 const API_URLS = process.env.REACT_APP_API_URL;
 
 export const GetDataPotagerContext = createContext();
@@ -12,9 +13,13 @@ export const DeletePotagerContext = createContext();
 export const DeletePlantContext = createContext();
 
 export const GetDataPotagerProvider = ({ children }) => {
+  // Context
+  const { isConnected } = useContext(IsConnectedContext);
+  // Initial state
   const [listPotager, setListPotager] = useState([]);
 
   const fetchDataPotager = () => {
+    const token = localStorage.getItem("token");
     axios
       .get(`${API_URLS}/potager`, {
         headers: {
@@ -31,8 +36,13 @@ export const GetDataPotagerProvider = ({ children }) => {
         console.log(error);
       });
   };
+
   useEffect(() => {
-    fetchDataPotager();
+    if (isConnected) {
+      fetchDataPotager();
+    } else {
+      return null;
+    }
   }, []);
 
   return (
@@ -58,7 +68,7 @@ export const HandleSubmitCreatePlantProvider = ({ children }) => {
   const HandleSubmitCreatePlant = (evt) => {
     evt.preventDefault();
     setFormDataPlant(formDataPlant);
-
+    const token = localStorage.getItem("token");
     axios
       .post(
         `${API_URLS}/plant/create`,
@@ -118,7 +128,7 @@ export const HandleSubmitCreatePotagerProvider = ({ children }) => {
     evt.preventDefault();
 
     setFormDataPotager(formDataPotager);
-
+    const token = localStorage.getItem("token");
     axios
       .post(
         `${API_URLS}/potager/create`,
@@ -167,6 +177,7 @@ export const DeletePotagerProvider = ({ children }) => {
   const { fetchDataPotager } = useContext(GetDataPotagerContext);
   // function for delete potager
   const deletePotager = async (id) => {
+    const token = localStorage.getItem("token");
     axios
       .delete(`${API_URLS}/potager/delete/${id}`, {
         headers: {
@@ -199,6 +210,7 @@ export const DeletePlantProvider = ({ children }) => {
   const { fetchDataPotager } = useContext(GetDataPotagerContext);
   // function for delete plant
   const deletePlant = async (id) => {
+    const token = localStorage.getItem("token");
     axios
       .delete(`${API_URLS}/plant/delete/${id}`, {
         headers: {

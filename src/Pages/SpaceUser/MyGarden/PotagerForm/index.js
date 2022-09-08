@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import PropTypes from "prop-types";
 // Import components
 import InputField from "../../../../Components/InputMyGarden";
@@ -7,7 +7,11 @@ import "./potagerForm.scss";
 // Import PotagerPlant
 import PotagerPlant from "./PotagerPlant";
 // Import Context
-import { HandleSubmitCreatePotagerContext } from "../../../../Utils/Context/potager";
+import {
+  HandleSubmitCreatePotagerContext,
+  GetDataPotagerContext,
+} from "../../../../Utils/Context/potager";
+import { IsConnectedContext } from "../../../../Utils/Context";
 
 function PotagerForm() {
   // Context
@@ -17,6 +21,17 @@ function PotagerForm() {
     setFormDataPotager,
     sucess,
   } = useContext(HandleSubmitCreatePotagerContext);
+  const { fetchDataPotager } = useContext(GetDataPotagerContext);
+  const { isConnected } = useContext(IsConnectedContext);
+
+  useEffect(() => {
+    if (isConnected) {
+      fetchDataPotager();
+    } else {
+      return null
+    }
+    
+  }, []);
 
   return (
     <div className="potager_form">

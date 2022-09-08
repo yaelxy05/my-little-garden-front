@@ -25,7 +25,7 @@ export const LoginAuthProvider = ({ children }) => {
     }
   };
 
-  const handleLogin = async (evt) => {
+  const handleLogin = (evt) => {
     evt.preventDefault();
     setFormData(formData);
     axios

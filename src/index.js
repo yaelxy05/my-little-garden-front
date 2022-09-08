@@ -16,23 +16,23 @@ import { LoginAuthProvider } from "./Utils/Context/auth";
 ReactDOM.render(
   <React.StrictMode>
     <Router>
-      <GetDataPotagerProvider>
-        <DeletePlantProvider>
-          <DeletePotagerProvider>
-            <HandleSubmitCreatePotagerProvider>
-              <HandleSubmitCreatePlantProvider>
-                <TokenProvider>
-                  <IsConnectedProvider>
+      <TokenProvider>
+        <IsConnectedProvider>
+          <GetDataPotagerProvider>
+            <DeletePlantProvider>
+              <DeletePotagerProvider>
+                <HandleSubmitCreatePotagerProvider>
+                  <HandleSubmitCreatePlantProvider>
                     <LoginAuthProvider>
                       <App />
                     </LoginAuthProvider>
-                  </IsConnectedProvider>
-                </TokenProvider>
-              </HandleSubmitCreatePlantProvider>
-            </HandleSubmitCreatePotagerProvider>
-          </DeletePotagerProvider>
-        </DeletePlantProvider>
-      </GetDataPotagerProvider>
+                  </HandleSubmitCreatePlantProvider>
+                </HandleSubmitCreatePotagerProvider>
+              </DeletePotagerProvider>
+            </DeletePlantProvider>
+          </GetDataPotagerProvider>
+        </IsConnectedProvider>
+      </TokenProvider>
     </Router>
   </React.StrictMode>,
   document.getElementById("root")

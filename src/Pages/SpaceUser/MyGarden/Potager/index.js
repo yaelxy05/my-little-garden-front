@@ -1,17 +1,32 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 // import SCSS
 import "./potager.scss";
 // Import fontawesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 // Import Context
-import { GetDataPotagerContext, DeletePotagerContext, DeletePlantContext } from "../../../../Utils/Context/potager";
+import {
+  GetDataPotagerContext,
+  DeletePotagerContext,
+  DeletePlantContext,
+} from "../../../../Utils/Context/potager";
+import { IsConnectedContext } from "../../../../Utils/Context";
 
 function Potager() {
   // Context
-  const { listPotager } = useContext(GetDataPotagerContext);
+  const { listPotager, fetchDataPotager } = useContext(GetDataPotagerContext);
   const { deletePotager } = useContext(DeletePotagerContext);
   const { deletePlant } = useContext(DeletePlantContext);
+  const { isConnected } = useContext(IsConnectedContext);
+
+  useEffect(() => {
+    if (isConnected) {
+      fetchDataPotager();
+    } else {
+      return null
+    }
+    
+  }, []);
 
   return (
     <section className="potager">
