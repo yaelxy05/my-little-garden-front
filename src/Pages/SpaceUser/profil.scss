@@ -145,6 +145,12 @@
     }
     .profil_data--right {
       width: 30%;
+      @include mixins.for-phone-and-tablet-only{
+        width: 100%;
+      }
+      @include mixins.for-screen-small-medium {
+        width: 100%;
+      }
       .profil_data--modify {
         width: 100%;
         @include mixins.for-screen-small-medium {
@@ -347,6 +353,9 @@
               .input_avatar {
                 width: 70%;
                 margin: 1rem 0 2.5rem 0;
+                @include mixins.for-desktop-small-medium {
+                  width: 100%;
+                }
 
                 &::-webkit-file-upload-button {
                   visibility: hidden;
@@ -397,6 +406,9 @@
               width: 6.5rem;
               height: auto;
               border-radius: 1rem;
+              @include mixins.for-desktop-small-medium{
+                width: 5rem;
+              }
             }
           }
           .avatar_error {
