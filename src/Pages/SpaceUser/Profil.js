@@ -10,7 +10,6 @@ function Profil() {
     lastname: "",
     email: "",
     id: "",
-    avatar: null,
   });
 
   const [messageSuccess, setMessageSuccess] = useState("");
@@ -52,8 +51,8 @@ function Profil() {
 
   // Function for update user info
   const handleUpdateProfile = async (evt) => {
-  const token = localStorage.getItem("token");
-  const API_URLS = process.env.REACT_APP_API_URL;
+    const token = localStorage.getItem("token");
+    const API_URLS = process.env.REACT_APP_API_URL;
     evt.preventDefault();
     setFormDataUser(formDataUser);
 
@@ -85,6 +84,36 @@ function Profil() {
       });
   };
 
+  const [uploadFile, setUploadFile] = useState({
+    avatar: null,
+  });
+  console.log(uploadFile);
+  const handleUpdateAvatar = async (evt) => {
+    const token = localStorage.getItem("token");
+    const API_URLS = process.env.REACT_APP_API_URL;
+    evt.preventDefault();
+    const formDataAvatar = new FormData();
+    formDataAvatar.append("avatar", uploadFile.avatar);
+    console.log(formDataAvatar);
+    axios
+      .post(
+        `${API_URLS}/user/${formDataUser.id}/update/avatar`,
+        formDataAvatar,
+        {
+          headers: {
+            Authorization: "Bearer " + token,
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      )
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+ 
   return (
     <div className="profil">
       <div className="profil_title">
@@ -148,26 +177,7 @@ function Profil() {
                 />
                 <label htmlFor="email">Email</label>
               </div>
-              {/*<div className="profil_data--input">
-                <input
-                  type="file"
-                  name="avatar"
-                  accept=".jpg,.png,.svg"
-                  readOnly={!modifyInputInformation}
-                  value={formDataUser.avatar}
-                  id="avatar"
-                  size="2000"
-                  className={modifyInputInformation ? "focus_input" : ""}
-                  onChange={(e) =>
-                    setFormDataUser({
-                      ...formDataUser,
-                      avatar: e.target.files[0],
-                    })
-                  }
-                />
-                <label htmlFor="avatar">Avatar</label>
-              </div> */}
-              
+
               {modifyInputInformation && (
                 <>
                   <div className="button_box">
@@ -190,64 +200,90 @@ function Profil() {
             </div>
           )}
         </article>
-        <div className="profil_data--modify">
-          <article
-            className={
-              modifyInputPassword
-                ? "profil_data input_modify--active"
-                : "profil_data input_modify"
-            }
-          >
-            <header>
-              <h2>Mon mot de passe</h2>
-            </header>
-            {modifyInputPassword && (
-              <>
-                <div className="profil_data--input">
-                  <input
-                    type="password"
-                    name="current-password"
-                    value=""
-                    id="current-password"
-                    className="focus_input"
-                  />
-                  <label htmlFor="current-password">Mot de passe actuel</label>
+        <div className="profil_data--right">
+          <div className="profil_data--modify">
+            <article
+              className={
+                modifyInputPassword
+                  ? "profil_data input_modify--active"
+                  : "profil_data input_modify"
+              }
+            >
+              <header>
+                <h2>Mon mot de passe</h2>
+              </header>
+              {modifyInputPassword && (
+                <>
+                  <div className="profil_data--input">
+                    <input
+                      type="password"
+                      name="current-password"
+                      value=""
+                      id="current-password"
+                      className="focus_input"
+                    />
+                    <label htmlFor="current-password">
+                      Mot de passe actuel
+                    </label>
+                    <a href="#">Mot de passe oublié ?</a>
+                  </div>
+                  <div className="profil_data--input">
+                    <input
+                      type="password"
+                      name="new-password"
+                      value=""
+                      id="new-password"
+                      className="focus_input"
+                    />
+                    <label htmlFor="new-password">Nouveau mot de passe</label>
+                  </div>
+                  <div className="profil_data--input">
+                    <input
+                      type="password"
+                      name="confirm-new-password"
+                      value=""
+                      id="confirm-new-password"
+                      className="focus_input"
+                    />
+                    <label htmlFor="confirm-new-password">
+                      Confirmer le mot de passe
+                    </label>
+                  </div>
+                  <button>Valider</button>
+                  <button onClick={desactivateButtonPassword}>Annuler</button>
+                </>
+              )}
+              {!modifyInputPassword && (
+                <>
+                  <button onClick={activateButtonPassword}>Modifier</button>
                   <a href="#">Mot de passe oublié ?</a>
-                </div>
-                <div className="profil_data--input">
-                  <input
-                    type="password"
-                    name="new-password"
-                    value=""
-                    id="new-password"
-                    className="focus_input"
-                  />
-                  <label htmlFor="new-password">Nouveau mot de passe</label>
-                </div>
-                <div className="profil_data--input">
-                  <input
-                    type="password"
-                    name="confirm-new-password"
-                    value=""
-                    id="confirm-new-password"
-                    className="focus_input"
-                  />
-                  <label htmlFor="confirm-new-password">
-                    Confirmer le mot de passe
-                  </label>
-                </div>
+                </>
+              )}
+            </article>
+          </div>
+          <div className="profil_data--avatar">
+            <form onSubmit={handleUpdateAvatar}>
+              <input
+                type="file"
+                name="avatar"
+                accept=".jpg,.png,.svg"
+                readOnly={!modifyInputInformation}
+                id="avatar"
+                size="2000"
+                className={modifyInputInformation ? "focus_input" : ""}
+                onChange={(e) =>
+                  setUploadFile({
+                    ...uploadFile,
+                    avatar: e.target.files[0],
+                  })
+                }
+              />
+              <label htmlFor="avatar">Avatar</label>
+              <div className="button_box">
                 <button>Valider</button>
-                <button onClick={desactivateButtonPassword}>Annuler</button>
-              </>
-            )}
-            {!modifyInputPassword && (
-              <>
-                <button onClick={activateButtonPassword}>Modifier</button>
-                <a href="#">Mot de passe oublié ?</a>
-              </>
-            )}
-          </article>
-          
+              </div>
+            </form>
+          </div>
         </div>
       </div>
     </div>
