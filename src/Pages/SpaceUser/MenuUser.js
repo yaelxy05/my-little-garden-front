@@ -1,8 +1,7 @@
 import React, { useEffect, useContext } from "react";
 import { Link, Outlet } from "react-router-dom";
 // Import Context
-import { InfoUserContext } from "../../Utils/Context/index";
-import { IsConnectedContext } from "../../Utils/Context/index";
+import { InfoUserContext, IsConnectedContext } from "../../Utils/Context/index";
 // Import fontawesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -16,18 +15,14 @@ import Avatar from "../../assets/img/avatar/user.png";
 
 function MenuUser() {
   // Context
-  const { loading, getInfoUser, formDataUser, setFormDataUser, setLoading } =
+  const { loading, getInfoUser, formDataUser } =
     useContext(InfoUserContext);
   const { isConnected } = useContext(IsConnectedContext);
+  console.log(isConnected);
 
   useEffect(() => {
-    if (isConnected) {
-      console.log("modifié");
-      getInfoUser();
-    } else {
-      return null;
-    }
-  }, []);
+    getInfoUser();
+  }, [getInfoUser]);
 
   return (
     <>

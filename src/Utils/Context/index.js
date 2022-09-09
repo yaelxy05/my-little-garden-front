@@ -1,4 +1,4 @@
-import React, { useState, createContext, useEffect, useContext } from "react";
+import React, { useState, createContext, useCallback } from "react";
 import axios from "axios";
 // info API
 const API_URLS = process.env.REACT_APP_API_URL;
@@ -28,8 +28,6 @@ export const TokenProvider = ({ children }) => {
 };
 
 export const InfoUserProvider = ({ children }) => {
-  // Context
-  const { isConnected } = useContext(IsConnectedContext);
   // Initial state
   const [loading, setLoading] = useState(true);
   const [formDataUser, setFormDataUser] = useState({
@@ -37,10 +35,10 @@ export const InfoUserProvider = ({ children }) => {
     lastname: "",
     avatar: "",
   });
-  const getInfoUser = async () => {
-    const token = localStorage.getItem("token");
+    const getInfoUser = useCallback(() => {
+      const token = localStorage.getItem("token");
 
-    await axios
+     axios
       .get(`${API_URLS}/users`, {
         headers: {
           Authorization: "Bearer " + token,
@@ -55,16 +53,7 @@ export const InfoUserProvider = ({ children }) => {
       .catch((error) => {
         console.log(error);
       });
-  };
-
-  useEffect(() => {
-    if (isConnected) {
-      console.log("modifié");
-      getInfoUser();
-    } else {
-      return null;
-    }
-  }, []);
+  }, [])
 
   return (
     <InfoUserContext.Provider

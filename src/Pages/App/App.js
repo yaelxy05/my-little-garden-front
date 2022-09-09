@@ -20,12 +20,14 @@ import MyGarden from "../SpaceUser/MyGarden";
 import Page404 from "../404";
 // Import Context
 import { IsConnectedContext, TokenContext } from "../../Utils/Context";
+import { LoginAuthContext } from "../../Utils/Context/auth";
 
 
 function App() {
   // Context
   const { setIsConnected } = useContext(IsConnectedContext);
-  const {  setToken } = useContext(TokenContext);
+  const { setToken } = useContext(TokenContext);
+  const { refreshLogin } = useContext(LoginAuthContext);
 
   
   axios.interceptors.response.use(
@@ -47,14 +49,8 @@ function App() {
     
   
   useEffect(() => {
-    const refreshLogin = () => {
-      if (window.localStorage.getItem("token") !== null) {
-        setToken(window.localStorage.getItem("token"));
-        setIsConnected(true);
-      }
-    };
     refreshLogin();
-  }, []);
+  }, [refreshLogin]);
 
   return (
     <div className="App">

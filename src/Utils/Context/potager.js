@@ -1,6 +1,4 @@
-import React, { useState, createContext, useEffect, useContext } from "react";
-// Import Context
-import { IsConnectedContext } from "./index";
+import React, { useState, createContext, useContext, useCallback } from "react";
 import axios from "axios";
 
 // info API
@@ -13,12 +11,10 @@ export const DeletePotagerContext = createContext();
 export const DeletePlantContext = createContext();
 
 export const GetDataPotagerProvider = ({ children }) => {
-  // Context
-  const { isConnected } = useContext(IsConnectedContext);
   // Initial state
   const [listPotager, setListPotager] = useState([]);
 
-  const fetchDataPotager = () => {
+  const fetchDataPotager = useCallback(() => {
     const token = localStorage.getItem("token");
     axios
       .get(`${API_URLS}/potager`, {
@@ -35,15 +31,8 @@ export const GetDataPotagerProvider = ({ children }) => {
       .catch((error) => {
         console.log(error);
       });
-  };
+  },[]);
 
-  useEffect(() => {
-    if (isConnected) {
-      fetchDataPotager();
-    } else {
-      return null;
-    }
-  }, []);
 
   return (
     <GetDataPotagerContext.Provider

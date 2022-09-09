@@ -1,4 +1,4 @@
-import React, { useState, createContext, useEffect, useContext } from "react";
+import React, { useState, createContext, useContext, useCallback } from "react";
 // Import Context
 import { IsConnectedContext, TokenContext } from "./index";
 import axios from "axios";
@@ -11,19 +11,19 @@ export const LoginAuthContext = createContext();
 export const LoginAuthProvider = ({ children }) => {
   // Context
   const { setToken } = useContext(TokenContext);
-  const { isConnected, setIsConnected } = useContext(IsConnectedContext);
+  const { setIsConnected } = useContext(IsConnectedContext);
   // Initial state
   const [error, setError] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
-  const refreshLogin = () => {
+  const refreshLogin = useCallback(() => {
     if (window.localStorage.getItem("token") !== null) {
       setToken(window.localStorage.getItem("token"));
       setIsConnected(true);
     }
-  };
+  },[]);
 
   const handleLogin = (evt) => {
     evt.preventDefault();
@@ -46,13 +46,11 @@ export const LoginAuthProvider = ({ children }) => {
       });
   };
 
-  useEffect(() => {
-    refreshLogin();
-  }, [isConnected]);
+
 
   return (
     <LoginAuthContext.Provider
-      value={{ formData, setFormData, error, setError, handleLogin }}
+      value={{ formData, setFormData, error, setError, handleLogin, refreshLogin }}
     >
       {children}
     </LoginAuthContext.Provider>

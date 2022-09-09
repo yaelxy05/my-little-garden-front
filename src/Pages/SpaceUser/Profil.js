@@ -317,7 +317,7 @@ function Profil() {
                 </div>
 
                 {uploadFile.preview !== null && uploadFile && (
-                  <img className="avatar_preview" src={uploadFile.preview} />
+                  <img className="avatar_preview" src={uploadFile.preview} alt="aperçu avatar"/>
                 )}
               </form>
               {error && (

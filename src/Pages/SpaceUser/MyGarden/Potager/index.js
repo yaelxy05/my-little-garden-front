@@ -10,23 +10,17 @@ import {
   DeletePotagerContext,
   DeletePlantContext,
 } from "../../../../Utils/Context/potager";
-import { IsConnectedContext } from "../../../../Utils/Context";
+
 
 function Potager() {
   // Context
   const { listPotager, fetchDataPotager } = useContext(GetDataPotagerContext);
   const { deletePotager } = useContext(DeletePotagerContext);
   const { deletePlant } = useContext(DeletePlantContext);
-  const { isConnected } = useContext(IsConnectedContext);
 
   useEffect(() => {
-    if (isConnected) {
       fetchDataPotager();
-    } else {
-      return null
-    }
-    
-  }, []);
+  }, [fetchDataPotager]);
 
   return (
     <section className="potager">
