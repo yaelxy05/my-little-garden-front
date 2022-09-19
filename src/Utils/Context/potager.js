@@ -1,6 +1,5 @@
 import React, { useState, createContext, useContext, useCallback } from "react";
 import axios from "axios";
-import { faL } from "@fortawesome/free-solid-svg-icons";
 
 // info API
 const API_URLS = process.env.REACT_APP_API_URL;

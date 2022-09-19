@@ -12,7 +12,10 @@ import {
   DeletePotagerProvider,
   DeletePlantProvider,
 } from "./Utils/Context/potager";
-import { LoginAuthProvider } from "./Utils/Context/auth";
+import {
+  LoginAuthProvider,
+  UserAccountDeleteProvider,
+} from "./Utils/Context/auth";
 import { InfoUserProvider } from "./Utils/Context/index";
 ReactDOM.render(
   <React.StrictMode>
@@ -20,20 +23,22 @@ ReactDOM.render(
       <TokenProvider>
         <IsConnectedProvider>
           <InfoUserProvider>
-          <GetDataPotagerProvider>
-            <DeletePlantProvider>
-              <DeletePotagerProvider>
-                <HandleSubmitCreatePotagerProvider>
-                  <HandleSubmitCreatePlantProvider>
-                    <LoginAuthProvider>
-                      <App />
-                    </LoginAuthProvider>
-                  </HandleSubmitCreatePlantProvider>
-                </HandleSubmitCreatePotagerProvider>
-              </DeletePotagerProvider>
-            </DeletePlantProvider>
+            <GetDataPotagerProvider>
+              <DeletePlantProvider>
+                <DeletePotagerProvider>
+                  <HandleSubmitCreatePotagerProvider>
+                    <HandleSubmitCreatePlantProvider>
+                      <UserAccountDeleteProvider>
+                        <LoginAuthProvider>
+                          <App />
+                        </LoginAuthProvider>
+                      </UserAccountDeleteProvider>
+                    </HandleSubmitCreatePlantProvider>
+                  </HandleSubmitCreatePotagerProvider>
+                </DeletePotagerProvider>
+              </DeletePlantProvider>
             </GetDataPotagerProvider>
-            </InfoUserProvider>
+          </InfoUserProvider>
         </IsConnectedProvider>
       </TokenProvider>
     </Router>

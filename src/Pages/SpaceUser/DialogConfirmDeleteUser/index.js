@@ -1,26 +1,26 @@
 import React, { useContext } from "react";
 // import SCSS
-import "../potager.scss";
+import "../DialogConfirmDeleteUser/dialog.scss";
 // Import Context
 import {
-  DeletePlantContext,
-} from "../../../../../Utils/Context/potager";
+  UserAccountDeleteContext,
+} from "../../../Utils/Context/auth";
 
 
-function DialogDeleteConfirm({idPlant, namePlant}) {
+function DialogDeleteConfirm({idUser, nameUser}) {
   // Context
-  const { deletePlant, setDeleteConfirmPlant } =
-    useContext(DeletePlantContext);
+  const { handleDeleteAccount, setDeleteConfirm } =
+    useContext(UserAccountDeleteContext);
   return (
     <div className="dialog_box">
       <div className="dialog_inner">
-              <h3>Etes vous sûr de vouloir supprimer ce plant?</h3>
-              <p>Nom du plant : {namePlant}</p>
+              <h3>Etes vous sûr de vouloir supprimer ce compte?</h3>
+              <p> {nameUser}</p>
         <div className="button_confirm">
           <button
             className="button_confirm--yes"
             onClick={() => {
-              deletePlant(idPlant);
+              handleDeleteAccount(idUser);
             }}
           >
             Oui
@@ -28,7 +28,7 @@ function DialogDeleteConfirm({idPlant, namePlant}) {
           <button
             className="button_confirm--no"
             onClick={() => {
-              setDeleteConfirmPlant(false);
+              setDeleteConfirm(false);
             }}
           >
             Non

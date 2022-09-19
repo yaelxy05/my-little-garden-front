@@ -5,8 +5,48 @@ import axios from "axios";
 // Info API
 const API_URLS = process.env.REACT_APP_API_URL;
 
-
 export const LoginAuthContext = createContext();
+export const UserAccountDeleteContext = createContext();
+
+export const UserAccountDeleteProvider = ({ children }) => {
+  // state
+  const [deleteConfirm, setDeleteConfirm] = useState(false);
+  // Context
+  const { setToken } = useContext(TokenContext);
+  const { setIsConnected } = useContext(IsConnectedContext);
+
+  const handleDeleteAccount = async () => {
+    const token = localStorage.getItem("token");
+    axios
+      .delete(`${API_URLS}/user/delete`, {
+        headers: {
+          Authorization: "Bearer " + token,
+          Accept: "application/json, text/plain, */*",
+          "Content-Type": "application/json",
+        },
+      })
+      .then((response) => {
+        console.log(response);
+        setDeleteConfirm(false);
+        window.location = "/connexion";
+
+        setIsConnected(false);
+        localStorage.removeItem("token");
+        setToken(null);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  return (
+    <UserAccountDeleteContext.Provider
+      value={{ handleDeleteAccount, deleteConfirm, setDeleteConfirm }}
+    >
+      {children}
+    </UserAccountDeleteContext.Provider>
+  );
+};
 
 export const LoginAuthProvider = ({ children }) => {
   // Context
@@ -23,7 +63,7 @@ export const LoginAuthProvider = ({ children }) => {
       setToken(window.localStorage.getItem("token"));
       setIsConnected(true);
     }
-  },[]);
+  }, []);
 
   const handleLogin = (evt) => {
     evt.preventDefault();
@@ -46,11 +86,16 @@ export const LoginAuthProvider = ({ children }) => {
       });
   };
 
-
-
   return (
     <LoginAuthContext.Provider
-      value={{ formData, setFormData, error, setError, handleLogin, refreshLogin }}
+      value={{
+        formData,
+        setFormData,
+        error,
+        setError,
+        handleLogin,
+        refreshLogin,
+      }}
     >
       {children}
     </LoginAuthContext.Provider>

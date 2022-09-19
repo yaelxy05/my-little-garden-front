@@ -17,7 +17,7 @@ function Potager() {
   // Context
   const { listPotager, fetchDataPotager } = useContext(GetDataPotagerContext);
   const { deleteConfirm, setDeleteConfirm } = useContext(DeletePotagerContext);
-  const { deletePlant, deleteConfirmPlant, setDeleteConfirmPlant } =
+  const { deleteConfirmPlant, setDeleteConfirmPlant } =
     useContext(DeletePlantContext);
   // state for get name and id for deleting a carre
   const [idCarre, setIdCarre] = useState(null);

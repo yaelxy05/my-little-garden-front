@@ -76,6 +76,10 @@
         width: 100%;
       }
 
+      .spaceuser_remove {
+        cursor: pointer;
+      }
+
       li:not(:last-child) {
         margin-bottom: 3rem;
       }
