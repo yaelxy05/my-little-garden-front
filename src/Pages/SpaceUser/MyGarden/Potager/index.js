@@ -10,17 +10,22 @@ import {
   DeletePotagerContext,
   DeletePlantContext,
 } from "../../../../Utils/Context/potager";
-import DialogDeleteConfirm from "./DialogConfirmDelete";
+import DialogDeleteConfirm from "./DialogConfirmDeleteCarre";
+import DialogDeleteConfirmPlant from "./DialogConfirmDeletePlant";
 
 function Potager() {
   // Context
   const { listPotager, fetchDataPotager } = useContext(GetDataPotagerContext);
-  const { deleteConfirm, setDeleteConfirm } =
-    useContext(DeletePotagerContext);
-  const { deletePlant } = useContext(DeletePlantContext);
-  // state for get name and id for deleting a carre 
-  const [id, setId] = useState(null);
-  const [name, setName] = useState(null);
+  const { deleteConfirm, setDeleteConfirm } = useContext(DeletePotagerContext);
+  const { deletePlant, deleteConfirmPlant, setDeleteConfirmPlant } =
+    useContext(DeletePlantContext);
+  // state for get name and id for deleting a carre
+  const [idCarre, setIdCarre] = useState(null);
+  const [nameCarre, setNameCarre] = useState(null);
+  // state for get name and id for deleting a plant
+  const [idPlant, setIdPlant] = useState(null);
+  const [namePlant, setNamePlant] = useState(null);
+
   useEffect(() => {
     fetchDataPotager();
   }, [fetchDataPotager]);
@@ -46,8 +51,8 @@ function Potager() {
                       icon={faXmark}
                       onClick={() => {
                         setDeleteConfirm(true);
-                        setId(list.id);
-                        setName(list.name);
+                        setIdCarre(list.id);
+                        setNameCarre(list.name);
                       }}
                     />
                     {list.plants.length !== 0 &&
@@ -63,7 +68,9 @@ function Potager() {
                               <FontAwesomeIcon
                                 icon={faXmark}
                                 onClick={() => {
-                                  deletePlant(items.id);
+                                  setDeleteConfirmPlant(true);
+                                  setIdPlant(items.id);
+                                  setNamePlant(items.name);
                                 }}
                               />
                             </div>
@@ -73,10 +80,20 @@ function Potager() {
                         }
                       })}
                   </div>
-
+                  {deleteConfirmPlant && (
+                    <>
+                      <DialogDeleteConfirmPlant
+                        namePlant={namePlant}
+                        idPlant={idPlant}
+                      />
+                    </>
+                  )}
                   {deleteConfirm && (
                     <>
-                      <DialogDeleteConfirm name={name} id={id} />
+                      <DialogDeleteConfirm
+                        nameCarre={nameCarre}
+                        idCarre={idCarre}
+                      />
                     </>
                   )}
                 </div>
@@ -96,8 +113,8 @@ function Potager() {
                       icon={faXmark}
                       onClick={() => {
                         setDeleteConfirm(true);
-                        setId(list.id);
-                        setName(list.name);
+                        setIdCarre(list.id);
+                        setNameCarre(list.name);
                       }}
                     />
                     {list.plants.map((items, id) => {
@@ -112,7 +129,9 @@ function Potager() {
                             <FontAwesomeIcon
                               icon={faXmark}
                               onClick={() => {
-                                deletePlant(items.id);
+                                setDeleteConfirmPlant(true);
+                                setIdPlant(items.id);
+                                setNamePlant(items.name);
                               }}
                             />
                           </div>
@@ -122,9 +141,20 @@ function Potager() {
                       }
                     })}
                   </div>
+                  {deleteConfirmPlant && (
+                    <>
+                      <DialogDeleteConfirmPlant
+                        namePlant={namePlant}
+                        idPlant={idPlant}
+                      />
+                    </>
+                  )}
                   {deleteConfirm && (
                     <>
-                      <DialogDeleteConfirm name={name} id={id} />
+                      <DialogDeleteConfirm
+                        nameCarre={nameCarre}
+                        idCarre={idCarre}
+                      />
                     </>
                   )}
                 </div>
@@ -144,8 +174,8 @@ function Potager() {
                       icon={faXmark}
                       onClick={() => {
                         setDeleteConfirm(true);
-                        setId(list.id);
-                        setName(list.name);
+                        setIdCarre(list.id);
+                        setNameCarre(list.name);
                       }}
                     />
                     {list.plants.map((items, id) => {
@@ -160,7 +190,9 @@ function Potager() {
                             <FontAwesomeIcon
                               icon={faXmark}
                               onClick={() => {
-                                deletePlant(items.id);
+                                setDeleteConfirmPlant(true);
+                                setIdPlant(items.id);
+                                setNamePlant(items.name);
                               }}
                             />
                           </div>
@@ -170,9 +202,20 @@ function Potager() {
                       }
                     })}
                   </div>
+                  {deleteConfirmPlant && (
+                    <>
+                      <DialogDeleteConfirmPlant
+                        namePlant={namePlant}
+                        idPlant={idPlant}
+                      />
+                    </>
+                  )}
                   {deleteConfirm && (
                     <>
-                      <DialogDeleteConfirm name={name} id={id} />
+                      <DialogDeleteConfirm
+                        nameCarre={nameCarre}
+                        idCarre={idCarre}
+                      />
                     </>
                   )}
                 </div>
@@ -192,8 +235,8 @@ function Potager() {
                       icon={faXmark}
                       onClick={() => {
                         setDeleteConfirm(true);
-                        setId(list.id);
-                        setName(list.name);
+                        setIdCarre(list.id);
+                        setNameCarre(list.name);
                       }}
                     />
                     {list.plants.map((items, id) => {
@@ -208,7 +251,9 @@ function Potager() {
                             <FontAwesomeIcon
                               icon={faXmark}
                               onClick={() => {
-                                deletePlant(items.id);
+                                setDeleteConfirmPlant(true);
+                                setIdPlant(items.id);
+                                setNamePlant(items.name);
                               }}
                             />
                           </div>
@@ -218,9 +263,20 @@ function Potager() {
                       }
                     })}
                   </div>
+                  {deleteConfirmPlant && (
+                    <>
+                      <DialogDeleteConfirmPlant
+                        namePlant={namePlant}
+                        idPlant={idPlant}
+                      />
+                    </>
+                  )}
                   {deleteConfirm && (
                     <>
-                      <DialogDeleteConfirm name={name} id={id} />
+                      <DialogDeleteConfirm
+                        nameCarre={nameCarre}
+                        idCarre={idCarre}
+                      />
                     </>
                   )}
                 </div>
@@ -240,8 +296,8 @@ function Potager() {
                       icon={faXmark}
                       onClick={() => {
                         setDeleteConfirm(true);
-                        setId(list.id);
-                        setName(list.name);
+                        setIdCarre(list.id);
+                        setNameCarre(list.name);
                       }}
                     />
                     {list.plants.map((items, id) => {
@@ -256,7 +312,9 @@ function Potager() {
                             <FontAwesomeIcon
                               icon={faXmark}
                               onClick={() => {
-                                deletePlant(items.id);
+                                setDeleteConfirmPlant(true);
+                                setIdPlant(items.id);
+                                setNamePlant(items.name);
                               }}
                             />
                           </div>
@@ -266,9 +324,20 @@ function Potager() {
                       }
                     })}
                   </div>
+                  {deleteConfirmPlant && (
+                    <>
+                      <DialogDeleteConfirmPlant
+                        namePlant={namePlant}
+                        idPlant={idPlant}
+                      />
+                    </>
+                  )}
                   {deleteConfirm && (
                     <>
-                      <DialogDeleteConfirm name={name} id={id} />
+                      <DialogDeleteConfirm
+                        nameCarre={nameCarre}
+                        idCarre={idCarre}
+                      />
                     </>
                   )}
                 </div>

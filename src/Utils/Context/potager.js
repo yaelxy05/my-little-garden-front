@@ -1,5 +1,6 @@
 import React, { useState, createContext, useContext, useCallback } from "react";
 import axios from "axios";
+import { faL } from "@fortawesome/free-solid-svg-icons";
 
 // info API
 const API_URLS = process.env.REACT_APP_API_URL;
@@ -200,6 +201,8 @@ export const DeletePotagerProvider = ({ children }) => {
 };
 
 export const DeletePlantProvider = ({ children }) => {
+  // state
+  const [deleteConfirmPlant, setDeleteConfirmPlant] = useState(false);
   const { fetchDataPotager } = useContext(GetDataPotagerContext);
   // function for delete plant
   const deletePlant = async (id) => {
@@ -215,6 +218,7 @@ export const DeletePlantProvider = ({ children }) => {
       .then((response) => {
         console.log(response);
         fetchDataPotager();
+        setDeleteConfirmPlant(false)
       })
       .catch((error) => {
         console.log(error);
@@ -225,6 +229,8 @@ export const DeletePlantProvider = ({ children }) => {
     <DeletePlantContext.Provider
       value={{
         deletePlant,
+        deleteConfirmPlant,
+        setDeleteConfirmPlant,
       }}
     >
       {children}
