@@ -31,8 +31,7 @@ export const GetDataPotagerProvider = ({ children }) => {
       .catch((error) => {
         console.log(error);
       });
-  },[]);
-
+  }, []);
 
   return (
     <GetDataPotagerContext.Provider
@@ -163,6 +162,8 @@ export const HandleSubmitCreatePotagerProvider = ({ children }) => {
 };
 
 export const DeletePotagerProvider = ({ children }) => {
+  // state
+  const [deleteConfirm, setDeleteConfirm] = useState(false);
   const { fetchDataPotager } = useContext(GetDataPotagerContext);
   // function for delete potager
   const deletePotager = async (id) => {
@@ -178,6 +179,7 @@ export const DeletePotagerProvider = ({ children }) => {
       .then((response) => {
         console.log(response);
         fetchDataPotager();
+        setDeleteConfirm(false);
       })
       .catch((error) => {
         console.log(error);
@@ -188,6 +190,8 @@ export const DeletePotagerProvider = ({ children }) => {
     <DeletePotagerContext.Provider
       value={{
         deletePotager,
+        deleteConfirm,
+        setDeleteConfirm,
       }}
     >
       {children}

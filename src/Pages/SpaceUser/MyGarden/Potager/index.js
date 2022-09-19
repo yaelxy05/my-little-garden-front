@@ -11,15 +11,15 @@ import {
   DeletePlantContext,
 } from "../../../../Utils/Context/potager";
 
-
 function Potager() {
   // Context
   const { listPotager, fetchDataPotager } = useContext(GetDataPotagerContext);
-  const { deletePotager } = useContext(DeletePotagerContext);
+  const { deletePotager, deleteConfirm, setDeleteConfirm } =
+    useContext(DeletePotagerContext);
   const { deletePlant } = useContext(DeletePlantContext);
 
   useEffect(() => {
-      fetchDataPotager();
+    fetchDataPotager();
   }, [fetchDataPotager]);
 
   return (
@@ -42,7 +42,7 @@ function Potager() {
                       id="trashIcon"
                       icon={faXmark}
                       onClick={() => {
-                        deletePotager(list.id);
+                        setDeleteConfirm(true);
                       }}
                     />
                     {list.plants.length !== 0 &&
@@ -68,6 +68,31 @@ function Potager() {
                         }
                       })}
                   </div>
+                  {deleteConfirm && (
+                    <div className="dialog_box">
+                      <div className="dialog_inner">
+                        <h3>êtes vous sur de vouloir supprimer ce carré?</h3>
+                        <div className="button_confirm">
+                          <button
+                            className="button_confirm--yes"
+                            onClick={() => {
+                              deletePotager(list.id);
+                            }}
+                          >
+                            Oui
+                          </button>
+                          <button
+                            className="button_confirm--no"
+                            onClick={() => {
+                              setDeleteConfirm(false);
+                            }}
+                          >
+                            Non
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  )}
                 </div>
               );
             } else if (list.size === 25) {
@@ -84,7 +109,7 @@ function Potager() {
                       id="trashIcon"
                       icon={faXmark}
                       onClick={() => {
-                        deletePotager(list.id);
+                        setDeleteConfirm(true);
                       }}
                     />
                     {list.plants.map((items, id) => {
@@ -109,6 +134,31 @@ function Potager() {
                       }
                     })}
                   </div>
+                  {deleteConfirm && (
+                    <div className="dialog_box">
+                      <div className="dialog_inner">
+                        <h3>êtes vous sur de vouloir supprimer ce carré?</h3>
+                        <div className="button_confirm">
+                          <button
+                            className="button_confirm--yes"
+                            onClick={() => {
+                              deletePotager(list.id);
+                            }}
+                          >
+                            Oui
+                          </button>
+                          <button
+                            className="button_confirm--no"
+                            onClick={() => {
+                              setDeleteConfirm(false);
+                            }}
+                          >
+                            Non
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  )}
                 </div>
               );
             } else if (list.size === 24) {
@@ -125,7 +175,7 @@ function Potager() {
                       id="trashIcon"
                       icon={faXmark}
                       onClick={() => {
-                        deletePotager(list.id);
+                        setDeleteConfirm(true);
                       }}
                     />
                     {list.plants.map((items, id) => {
@@ -150,6 +200,31 @@ function Potager() {
                       }
                     })}
                   </div>
+                  {deleteConfirm && (
+                    <div className="dialog_box">
+                      <div className="dialog_inner">
+                        <h3>êtes vous sur de vouloir supprimer ce carré?</h3>
+                        <div className="button_confirm">
+                          <button
+                            className="button_confirm--yes"
+                            onClick={() => {
+                              deletePotager(list.id);
+                            }}
+                          >
+                            Oui
+                          </button>
+                          <button
+                            className="button_confirm--no"
+                            onClick={() => {
+                              setDeleteConfirm(false);
+                            }}
+                          >
+                            Non
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  )}
                 </div>
               );
             } else if (list.size === 35) {
@@ -166,7 +241,7 @@ function Potager() {
                       id="trashIcon"
                       icon={faXmark}
                       onClick={() => {
-                        deletePotager(list.id);
+                        setDeleteConfirm(true);
                       }}
                     />
                     {list.plants.map((items, id) => {
@@ -191,6 +266,31 @@ function Potager() {
                       }
                     })}
                   </div>
+                  {deleteConfirm && (
+                    <div className="dialog_box">
+                      <div className="dialog_inner">
+                        <h3>êtes vous sur de vouloir supprimer ce carré?</h3>
+                        <div className="button_confirm">
+                          <button
+                            className="button_confirm--yes"
+                            onClick={() => {
+                              deletePotager(list.id);
+                            }}
+                          >
+                            Oui
+                          </button>
+                          <button
+                            className="button_confirm--no"
+                            onClick={() => {
+                              setDeleteConfirm(false);
+                            }}
+                          >
+                            Non
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  )}
                 </div>
               );
             } else {
@@ -207,7 +307,7 @@ function Potager() {
                       id="trashIcon"
                       icon={faXmark}
                       onClick={() => {
-                        deletePotager(list.id);
+                        setDeleteConfirm(true);
                       }}
                     />
                     {list.plants.map((items, id) => {
@@ -232,6 +332,31 @@ function Potager() {
                       }
                     })}
                   </div>
+                  {deleteConfirm && (
+                    <div className="dialog_box">
+                      <div className="dialog_inner">
+                        <h3>êtes vous sur de vouloir supprimer ce carré?</h3>
+                        <div className="button_confirm">
+                          <button
+                            className="button_confirm--yes"
+                            onClick={() => {
+                              deletePotager(list.id);
+                            }}
+                          >
+                            Oui
+                          </button>
+                          <button
+                            className="button_confirm--no"
+                            onClick={() => {
+                              setDeleteConfirm(false);
+                            }}
+                          >
+                            Non
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  )}
                 </div>
               );
             }
