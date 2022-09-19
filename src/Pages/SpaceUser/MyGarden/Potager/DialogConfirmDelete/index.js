@@ -15,7 +15,7 @@ function DialogDeleteConfirm({id, name}) {
     <div className="dialog_box">
       <div className="dialog_inner">
               <h3>êtes vous sur de vouloir supprimer ce carré?</h3>
-              <p>{name}</p>
+              <p>Nom du carré : {name}</p>
         <div className="button_confirm">
           <button
             className="button_confirm--yes"
