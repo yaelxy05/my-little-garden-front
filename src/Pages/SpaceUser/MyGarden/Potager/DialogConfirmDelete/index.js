@@ -1,26 +1,42 @@
 import React, { useContext } from "react";
+// import SCSS
+import "../potager.scss";
 // Import Context
 import {
-  GetDataPotagerContext,
   DeletePotagerContext,
-} from "../../../../Utils/Context/potager";
+} from "../../../../../Utils/Context/potager";
 
-function dialogDeleteConfirm() {
+
+function DialogDeleteConfirm({id, name}) {
   // Context
-  const { listPotager, fetchDataPotager } = useContext(GetDataPotagerContext);
-  const { deletePotager, deleteConfirm, setDeleteConfirm } =
+  const { deletePotager, setDeleteConfirm } =
     useContext(DeletePotagerContext);
   return (
     <div className="dialog_box">
       <div className="dialog_inner">
-        <h3>êtes vous sur de vouloir supprimer ce carré?</h3>
+              <h3>êtes vous sur de vouloir supprimer ce carré?</h3>
+              <p>{name}</p>
         <div className="button_confirm">
-          <button>Oui</button>
-          <button>Non</button>
+          <button
+            className="button_confirm--yes"
+            onClick={() => {
+              deletePotager(id);
+            }}
+          >
+            Oui
+          </button>
+          <button
+            className="button_confirm--no"
+            onClick={() => {
+              setDeleteConfirm(false);
+            }}
+          >
+            Non
+          </button>
         </div>
       </div>
     </div>
   );
 }
 
-export default dialogDeleteConfirm;
+export default DialogDeleteConfirm;
