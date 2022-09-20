@@ -1,3 +1,6 @@
+@use "src/styles/utils/vars";
+@use "src/styles/utils/mixins";
+
 .header {
   background-image: url("../../assets/img/background/seedling-gfe77ea329_1280.jpg");
   height: 45rem;
@@ -10,6 +13,7 @@
   justify-content: center;
   align-items: center;
   margin-bottom: 3rem;
+  z-index: -1;
 
   .header_description {
     display: flex;
@@ -22,10 +26,16 @@
     font-weight: bold;
     height: 14rem;
     padding: 0 5rem;
+    @include mixins.for-phone-and-tablet-only {
+      width: 80%;
+    }
 
     h1 {
       font-size: 3rem;
       margin-bottom: 1.5rem;
+      @include mixins.for-phone-and-tablet-only {
+        font-size: 2rem;
+      }
     }
   }
 

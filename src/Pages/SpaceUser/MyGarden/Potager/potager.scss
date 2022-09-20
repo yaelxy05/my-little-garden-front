@@ -1,0 +1,237 @@
+@use "src/styles/utils/vars";
+@use "src/styles/utils/mixins";
+
+.potager {
+  background-color: #008037;
+  min-height: 100vh;
+
+  h2 {
+    width: 100%;
+    height: 3.5rem;
+    text-align: center;
+    padding: 2rem 0;
+    font-weight: bold;
+    font-size: 1.5rem;
+    font-family: vars.$fontTitle;
+    color: vars.$colorBlue;
+  }
+
+  .potager_plan {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    padding-bottom: 3rem;
+    @include mixins.for-phone-and-tablet-only {
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .potager_carre--box {
+      margin: 2rem 3rem;
+      @include mixins.for-phone-and-tablet-only {
+        margin: 2rem 1.5rem;
+      }
+      @include mixins.for-phone-only {
+        margin: 2rem 1.5rem;
+      }
+      h3 {
+        text-align: center;
+        font-weight: bold;
+        font-family: vars.$fontSecondary;
+        color: vars.$color4;
+
+        .potager_size {
+          color: vars.$colorLight;
+          background-color: vars.$colorBlue;
+          border: 2px solid vars.$colorLight;
+          margin-left: 1rem;
+          border-radius: 1rem;
+          padding: 0.4rem;
+          font-size: 0.8rem;
+        }
+      }
+
+      .dialog_box {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.5);
+
+        .dialog_inner {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          position: absolute;
+          top: 45%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          background: white;
+          padding: 2rem;
+          border-radius: 10px;
+
+          h3 {
+            color: #111;
+            font-size: 16px;
+            margin-bottom: 1rem;
+          }
+
+          .button_confirm {
+            display: flex;
+            align-items: center;
+            margin-top: 2rem;
+
+            button {
+              color: white;
+              padding: 15px;
+              border: none;
+              border-radius: 1rem;
+              cursor: pointer;
+              font-weight: bold;
+            }
+
+            .button_confirm--yes {
+              background: green;
+              margin-right: 1rem;
+            }
+
+            .button_confirm--no {
+              background: red;
+            }
+          }
+        }
+      }
+
+      .potager_carre {
+        border: solid 6px #efc40d;
+        width: 25rem;
+        height: 9rem;
+        margin-top: 1rem;
+        background: #7c4807;
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        position: relative;
+
+        #trashIcon {
+          position: absolute;
+          bottom: -25px;
+          right: -21px;
+          font-size: 2rem;
+          width: 1.2em;
+          height: 1.2em;
+          text-align: center;
+          display: inline-block;
+          background: vars.$colorError;
+          border-radius: 50%;
+          transition: 0.5s;
+          cursor: pointer;
+
+          &:hover {
+            background: black;
+            color: vars.$colorError;
+          }
+        }
+
+        .plant_box {
+          position: relative;
+
+          img {
+            height: 3.5rem;
+            width: 5.25rem;
+            border-radius: 1rem;
+            margin: 1.3rem;
+            background: vars.$colorLight;
+            @include mixins.for-phone-and-tablet-only {
+              height: 2rem;
+              width: 3.25rem;
+            }
+            @include mixins.for-phone-only {
+              margin: 1.5rem 0.3rem 1rem 0.3rem;
+            }
+          }
+
+          svg {
+            position: absolute;
+            right: 10px;
+            top: 8px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            width: 1.2em;
+            height: 1.2em;
+            text-align: center;
+            display: inline-block;
+            background: vars.$colorError;
+            border-radius: 50%;
+            transition: 0.5s;
+            @include mixins.for-phone-only {
+              height: 1rem;
+              right: -1px;
+              top: 14px;
+            }
+
+            &:hover {
+              background: black;
+              color: vars.$colorError;
+            }
+          }
+        }
+      }
+
+      .carre33 {
+        width: 25rem;
+        height: 25rem;
+        @include mixins.for-phone-and-tablet-only {
+          width: 20rem;
+          height: 20rem;
+        }
+        @include mixins.for-phone-only {
+          width: 15rem;
+          height: 15rem;
+        }
+      }
+
+      .carre25 {
+        width: 42rem;
+        height: 14rem;
+        @include mixins.for-phone-and-tablet-only {
+          width: 30rem;
+          height: 10rem;
+        }
+        @include mixins.for-phone-only {
+          width: 20rem;
+        }
+      }
+
+      .carre24 {
+        width: 35rem;
+        height: 13rem;
+        @include mixins.for-phone-and-tablet-only {
+          width: 28rem;
+        }
+        @include mixins.for-phone-only {
+          width: 20rem;
+        }
+      }
+
+      .carre35 {
+        width: 45rem;
+        height: 25rem;
+        @include mixins.for-tablet-portrait-up {
+          width: 30rem;
+          height: 15rem;
+        }
+        @include mixins.for-phone-and-tablet-only {
+          height: 15rem;
+        }
+        @include mixins.for-phone-only {
+          width: 20rem;
+        }
+      }
+    }
+  }
+}

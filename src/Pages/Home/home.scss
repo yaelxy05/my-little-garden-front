@@ -1,0 +1,53 @@
+@use "src/styles/utils/vars";
+@use "src/styles/utils/mixins";
+
+.home {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+    h2 {
+        font-family: vars.$fontMenu;
+        color: vars.$colorBlue;
+        font-weight: bold;
+        font-size: 2rem;
+        margin-bottom: 2rem;
+        @include mixins.for-phone-and-tablet-only {
+            font-size: 1rem;
+        }
+    }
+
+  .main_slide {
+    margin-bottom: 2rem;
+    .carousel_box {
+      img {
+        border-radius: 2rem;
+        border: solid 2px vars.$colorBlue;
+        height: 700px;
+        width: 600px;
+        
+
+        @include mixins.for-phone-and-tablet-only {
+            height: 400px;
+            width: 300px;
+            object-fit: cover;
+        }
+      }
+    }
+
+    .carousel {
+      .slider-wrapper {
+        width: 50%;
+      }
+
+      .control-dots {
+        .dot {
+          background-color: vars.$colorBlue !important;
+          border-radius: 50% !important;
+          width: 10px !important;
+          height: 10px !important;
+        }
+      }
+    }
+  }
+}

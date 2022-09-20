@@ -1,0 +1,76 @@
+@use "src/styles/utils/vars";
+@use "src/styles/utils/mixins";
+
+.list-semis {
+  width: 100%;
+  padding-left: 5rem;
+  padding-top: 8rem;
+  background: #f8f9fd;
+  @include mixins.for-screen-small-medium {
+    min-height: 100vh;
+    margin-bottom: 3rem;
+  }
+
+  .list-semis--title {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 2rem;
+
+    h1 {
+      color: vars.$colorBlue;
+      font-weight: bold;
+      font-size: 1.8rem;
+      font-family: vars.$fontMenu;
+    }
+  }
+
+  .list-semis--box {
+    table {
+      box-shadow: 0 2px 1px -1px rgb(0 0 0 / 20%), 0 1px 1px 0 rgb(0 0 0 / 14%),
+        0 1px 3px 0 rgb(0 0 0 / 12%);
+      border: 1.5px solid #bec7e6;
+      border-radius: 2px;
+      width: 80%;
+  
+      &:hover {
+        box-shadow: 0 3px 3px -2px rgb(0 0 0 / 20%), 0 3px 4px 0 rgb(0 0 0 / 14%),
+          0 1px 8px 0 rgb(0 0 0 / 12%);
+        transition: box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      thead {
+        width: 100%;
+        text-align: center;
+        font-weight: bold;
+  
+        td {
+          border: 1px solid #dbe3ff;
+          padding: 1rem;
+          color: vars.$color5;
+        }
+      }
+  
+      tbody {
+        text-align: center;
+  
+        td {
+          border: 1px solid #dbe3ff;
+          padding: 1rem;
+          width: 100%;
+          font-weight: bold;
+        }
+        .blue {
+          background: vars.$colorBlue;
+        }
+  
+        .brown {
+          background-color: vars.$colorBrown;
+    
+        }
+  
+        .red {
+          background: vars.$colorRed;
+        }
+      }
+    }
+  }
+}

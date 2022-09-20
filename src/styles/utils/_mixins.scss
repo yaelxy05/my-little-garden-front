@@ -1,7 +1,35 @@
 @use "src/styles/utils/vars";
 
+@mixin legendBrown {
+  background-color: vars.$colorBrown;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  margin-right: 1rem;
+}
 
-
+@mixin legendRed {
+  background-color: vars.$colorRed;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  margin-right: 1rem;
+}
+@mixin legendBlue {
+  background-color: vars.$colorBlue;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  margin-right: 1rem;
+}
+@mixin buttonInput {
+  background: vars.$primaryColor;
+  border: none;
+  height: 3rem;
+  border-radius: 2rem;
+  color: vars.$colorLight;
+  font-weight: bold;
+}
 @mixin flexStartCenter {
   display: flex;
   justify-content: center;
@@ -62,7 +90,7 @@
   }
 }
 @mixin for-screen-small-medium {
-  @media  (max-width: 999px) {
+  @media (max-width: 999px) {
     @content;
   }
 }

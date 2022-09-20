@@ -1,0 +1,271 @@
+@use "src/styles/utils/vars";
+@use "src/styles/utils/mixins";
+
+.potager_form {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+  height: 15rem;
+  margin-top: 10rem;
+  margin-bottom: 18rem;
+  @include mixins.for-phone-and-tablet-only {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 25rem;
+    margin-top: 34rem;
+  }
+
+  .potager_addCarre {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    height: 30.5rem;
+    width: 20rem;
+    border-radius: 1rem;
+    background: vars.$colorLight;
+    box-shadow: 0px 6px 10px rgb(179, 179, 179);
+    position: relative;
+    z-index: 0;
+    @include mixins.for-phone-and-tablet-only {
+      margin-bottom: 3rem;
+    }
+
+    h1 {
+      width: 100%;
+      height: 3.5rem;
+      text-align: center;
+      margin-top: 2rem;
+      margin-bottom: 2rem;
+      font-weight: bold;
+      font-size: 1.5rem;
+      font-family: vars.$fontTitle;
+      color: vars.$colorBlue;
+    }
+
+    .input_box {
+      width: 15rem;
+      margin: 0 2rem 2rem 2rem;
+
+      select {
+        width: 100%;
+        height: 1.8rem;
+        border: 0;
+        border-bottom: 1.5px solid vars.$secondaryColor;
+        background-color: transparent;
+        outline: none;
+        cursor: pointer;
+
+        font-size: 1em;
+        &::placeholder {
+          color: transparent;
+        }
+
+        &:focus {
+          width: 100%;
+          transition: 0.4s;
+          border-bottom: 3px solid vars.$color5;
+        }
+      }
+
+      input {
+        width: 100%;
+        border: 0;
+        border-bottom: 1.5px solid vars.$secondaryColor;
+        background-color: transparent;
+        padding: 4px 0;
+
+        font-size: 1em;
+        &::placeholder {
+          color: transparent;
+        }
+
+        &:focus {
+          width: 100%;
+          transition: 0.4s;
+          border-bottom: 3px solid vars.$color5;
+        }
+        &:focus ~ #labelField-name,
+        &:not(:placeholder-shown) ~ #labelField-name {
+          transform: translateY(-1em) scale(0.8);
+        }
+      }
+
+      label {
+        margin: 1rem 0;
+        color: rgb(153, 153, 153);
+        height: 2px;
+        transition: all 0.25s cubic-bezier(0.2, 0, 0.03, 1);
+        pointer-events: none;
+      }
+
+      #labelField-name {
+        position: absolute;
+        top: 112px;
+        left: 40px;
+      }
+    }
+
+    .addCarre_box {
+      display: flex;
+      justify-content: center;
+      margin-top: 2.5rem;
+      .addCarre_button {
+        @include mixins.buttonInput;
+        width: 8rem;
+        margin: 1.5rem 0 6rem 0;
+      }
+    }
+    .message_sucess--box {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 2rem;
+
+      .message_sucess {
+        align-self: center;
+        text-align: center;
+        height: 2.3rem;
+        width: 90%;
+        border: 1px solid vars.$primaryColor;
+        color: vars.$primaryColor;
+        border-radius: 2rem;
+        padding-top: 0.6rem;
+      }
+    }
+  }
+
+  .potager_addPlant {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    height: 30.5rem;
+    width: 20rem;
+    border-radius: 1rem;
+    background: vars.$colorLight;
+    box-shadow: 0px 6px 10px rgb(179, 179, 179);
+    position: relative;
+    z-index: 0;
+
+    h1 {
+      width: 100%;
+      height: 3.5rem;
+      text-align: center;
+      margin-top: 2rem;
+      font-weight: bold;
+      font-size: 1.5rem;
+      font-family: vars.$fontTitle;
+      color: vars.$colorBlue;
+    }
+
+    .input_box {
+      width: 15rem;
+      margin: 0 2rem 2rem 2rem;
+
+      select {
+        width: 100%;
+        height: 1.8rem;
+        border: 0;
+        border-bottom: 1.5px solid vars.$secondaryColor;
+        background-color: transparent;
+        outline: none;
+        cursor: pointer;
+
+        font-size: 1em;
+        &::placeholder {
+          color: transparent;
+        }
+
+        &:focus {
+          width: 100%;
+          transition: 0.4s;
+          border-bottom: 3px solid vars.$color5;
+        }
+      }
+
+      input {
+        width: 100%;
+
+        border: 0;
+        border-bottom: 1.5px solid vars.$secondaryColor;
+        background-color: transparent;
+        padding: 4px 0;
+
+        font-size: 1em;
+        &::placeholder {
+          color: transparent;
+        }
+
+        &:focus {
+          width: 100%;
+          transition: 0.4s;
+          border-bottom: 3px solid vars.$color5;
+        }
+        &:focus ~ #labelField-name,
+        &:not(:placeholder-shown) ~ #labelField-name {
+          transform: translateY(-1em) scale(0.8);
+        }
+
+        &:focus ~ #labelField-variete,
+        &:not(:placeholder-shown) ~ #labelField-variete {
+          transform: translateY(-1em) scale(0.8);
+        }
+      }
+
+      label {
+        margin: 1rem 0;
+        color: rgb(153, 153, 153);
+        height: 2px;
+        transition: all 0.25s cubic-bezier(0.2, 0, 0.03, 1);
+        pointer-events: none;
+      }
+
+      #labelField-name {
+        position: absolute;
+        top: 80px;
+        left: 40px;
+      }
+
+      #labelField-variete {
+        position: absolute;
+        top: 217px;
+        left: 40px;
+      }
+
+      #labelField-potager {
+        position: absolute;
+        top: 257px;
+        left: 40px;
+      }
+    }
+
+    .addCarre_box {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 1.4rem;
+      .addCarre_button {
+        @include mixins.buttonInput;
+        width: 8rem;
+        margin: 0.2rem 0 0.1rem 0;
+      }
+    }
+
+    .message_sucess--box {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 2rem;
+
+      .message_sucess {
+        align-self: center;
+        text-align: center;
+        height: 2.3rem;
+        width: 90%;
+        border: 1px solid vars.$primaryColor;
+        color: vars.$primaryColor;
+        border-radius: 2rem;
+        padding-top: 0.6rem;
+      }
+    }
+  }
+}

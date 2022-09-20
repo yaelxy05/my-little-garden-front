@@ -1,0 +1,427 @@
+@use "src/styles/utils/vars";
+@use "src/styles/utils/mixins";
+
+.profil {
+  width: 100%;
+  padding-left: 5rem;
+  padding-top: 8rem;
+  background: #f8f9fd;
+  @include mixins.for-screen-small-medium {
+    min-height: 100vh;
+    margin-bottom: 3rem;
+  }
+  @include mixins.for-phone-and-tablet-only {
+    margin-top: 5rem;
+    padding-left: 0;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  .profil_title {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 2rem;
+    @include mixins.for-phone-and-tablet-only {
+      align-items: center;
+      justify-content: center;
+    }
+
+    h1 {
+      color: vars.$colorBlue;
+      font-weight: bold;
+      font-size: 1.8rem;
+      font-family: vars.$fontMenu;
+    }
+  }
+
+  .profil_data--box {
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+    @include mixins.for-screen-small-medium {
+      flex-direction: column;
+      display: block;
+    }
+    @include mixins.for-phone-and-tablet-only {
+      margin-left: 1.35rem;
+    }
+
+    .profil_data {
+      border-radius: 8px;
+      background-color: rgb(255, 255, 255);
+      box-shadow: 0px 4px 10px rgb(179, 179, 179);
+      color: rgb(23, 20, 45);
+      height: 28rem;
+      width: 50%;
+      padding: 2rem 2rem;
+      margin-right: 2.5rem;
+      @include mixins.for-screen-small-medium {
+        margin-right: 0;
+        margin-bottom: 2rem;
+        width: 90%;
+      }
+
+      &:hover {
+        box-shadow: 0px 4px 8px rgb(83, 87, 87);
+      }
+
+      h2 {
+        font-weight: bold;
+        font-size: 1.5rem;
+        margin-bottom: 2rem;
+      }
+
+      .message_success {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 2rem;
+        background: vars.$colorGreenTransparent;
+        color: vars.$colorLight;
+        border-radius: 2rem;
+        font-weight: bold;
+      }
+
+      .profil_data--form {
+        padding-top: 2rem;
+        .button_box {
+          display: flex;
+          flex-direction: row;
+          justify-content: flex-start;
+          button {
+            width: 7rem;
+            border-radius: 2rem;
+            padding: 0.5rem 0;
+            margin-bottom: 1rem;
+            margin-right: 0.5rem;
+            border: none;
+            background: vars.$primaryColor;
+            color: vars.$colorLight;
+            font-weight: bold;
+            font-size: 1rem;
+            align-self: center;
+          }
+        }
+
+        .profil_data--input {
+          display: flex;
+          flex-direction: column;
+          position: relative;
+          margin-bottom: 2.5rem;
+
+          .focus_input {
+            border-bottom: 1px solid vars.$colorBlue;
+          }
+
+          input {
+            display: block;
+            padding: 4px 28px 4px 0px;
+            border: none;
+            appearance: none;
+            border-radius: 0px;
+            background-color: transparent;
+            text-overflow: ellipsis;
+
+            &:read-only {
+              cursor: default;
+            }
+          }
+
+          label {
+            position: absolute;
+            top: 0;
+            padding: 4px 0px;
+            pointer-events: none;
+            transition: transform 0.2s ease 0s, font-size 0.2s ease 0s,
+              color 0.2s ease 0s;
+            color: rgba(23, 20, 45, 0.8);
+            transform: translateY(-100%);
+            font-size: 10px;
+            line-height: 1.5;
+          }
+        }
+      }
+    }
+    .profil_data--right {
+      width: 30%;
+      @include mixins.for-phone-and-tablet-only{
+        width: 100%;
+      }
+      @include mixins.for-screen-small-medium {
+        width: 100%;
+      }
+      .profil_data--modify {
+        width: 100%;
+        @include mixins.for-screen-small-medium {
+          margin-right: 0;
+          width: 90%;
+        }
+        .input_modify--active {
+          height: 24rem;
+          width: 100%;
+          margin-bottom: 1.5rem;
+          transition: all ease-in-out 1s;
+
+          .profil_data--input {
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            margin-bottom: 2.5rem;
+
+            a {
+              font-size: 0.9rem;
+            }
+            #current-password {
+              margin-bottom: 0.5rem;
+            }
+
+            .focus_input {
+              border-bottom: 1px solid vars.$colorBlue;
+            }
+
+            input {
+              display: block;
+              padding: 4px 28px 4px 0px;
+              border: none;
+            }
+
+            label {
+              position: absolute;
+              top: 0;
+              padding: 4px 0px;
+              pointer-events: none;
+              transition: transform 0.2s ease 0s, font-size 0.2s ease 0s,
+                color 0.2s ease 0s;
+              color: rgba(23, 20, 45, 0.8);
+              transform: translateY(-100%);
+              font-size: 10px;
+              line-height: 1.5;
+            }
+          }
+
+          button {
+            width: 7rem;
+            border-radius: 2rem;
+            padding: 0.5rem 0;
+            border: none;
+            background: vars.$primaryColor;
+            color: vars.$colorLight;
+            font-weight: bold;
+            margin-right: 0.5rem;
+            font-size: 1rem;
+          }
+        }
+
+        .input_modify {
+          display: flex;
+          flex-direction: column;
+          height: 11rem;
+          width: 100%;
+          margin-bottom: 1.5rem;
+          transition: all ease-out 1s;
+
+          .profil_data--input {
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            margin-bottom: 2.5rem;
+
+            .focus_input {
+              border-bottom: 1px solid vars.$colorBlue;
+            }
+
+            input {
+              display: block;
+              padding: 4px 28px 4px 0px;
+              border: none;
+              appearance: none;
+              border-radius: 0px;
+              background-color: transparent;
+              text-overflow: ellipsis;
+
+              &:read-only {
+                cursor: default;
+              }
+            }
+
+            label {
+              position: absolute;
+              top: 0;
+              padding: 4px 0px;
+              pointer-events: none;
+              transition: transform 0.2s ease 0s, font-size 0.2s ease 0s,
+                color 0.2s ease 0s;
+              color: rgba(23, 20, 45, 0.8);
+              transform: translateY(-100%);
+              font-size: 10px;
+              line-height: 1.5;
+            }
+          }
+
+          button {
+            width: 7rem;
+            border-radius: 2rem;
+            padding: 0.5rem 0;
+            border: none;
+            background: vars.$primaryColor;
+            color: vars.$colorLight;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+          }
+
+          .profil_data--email {
+            display: flex;
+            position: relative;
+            margin-top: 0.5rem;
+
+            input {
+              display: block;
+              padding: 4px 28px 4px 0px;
+              border: none;
+              appearance: none;
+              border-radius: 0px;
+              background-color: transparent;
+              text-overflow: ellipsis;
+              font-weight: 500;
+
+              &:read-only {
+                cursor: default;
+              }
+            }
+
+            label {
+              position: absolute;
+              top: 0;
+              padding: 4px 0px;
+              pointer-events: none;
+              transition: transform 0.2s ease 0s, font-size 0.2s ease 0s,
+                color 0.2s ease 0s;
+              color: rgba(23, 20, 45, 0.8);
+              transform: translateY(-100%);
+              font-size: 10px;
+              line-height: 1.5;
+            }
+
+            .button_email {
+              width: 7rem;
+              border-radius: 2rem;
+              padding: 0.5rem 0;
+              border: none;
+              background: vars.$primaryColor;
+              color: vars.$colorLight;
+              font-weight: bold;
+              font-size: 1rem;
+            }
+          }
+        }
+      }
+      .profil_data--avatar {
+        border-radius: 8px;
+        background-color: rgb(255, 255, 255);
+        box-shadow: 0px 4px 10px rgb(179, 179, 179);
+        color: rgb(23, 20, 45);
+        height: 15.4rem;
+        width: 100%;
+        padding: 2rem 2rem;
+        margin-right: 2.5rem;
+        &:hover {
+          box-shadow: 0px 4px 8px rgb(83, 87, 87);
+        }
+        @include mixins.for-screen-small-medium {
+          margin-right: 0;
+          margin-bottom: 2rem;
+          width: 90%;
+        }
+
+        h2 {
+          font-weight: bold;
+          font-size: 1.5rem;
+        }
+
+        .profil_data--avatar--box {
+          .profil_data--avatar--middle {
+            display: flex;
+            margin-top: 1rem;
+            margin: 1rem 0 0.8rem 0;
+
+            .profil_data--avatar--input {
+              display: flex;
+              flex-direction: column;
+
+              .input_avatar {
+                width: 70%;
+                margin: 1rem 0 2.5rem 0;
+                @include mixins.for-desktop-small-medium {
+                  width: 100%;
+                }
+
+                &::-webkit-file-upload-button {
+                  visibility: hidden;
+                }
+                &::before {
+                  content: "Choisir une image";
+                  display: inline-block;
+                  background: linear-gradient(top, #f9f9f9, #e3e3e3);
+                  border: 1px solid #999;
+                  border-radius: 3px;
+                  padding: 5px 8px;
+                  outline: none;
+                  white-space: nowrap;
+                  -webkit-user-select: none;
+                  cursor: pointer;
+                  text-shadow: 1px 1px #fff;
+                  font-weight: 700;
+                  font-size: 10pt;
+                  &:hover {
+                    border-color: black;
+                  }
+                  &:active {
+                    background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
+                  }
+                }
+              }
+
+              .button_box {
+                display: flex;
+                flex-direction: row;
+                justify-content: flex-start;
+                button {
+                  width: 7rem;
+                  border-radius: 2rem;
+                  padding: 0.5rem 0;
+                  margin-bottom: 0.5rem;
+                  margin-right: 0.5rem;
+                  border: none;
+                  background: vars.$primaryColor;
+                  color: vars.$colorLight;
+                  font-weight: bold;
+                  font-size: 1rem;
+                  align-self: center;
+                }
+              }
+            }
+            .avatar_preview {
+              width: 6.5rem;
+              height: auto;
+              border-radius: 1rem;
+              @include mixins.for-desktop-small-medium{
+                width: 5rem;
+              }
+            }
+          }
+          .avatar_error {
+            color: red;
+            font-weight: bold;
+          }
+
+          .avatar_sucess {
+            color: green;
+            font-weight: bold;
+          }
+        }
+      }
+    }
+  }
+}

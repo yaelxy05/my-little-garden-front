@@ -1,9 +1,21 @@
 // == Color
-$primaryColor: #74EC8D;
+$primaryColor: #089426;
 $secondaryColor: #EBB016;
 $color3: #E0FF20;
 $color4: #21DAFF;
 $color5: #FF5C1A;
+$colorLight: #ffffff;
+$colorError: rgb(211, 0, 0);
+$colorBrown: rgb(157, 90, 40);
+$colorRed: rgb(182, 59, 59);
+$colorBlue: rgb(43, 45, 175);
+$colorGreenTransparent: #089426e0;
 // == Font 
 @import url('https://fonts.googleapis.com/css2?family=Redressed&display=swap');
 $fontMenu: 'Redressed', cursive;
+
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+$fontTitle: 'Lobster', cursive;
+
+@import url('https://fonts.googleapis.com/css2?family=Sansita+Swashed:wght@300&display=swap');
+$fontSecondary: 'Sansita Swashed', cursive;

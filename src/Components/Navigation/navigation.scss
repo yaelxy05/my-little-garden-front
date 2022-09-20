@@ -1,0 +1,15 @@
+@use "src/styles/utils/vars";
+@use "src/styles/utils/mixins";
+
+.navigation {
+  .navigation_mobile {
+    @include mixins.for-tablet-landscape-up {
+        display: none;
+    }
+  }
+  .navigation_desktop {
+      @include mixins.for-phone-and-tablet-only {
+          display: none;
+      }
+  }
+}
