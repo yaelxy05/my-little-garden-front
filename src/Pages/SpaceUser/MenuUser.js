@@ -28,7 +28,7 @@ function MenuUser() {
         <div className="menu_user-img">
           {!loading && formDataUser.avatar !== null && (
             <img
-              src={"http://127.0.0.1:8000/images/" + formDataUser.avatar}
+              src={"https://littlegardenback.yaelhue-creation.com/images/" + formDataUser.avatar}
               alt="avatar profil"
             />
           )}
