@@ -1,10 +1,8 @@
-import React, { useEffect, useContext, useState } from "react";
+import React, { useEffect, useContext } from "react";
 import { Link, Outlet } from "react-router-dom";
 // Import Context
 import { InfoUserContext } from "../../Utils/Context/index";
-import { UserAccountDeleteContext } from "../../Utils/Context/auth";
-// Import Components
-import DialogDeleteConfirmUser from "./DialogConfirmDeleteUser";
+
 // Import fontawesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -12,20 +10,13 @@ import {
   faSeedling,
   faRectangleList,
   faCarrot,
-  faTrash,
 } from "@fortawesome/free-solid-svg-icons";
 // Import picture
 import Avatar from "../../assets/img/avatar/user.png";
 
 function MenuUser() {
-  // state for get name and id for deleting a carre
-  const [idUser, setIdUser] = useState(null);
-  const [nameUser, setNameUser] = useState(null);
   // Context
   const { loading, getInfoUser, formDataUser } = useContext(InfoUserContext);
-  const { deleteConfirm, setDeleteConfirm } = useContext(
-    UserAccountDeleteContext
-  );
 
   useEffect(() => {
     getInfoUser();
@@ -72,33 +63,9 @@ function MenuUser() {
               <p>Mon potager</p>
             </Link>
           </li>
-
-          <li className="spaceuser_remove">
-            <FontAwesomeIcon
-              icon={faTrash}
-              onClick={() => {
-                setDeleteConfirm(true);
-                setIdUser(formDataUser.id);
-                setNameUser(formDataUser.name);
-              }}
-            />
-            <p
-              onClick={() => {
-                setDeleteConfirm(true);
-                setIdUser(formDataUser.id);
-                setNameUser(formDataUser.name);
-              }}
-            >
-              Supprimer mon compte
-            </p>
-          </li>
         </ul>
       </aside>
-      {deleteConfirm && (
-        <>
-          <DialogDeleteConfirmUser nameUser={nameUser} idUser={idUser} />
-        </>
-      )}
+
       <Outlet />
     </>
   );

@@ -1,14 +1,22 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useRef } from "react";
 // Import package
 import axios from "axios";
 // Import Context
-import {
-  InfoUserContext
-} from "../../Utils/Context/index";
+import { InfoUserContext } from "../../Utils/Context/index";
+import { UserAccountDeleteContext } from "../../Utils/Context/auth";
+// Import Components
+import DialogDeleteConfirmUser from "./DialogConfirmDeleteUser";
 // import scss
 import "./profil.scss";
+
 function Profil() {
+  // state for get name and id for deleting a user account
+  const [idUser, setIdUser] = useState(null);
+  const [nameUser, setNameUser] = useState(null);
   // Context
+  const { deleteConfirm, setDeleteConfirm } = useContext(
+    UserAccountDeleteContext
+  );
   const { getInfoUser } = useContext(InfoUserContext);
   // Initial state
   const [formDataUser, setFormDataUser] = useState({
@@ -30,6 +38,20 @@ function Profil() {
 
   const activateButtonPassword = () => setModifyInputPassword(true);
   const desactivateButtonPassword = () => setModifyInputPassword(false);
+
+  // function for toggle pop-up confirmation remove account user
+  const ref = useRef();
+  useEffect(() => {
+    const checkIfClickedOutside = (e) => {
+      if (deleteConfirm && ref.current && ref.current.contains(e.target)) {
+        setDeleteConfirm(false);
+      }
+    };
+    document.addEventListener("click", checkIfClickedOutside);
+    return () => {
+      document.removeEventListener("click", checkIfClickedOutside);
+    };
+  }, [deleteConfirm]);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -138,7 +160,7 @@ function Profil() {
   };
 
   return (
-    <div className="profil">
+    <div className="profil" ref={ref}>
       <div className="profil_title">
         <h1>Informations</h1>
       </div>
@@ -317,7 +339,11 @@ function Profil() {
                 </div>
 
                 {uploadFile.preview !== null && uploadFile && (
-                  <img className="avatar_preview" src={uploadFile.preview} alt="aperçu avatar"/>
+                  <img
+                    className="avatar_preview"
+                    src={uploadFile.preview}
+                    alt="aperçu avatar"
+                  />
                 )}
               </form>
               {error && (
@@ -336,7 +362,33 @@ function Profil() {
               )}
             </div>
           </div>
+          <div className="spaceuser_wrap">
+            <div
+              className="spaceuser_box--remove"
+              onClick={() => {
+                setDeleteConfirm(true);
+                setIdUser(formDataUser.id);
+                setNameUser(formDataUser.name);
+              }}
+            >
+              <p
+                className="spaceuser_remove"
+                onClick={() => {
+                  setDeleteConfirm(true);
+                  setIdUser(formDataUser.id);
+                  setNameUser(formDataUser.name);
+                }}
+              >
+                Supprimer mon compte
+              </p>
+            </div>
+          </div>
         </div>
+        {deleteConfirm && (
+          <>
+            <DialogDeleteConfirmUser nameUser={nameUser} idUser={idUser} />
+          </>
+        )}
       </div>
     </div>
   );

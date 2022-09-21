@@ -18,6 +18,48 @@
     flex-direction: column;
   }
 
+  .spaceuser_wrap {
+    @include mixins.for-phone-and-tablet-only {
+      display: flex;
+      justify-content: center;
+      margin-right: 1.5rem;
+    }
+    @include mixins.for-screen-small-medium {
+      display: flex;
+      justify-content: center;
+    }
+
+    .spaceuser_box--remove {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      border: red solid 3px;
+      background-color: white;
+      border-radius: 1rem;
+      margin-top: 4rem;
+      padding: 1rem;
+      color: red;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 1rem;
+      text-align: center;
+      @include mixins.for-screen-small-medium {
+        width: 30%;
+      }
+
+      &:hover {
+        border: white solid 3px;
+        background-color: red;
+        color: white;
+      }
+
+      @include mixins.for-phone-and-tablet-only {
+        align-self: center;
+        width: 30%;
+      }
+    }
+  }
+
   .profil_title {
     display: flex;
     align-items: flex-start;
@@ -145,7 +187,7 @@
     }
     .profil_data--right {
       width: 30%;
-      @include mixins.for-phone-and-tablet-only{
+      @include mixins.for-phone-and-tablet-only {
         width: 100%;
       }
       @include mixins.for-screen-small-medium {
@@ -406,7 +448,7 @@
               width: 6.5rem;
               height: auto;
               border-radius: 1rem;
-              @include mixins.for-desktop-small-medium{
+              @include mixins.for-desktop-small-medium {
                 width: 5rem;
               }
             }
