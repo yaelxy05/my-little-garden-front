@@ -5,6 +5,7 @@
   width: 100%;
   padding-left: 5rem;
   padding-top: 8rem;
+  padding-bottom: 2rem;
   background: #f8f9fd;
   @include mixins.for-screen-small-medium {
     min-height: 100vh;
@@ -23,6 +24,7 @@
       display: flex;
       justify-content: center;
       margin-right: 1.5rem;
+      margin-bottom: 2rem;
     }
     @include mixins.for-screen-small-medium {
       display: flex;
@@ -95,7 +97,7 @@
       box-shadow: 0px 4px 10px rgb(179, 179, 179);
       color: rgb(23, 20, 45);
       height: 28rem;
-      width: 50%;
+      width: 40%;
       padding: 2rem 2rem;
       margin-right: 2.5rem;
       @include mixins.for-screen-small-medium {
@@ -186,7 +188,7 @@
       }
     }
     .profil_data--right {
-      width: 30%;
+      width: 50%;
       @include mixins.for-phone-and-tablet-only {
         width: 100%;
       }
@@ -200,10 +202,28 @@
           width: 90%;
         }
         .input_modify--active {
-          height: 24rem;
+          min-height: 24rem;
           width: 100%;
           margin-bottom: 1.5rem;
-          transition: all ease-in-out 1s;
+
+          .message {
+            margin-bottom: 1rem;
+            @include mixins.for-desktop-small-medium {
+              font-size: 0.7rem;
+              margin-bottom: 0.5rem;
+            }
+          }
+          
+          .password_error {
+            color: red;
+            font-weight: bold;
+          }
+
+          .newPassword_sucess {
+            color: green;
+            font-weight: bold;
+          }
+        }
 
           .profil_data--input {
             display: flex;
@@ -252,6 +272,9 @@
             font-weight: bold;
             margin-right: 0.5rem;
             font-size: 1rem;
+            @include mixins.for-desktop-small-medium {
+              margin-top: 1rem;
+            }
           }
         }
 
@@ -262,6 +285,9 @@
           width: 100%;
           margin-bottom: 1.5rem;
           transition: all ease-out 1s;
+          @include mixins.for-desktop-small-medium {
+            height: 14rem;
+          }
 
           .profil_data--input {
             display: flex;
@@ -466,4 +492,3 @@
       }
     }
   }
-}
