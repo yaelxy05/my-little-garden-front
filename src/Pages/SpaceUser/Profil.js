@@ -26,16 +26,20 @@ function Profil() {
     id: "",
   });
 
+  const [formDataPasswordUpdate, setFormDataPasswordUpdate] = useState({
+    oldPassword: "",
+    newPassword: "",
+    newPasswordConfirm: "",
+  });
+
   const [messageSuccess, setMessageSuccess] = useState("");
+  const [messageError, setMessageError] = useState("");
 
   // for activate or deactivate input
   const [modifyInputInformation, setModifyInputInformation] = useState(false);
-
   const activateButton = () => setModifyInputInformation(true);
   const desactivateButton = () => setModifyInputInformation(false);
-
   const [modifyInputPassword, setModifyInputPassword] = useState(false);
-
   const activateButtonPassword = () => setModifyInputPassword(true);
   const desactivateButtonPassword = () => setModifyInputPassword(false);
 
@@ -159,6 +163,50 @@ function Profil() {
     }
   };
 
+  const [errorPassword, setErrorPassword] = useState(false);
+  const [sucessPassword, setSucessPassword] = useState(false);
+  const [messageSuccessPassword, setMessageSuccessPassword] = useState("");
+  const [messageErrorPassword, setMessageErrorPassword] = useState("");
+
+  const handleUpdatePassword = async (evt) => {
+    const API_URLS = process.env.REACT_APP_API_URL;
+    const token = localStorage.getItem("token");
+    evt.preventDefault();
+    setFormDataPasswordUpdate(formDataPasswordUpdate);
+    axios
+      .patch(
+        `${API_URLS}/${formDataUser.id}/password-edit`,
+        {
+          oldPassword: formDataPasswordUpdate.oldPassword,
+          newPassword: formDataPasswordUpdate.newPassword,
+        },
+        {
+          headers: {
+            Authorization: "Bearer " + token,
+            Accept: "application/json, text/plain, */*",
+            "Content-Type": "application/json",
+          },
+        }
+      )
+      .then((response) => {
+        setSucessPassword(true);
+        setMessageSuccessPassword(response.data.message);
+        setTimeout(() => {
+          setSucessPassword(false);
+          setMessageSuccessPassword("");
+        }, 2500);
+      })
+      .catch((error) => {
+        setErrorPassword(true);
+        console.log(error.response.data.message);
+        setMessageErrorPassword(error.response.data.message);
+        setTimeout(() => {
+          setMessageErrorPassword("");
+          setErrorPassword(false);
+        }, 4500);
+      });
+  };
+
   return (
     <div className="profil" ref={ref}>
       <div className="profil_title">
@@ -259,43 +307,76 @@ function Profil() {
               </header>
               {modifyInputPassword && (
                 <>
-                  <div className="profil_data--input">
-                    <input
-                      type="password"
-                      name="current-password"
-                      value=""
-                      id="current-password"
-                      className="focus_input"
-                    />
-                    <label htmlFor="current-password">
-                      Mot de passe actuel
-                    </label>
-                    <a href="#">Mot de passe oublié ?</a>
-                  </div>
-                  <div className="profil_data--input">
-                    <input
-                      type="password"
-                      name="new-password"
-                      value=""
-                      id="new-password"
-                      className="focus_input"
-                    />
-                    <label htmlFor="new-password">Nouveau mot de passe</label>
-                  </div>
-                  <div className="profil_data--input">
-                    <input
-                      type="password"
-                      name="confirm-new-password"
-                      value=""
-                      id="confirm-new-password"
-                      className="focus_input"
-                    />
-                    <label htmlFor="confirm-new-password">
-                      Confirmer le mot de passe
-                    </label>
-                  </div>
-                  <button>Valider</button>
-                  <button onClick={desactivateButtonPassword}>Annuler</button>
+                  <form onSubmit={handleUpdatePassword}>
+                    <div className="profil_data--input">
+                      <input
+                        type="password"
+                        name="oldPassword"
+                        value={formDataPasswordUpdate.oldPassword}
+                        id="current-password"
+                        className="focus_input"
+                        onChange={(e) =>
+                          setFormDataPasswordUpdate({
+                            ...formDataPasswordUpdate,
+                            oldPassword: e.target.value,
+                          })
+                        }
+                      />
+                      <label htmlFor="current-password">
+                        Mot de passe actuel
+                      </label>
+                    </div>
+                    <div className="profil_data--input">
+                      <input
+                        type="password"
+                        name="newPassword"
+                        value={formDataPasswordUpdate.newPassword}
+                        id="new-password"
+                        className="focus_input"
+                        onChange={(e) =>
+                          setFormDataPasswordUpdate({
+                            ...formDataPasswordUpdate,
+                            newPassword: e.target.value,
+                          })
+                        }
+                      />
+                      <label htmlFor="new-password">Nouveau mot de passe</label>
+                    </div>
+                    <div className="profil_data--input">
+                      <input
+                        type="password"
+                        name="confirm-new-password"
+                        value={formDataPasswordUpdate.newPasswordConfirm}
+                        id="confirm-new-password"
+                        className="focus_input"
+                        onChange={(e) =>
+                          setFormDataPasswordUpdate({
+                            ...formDataPasswordUpdate,
+                            newPasswordConfirm: e.target.value,
+                          })
+                        }
+                      />
+                      <label htmlFor="confirm-new-password">
+                        Confirmer le mot de passe
+                      </label>
+                    </div>
+                    {sucessPassword && (
+                      <>
+                        <p className="message newPassword_sucess">
+                          {messageSuccessPassword}
+                        </p>
+                      </>
+                    )}
+                    {errorPassword && (
+                      <>
+                        <p className="message password_error">
+                          {messageErrorPassword}
+                        </p>
+                      </>
+                    )}
+                    <button>Valider</button>
+                    <button onClick={desactivateButtonPassword}>Annuler</button>
+                  </form>
                 </>
               )}
               {!modifyInputPassword && (
@@ -345,21 +426,21 @@ function Profil() {
                     alt="aperçu avatar"
                   />
                 )}
+                {error && (
+                  <>
+                    <p className="avatar_error">
+                      La taille de l'avatar ne doit pas dépasser 2MO
+                    </p>
+                  </>
+                )}
+                {sucess && (
+                  <>
+                    <p className="avatar_sucess">
+                      L'avatar a bien etait modifié!
+                    </p>
+                  </>
+                )}
               </form>
-              {error && (
-                <>
-                  <p className="avatar_error">
-                    La taille de l'avatar ne doit pas dépasser 2MO
-                  </p>
-                </>
-              )}
-              {sucess && (
-                <>
-                  <p className="avatar_sucess">
-                    L'avatar a bien etait modifié!
-                  </p>
-                </>
-              )}
             </div>
           </div>
           <div className="spaceuser_wrap">
